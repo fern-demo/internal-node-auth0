@@ -12,23 +12,29 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.72.5
-current_generation: 2de4c6369e279ba461d20dfe1bb8503255fab5a6
+  - commit_sha: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
+    tree_hash: 9fd7980ab8624b97d74d484013b559fb3af8259b
+    timestamp: 2026-07-21T04:00:16.980Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.82.2
+current_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
 patches:
   - id: patch-066ff9e0
-    content_hash: sha256:d30e29e02d93b301c7d7f14434c3339c9008aa98a07e6d5a4d6f3e2b06e9e51b
+    content_hash: sha256:5b87ec9a63fc57aba4840d0d335d472c621e838fc1d61515b30660df39d0dbc2
     original_commit: 066ff9e02c45f4abf46791a3f070c762f7ecd924
     original_message: "docs: add v6 migration guide for breaking changes in v6.0.0 (#1368)"
     original_author: Ankita Tripathi <51994119+ankita10119@users.noreply.github.com>
-    base_generation: 2de4c6369e279ba461d20dfe1bb8503255fab5a6
+    base_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
     files:
       - v6_MIGRATION_GUIDE.md
     patch_content: |
       diff --git a/v6_MIGRATION_GUIDE.md b/v6_MIGRATION_GUIDE.md
       new file mode 100644
-      index 000000000..30d5944c4
+      index 000000000..d1eb6bd69
       --- /dev/null
       +++ b/v6_MIGRATION_GUIDE.md
-      @@ -0,0 +1,86 @@
+      @@ -0,0 +1,158 @@
       +# V6 Migration Guide
       +
       +A guide to migrating the Auth0 Node.js SDK from `5.x` to `6.x`.
@@ -37,10 +43,12 @@ patches:
       +- [Breaking changes](#breaking-changes)
       +    - [ConnectionAttributeIdentifier replaced with identifier-specific types](#connectionattributeidentifier-replaced-with-identifier-specific-types)
       +    - [PhoneProviderProtectionBackoffStrategyEnum value change](#phoneproviderprotectionbackoffstrategyenum-value-change)
+      +    - [users.federatedConnectionsTokensets removed](#usersfederatedconnectionstokensets-removed)
+      +    - [federated_connections_access_tokens removed from connection options](#federated_connections_access_tokens-removed-from-connection-options)
       +
       +## Overall changes
       +
-      +V6 is a focused release that addresses type correctness for database connection attribute identifiers and aligns the phone provider backoff strategy enum with the updated API. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
+      +V6 addresses type correctness for database connection attribute identifiers, aligns the phone provider backoff strategy enum with the updated API, and removes the federated connections tokensets user sub-client. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
       +
       +## Breaking changes
       +
@@ -115,6 +123,76 @@ patches:
       +```
       +
       +If you were passing this value directly as a string `"none"`, update it to `"default"` to match the updated API.
+      +
+      +---
+      +
+      +### users.federatedConnectionsTokensets removed
+      +
+      +The `client.users.federatedConnectionsTokensets` sub-client has been removed. This includes the `list()` and `delete()` methods.
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +// List active federated connection tokensets for a user
+      +const tokensets = await client.users.federatedConnectionsTokensets.list("user_id");
+      +
+      +// Delete a tokenset
+      +await client.users.federatedConnectionsTokensets.delete("user_id", "tokenset_id");
+      +```
+      +
+      +**After (v6):**
+      +
+      +These methods are no longer available. Remove any calls to `client.users.federatedConnectionsTokensets` from your code.
+      +
+      +---
+      +
+      +### federated_connections_access_tokens removed from connection options
+      +
+      +The `federated_connections_access_tokens` field has been removed from all connection option types, including create and update. This affects OIDC, Azure AD, Google Apps, and other connection strategies. Remove it from any create or update payloads.
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +// On create
+      +await client.connections.create({
+      +    strategy: "oidc",
+      +    name: "my-connection",
+      +    options: {
+      +        federated_connections_access_tokens: { ... },
+      +        // other options
+      +    },
+      +});
+      +
+      +// On update
+      +await client.connections.update("connection_id", {
+      +    options: {
+      +        federated_connections_access_tokens: { ... },
+      +        // other options
+      +    },
+      +});
+      +```
+      +
+      +**After (v6):**
+      +
+      +```ts
+      +// On create
+      +await client.connections.create({
+      +    strategy: "oidc",
+      +    name: "my-connection",
+      +    options: {
+      +        // remove federated_connections_access_tokens
+      +        // other options
+      +    },
+      +});
+      +
+      +// On update
+      +await client.connections.update("connection_id", {
+      +    options: {
+      +        // remove federated_connections_access_tokens
+      +        // other options
+      +    },
+      +});
+      +```
     theirs_snapshot:
       v6_MIGRATION_GUIDE.md: |
         # V6 Migration Guide
@@ -125,10 +203,12 @@ patches:
         - [Breaking changes](#breaking-changes)
             - [ConnectionAttributeIdentifier replaced with identifier-specific types](#connectionattributeidentifier-replaced-with-identifier-specific-types)
             - [PhoneProviderProtectionBackoffStrategyEnum value change](#phoneproviderprotectionbackoffstrategyenum-value-change)
+            - [users.federatedConnectionsTokensets removed](#usersfederatedconnectionstokensets-removed)
+            - [federated_connections_access_tokens removed from connection options](#federated_connections_access_tokens-removed-from-connection-options)
 
         ## Overall changes
 
-        V6 is a focused release that addresses type correctness for database connection attribute identifiers and aligns the phone provider backoff strategy enum with the updated API. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
+        V6 addresses type correctness for database connection attribute identifiers, aligns the phone provider backoff strategy enum with the updated API, and removes the federated connections tokensets user sub-client. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
 
         ## Breaking changes
 
@@ -203,4 +283,570 @@ patches:
         ```
 
         If you were passing this value directly as a string `"none"`, update it to `"default"` to match the updated API.
+
+        ---
+
+        ### users.federatedConnectionsTokensets removed
+
+        The `client.users.federatedConnectionsTokensets` sub-client has been removed. This includes the `list()` and `delete()` methods.
+
+        **Before (v5):**
+
+        ```ts
+        // List active federated connection tokensets for a user
+        const tokensets = await client.users.federatedConnectionsTokensets.list("user_id");
+
+        // Delete a tokenset
+        await client.users.federatedConnectionsTokensets.delete("user_id", "tokenset_id");
+        ```
+
+        **After (v6):**
+
+        These methods are no longer available. Remove any calls to `client.users.federatedConnectionsTokensets` from your code.
+
+        ---
+
+        ### federated_connections_access_tokens removed from connection options
+
+        The `federated_connections_access_tokens` field has been removed from all connection option types, including create and update. This affects OIDC, Azure AD, Google Apps, and other connection strategies. Remove it from any create or update payloads.
+
+        **Before (v5):**
+
+        ```ts
+        // On create
+        await client.connections.create({
+            strategy: "oidc",
+            name: "my-connection",
+            options: {
+                federated_connections_access_tokens: { ... },
+                // other options
+            },
+        });
+
+        // On update
+        await client.connections.update("connection_id", {
+            options: {
+                federated_connections_access_tokens: { ... },
+                // other options
+            },
+        });
+        ```
+
+        **After (v6):**
+
+        ```ts
+        // On create
+        await client.connections.create({
+            strategy: "oidc",
+            name: "my-connection",
+            options: {
+                // remove federated_connections_access_tokens
+                // other options
+            },
+        });
+
+        // On update
+        await client.connections.update("connection_id", {
+            options: {
+                // remove federated_connections_access_tokens
+                // other options
+            },
+        });
+        ```
     user_owned: true
+  - id: patch-d8faf7a2
+    content_hash: sha256:5b87ec9a63fc57aba4840d0d335d472c621e838fc1d61515b30660df39d0dbc2
+    original_commit: d8faf7a21efbed3bd75a0f36ff0d190bb9dd986b
+    original_message: "docs: update v6 migration guide with federatedConnectionsTokensets and federated_connections_access_tokens breaking changes (#1370)"
+    original_author: Ankita Tripathi <51994119+ankita10119@users.noreply.github.com>
+    base_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
+    files:
+      - v6_MIGRATION_GUIDE.md
+    patch_content: |
+      diff --git a/v6_MIGRATION_GUIDE.md b/v6_MIGRATION_GUIDE.md
+      new file mode 100644
+      index 000000000..d1eb6bd69
+      --- /dev/null
+      +++ b/v6_MIGRATION_GUIDE.md
+      @@ -0,0 +1,158 @@
+      +# V6 Migration Guide
+      +
+      +A guide to migrating the Auth0 Node.js SDK from `5.x` to `6.x`.
+      +
+      +- [Overall changes](#overall-changes)
+      +- [Breaking changes](#breaking-changes)
+      +    - [ConnectionAttributeIdentifier replaced with identifier-specific types](#connectionattributeidentifier-replaced-with-identifier-specific-types)
+      +    - [PhoneProviderProtectionBackoffStrategyEnum value change](#phoneproviderprotectionbackoffstrategyenum-value-change)
+      +    - [users.federatedConnectionsTokensets removed](#usersfederatedconnectionstokensets-removed)
+      +    - [federated_connections_access_tokens removed from connection options](#federated_connections_access_tokens-removed-from-connection-options)
+      +
+      +## Overall changes
+      +
+      +V6 addresses type correctness for database connection attribute identifiers, aligns the phone provider backoff strategy enum with the updated API, and removes the federated connections tokensets user sub-client. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
+      +
+      +## Breaking changes
+      +
+      +### ConnectionAttributeIdentifier replaced with identifier-specific types
+      +
+      +In v5, all three attribute identifiers (email, phone number, and username) shared a single `ConnectionAttributeIdentifier` type for their `identifier` field. This was incorrect — each identifier type supports different values for `default_method`.
+      +
+      +In v6, `ConnectionAttributeIdentifier` has been removed and replaced with three separate types:
+      +
+      +| Attribute      | Old type                        | New type                      | `default_method` values       |
+      +| -------------- | ------------------------------- | ----------------------------- | ----------------------------- |
+      +| `email`        | `ConnectionAttributeIdentifier` | `EmailAttributeIdentifier`    | `"password"` \| `"email_otp"` |
+      +| `phone_number` | `ConnectionAttributeIdentifier` | `PhoneAttributeIdentifier`    | `"password"` \| `"phone_otp"` |
+      +| `username`     | `ConnectionAttributeIdentifier` | `UsernameAttributeIdentifier` | _(no `default_method`)_       |
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +import { Management } from "auth0";
+      +
+      +const identifier: Management.ConnectionAttributeIdentifier = {
+      +    active: true,
+      +    default_method: "email_otp",
+      +};
+      +```
+      +
+      +**After (v6):**
+      +
+      +```ts
+      +import { Management } from "auth0";
+      +
+      +// For email attribute
+      +const emailIdentifier: Management.EmailAttributeIdentifier = {
+      +    active: true,
+      +    default_method: "email_otp",
+      +};
+      +
+      +// For phone_number attribute
+      +const phoneIdentifier: Management.PhoneAttributeIdentifier = {
+      +    active: true,
+      +    default_method: "phone_otp",
+      +};
+      +
+      +// For username attribute (no default_method)
+      +const usernameIdentifier: Management.UsernameAttributeIdentifier = {
+      +    active: true,
+      +};
+      +```
+      +
+      +If you were using `ConnectionAttributeIdentifier` as a type annotation in your own code, update it to the appropriate identifier-specific type based on which attribute it applies to.
+      +
+      +---
+      +
+      +### PhoneProviderProtectionBackoffStrategyEnum value change
+      +
+      +The `PhoneProviderProtectionBackoffStrategyEnum` enum has been updated to reflect a change in the Auth0 API. The `None` variant has been renamed to `Default`, and its string value has changed from `"none"` to `"default"`.
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +import { Management } from "auth0";
+      +
+      +const strategy = Management.PhoneProviderProtectionBackoffStrategyEnum.None; // "none"
+      +```
+      +
+      +**After (v6):**
+      +
+      +```ts
+      +import { Management } from "auth0";
+      +
+      +const strategy = Management.PhoneProviderProtectionBackoffStrategyEnum.Default; // "default"
+      +```
+      +
+      +If you were passing this value directly as a string `"none"`, update it to `"default"` to match the updated API.
+      +
+      +---
+      +
+      +### users.federatedConnectionsTokensets removed
+      +
+      +The `client.users.federatedConnectionsTokensets` sub-client has been removed. This includes the `list()` and `delete()` methods.
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +// List active federated connection tokensets for a user
+      +const tokensets = await client.users.federatedConnectionsTokensets.list("user_id");
+      +
+      +// Delete a tokenset
+      +await client.users.federatedConnectionsTokensets.delete("user_id", "tokenset_id");
+      +```
+      +
+      +**After (v6):**
+      +
+      +These methods are no longer available. Remove any calls to `client.users.federatedConnectionsTokensets` from your code.
+      +
+      +---
+      +
+      +### federated_connections_access_tokens removed from connection options
+      +
+      +The `federated_connections_access_tokens` field has been removed from all connection option types, including create and update. This affects OIDC, Azure AD, Google Apps, and other connection strategies. Remove it from any create or update payloads.
+      +
+      +**Before (v5):**
+      +
+      +```ts
+      +// On create
+      +await client.connections.create({
+      +    strategy: "oidc",
+      +    name: "my-connection",
+      +    options: {
+      +        federated_connections_access_tokens: { ... },
+      +        // other options
+      +    },
+      +});
+      +
+      +// On update
+      +await client.connections.update("connection_id", {
+      +    options: {
+      +        federated_connections_access_tokens: { ... },
+      +        // other options
+      +    },
+      +});
+      +```
+      +
+      +**After (v6):**
+      +
+      +```ts
+      +// On create
+      +await client.connections.create({
+      +    strategy: "oidc",
+      +    name: "my-connection",
+      +    options: {
+      +        // remove federated_connections_access_tokens
+      +        // other options
+      +    },
+      +});
+      +
+      +// On update
+      +await client.connections.update("connection_id", {
+      +    options: {
+      +        // remove federated_connections_access_tokens
+      +        // other options
+      +    },
+      +});
+      +```
+    theirs_snapshot:
+      v6_MIGRATION_GUIDE.md: |
+        # V6 Migration Guide
+
+        A guide to migrating the Auth0 Node.js SDK from `5.x` to `6.x`.
+
+        - [Overall changes](#overall-changes)
+        - [Breaking changes](#breaking-changes)
+            - [ConnectionAttributeIdentifier replaced with identifier-specific types](#connectionattributeidentifier-replaced-with-identifier-specific-types)
+            - [PhoneProviderProtectionBackoffStrategyEnum value change](#phoneproviderprotectionbackoffstrategyenum-value-change)
+            - [users.federatedConnectionsTokensets removed](#usersfederatedconnectionstokensets-removed)
+            - [federated_connections_access_tokens removed from connection options](#federated_connections_access_tokens-removed-from-connection-options)
+
+        ## Overall changes
+
+        V6 addresses type correctness for database connection attribute identifiers, aligns the phone provider backoff strategy enum with the updated API, and removes the federated connections tokensets user sub-client. There are no changes to the Authentication API — any code written for the Authentication API in `5.x` will continue to work in `6.x`.
+
+        ## Breaking changes
+
+        ### ConnectionAttributeIdentifier replaced with identifier-specific types
+
+        In v5, all three attribute identifiers (email, phone number, and username) shared a single `ConnectionAttributeIdentifier` type for their `identifier` field. This was incorrect — each identifier type supports different values for `default_method`.
+
+        In v6, `ConnectionAttributeIdentifier` has been removed and replaced with three separate types:
+
+        | Attribute      | Old type                        | New type                      | `default_method` values       |
+        | -------------- | ------------------------------- | ----------------------------- | ----------------------------- |
+        | `email`        | `ConnectionAttributeIdentifier` | `EmailAttributeIdentifier`    | `"password"` \| `"email_otp"` |
+        | `phone_number` | `ConnectionAttributeIdentifier` | `PhoneAttributeIdentifier`    | `"password"` \| `"phone_otp"` |
+        | `username`     | `ConnectionAttributeIdentifier` | `UsernameAttributeIdentifier` | _(no `default_method`)_       |
+
+        **Before (v5):**
+
+        ```ts
+        import { Management } from "auth0";
+
+        const identifier: Management.ConnectionAttributeIdentifier = {
+            active: true,
+            default_method: "email_otp",
+        };
+        ```
+
+        **After (v6):**
+
+        ```ts
+        import { Management } from "auth0";
+
+        // For email attribute
+        const emailIdentifier: Management.EmailAttributeIdentifier = {
+            active: true,
+            default_method: "email_otp",
+        };
+
+        // For phone_number attribute
+        const phoneIdentifier: Management.PhoneAttributeIdentifier = {
+            active: true,
+            default_method: "phone_otp",
+        };
+
+        // For username attribute (no default_method)
+        const usernameIdentifier: Management.UsernameAttributeIdentifier = {
+            active: true,
+        };
+        ```
+
+        If you were using `ConnectionAttributeIdentifier` as a type annotation in your own code, update it to the appropriate identifier-specific type based on which attribute it applies to.
+
+        ---
+
+        ### PhoneProviderProtectionBackoffStrategyEnum value change
+
+        The `PhoneProviderProtectionBackoffStrategyEnum` enum has been updated to reflect a change in the Auth0 API. The `None` variant has been renamed to `Default`, and its string value has changed from `"none"` to `"default"`.
+
+        **Before (v5):**
+
+        ```ts
+        import { Management } from "auth0";
+
+        const strategy = Management.PhoneProviderProtectionBackoffStrategyEnum.None; // "none"
+        ```
+
+        **After (v6):**
+
+        ```ts
+        import { Management } from "auth0";
+
+        const strategy = Management.PhoneProviderProtectionBackoffStrategyEnum.Default; // "default"
+        ```
+
+        If you were passing this value directly as a string `"none"`, update it to `"default"` to match the updated API.
+
+        ---
+
+        ### users.federatedConnectionsTokensets removed
+
+        The `client.users.federatedConnectionsTokensets` sub-client has been removed. This includes the `list()` and `delete()` methods.
+
+        **Before (v5):**
+
+        ```ts
+        // List active federated connection tokensets for a user
+        const tokensets = await client.users.federatedConnectionsTokensets.list("user_id");
+
+        // Delete a tokenset
+        await client.users.federatedConnectionsTokensets.delete("user_id", "tokenset_id");
+        ```
+
+        **After (v6):**
+
+        These methods are no longer available. Remove any calls to `client.users.federatedConnectionsTokensets` from your code.
+
+        ---
+
+        ### federated_connections_access_tokens removed from connection options
+
+        The `federated_connections_access_tokens` field has been removed from all connection option types, including create and update. This affects OIDC, Azure AD, Google Apps, and other connection strategies. Remove it from any create or update payloads.
+
+        **Before (v5):**
+
+        ```ts
+        // On create
+        await client.connections.create({
+            strategy: "oidc",
+            name: "my-connection",
+            options: {
+                federated_connections_access_tokens: { ... },
+                // other options
+            },
+        });
+
+        // On update
+        await client.connections.update("connection_id", {
+            options: {
+                federated_connections_access_tokens: { ... },
+                // other options
+            },
+        });
+        ```
+
+        **After (v6):**
+
+        ```ts
+        // On create
+        await client.connections.create({
+            strategy: "oidc",
+            name: "my-connection",
+            options: {
+                // remove federated_connections_access_tokens
+                // other options
+            },
+        });
+
+        // On update
+        await client.connections.update("connection_id", {
+            options: {
+                // remove federated_connections_access_tokens
+                // other options
+            },
+        });
+        ```
+  - id: patch-a823058b
+    content_hash: sha256:99f6d783ff5b3315378610ff8a88aa7ef2f6d7802b2e39ee9c1adb299d093039
+    original_commit: a823058bd14f6667877bffb625aaa2eadd9d1604
+    original_message: Release v6.0.0 (#1371)
+    original_author: Ankita Tripathi <51994119+ankita10119@users.noreply.github.com>
+    base_generation: d96634c32b9ff972996e012d3e238c9b162ecaf1
+    files:
+      - package.json
+    patch_content: |
+      diff --git a/package.json b/package.json
+      index 882cc5884..893c28695 100644
+      --- a/package.json
+      +++ b/package.json
+      @@ -1,6 +1,6 @@
+       {
+           "name": "auth0",
+      -    "version": "5.14.0",
+      +    "version": "6.0.0",
+           "private": false,
+           "repository": {
+               "type": "git",
+    theirs_snapshot:
+      package.json: |
+        {
+            "name": "auth0",
+            "version": "6.0.0",
+            "private": false,
+            "repository": {
+                "type": "git",
+                "url": "git+https://github.com/auth0/node-auth0.git"
+            },
+            "license": "MIT",
+            "type": "commonjs",
+            "main": "./dist/cjs/index.js",
+            "module": "./dist/esm/index.mjs",
+            "types": "./dist/cjs/index.d.ts",
+            "exports": {
+                ".": {
+                    "import": {
+                        "types": "./dist/esm/index.d.mts",
+                        "default": "./dist/esm/index.mjs"
+                    },
+                    "require": {
+                        "types": "./dist/cjs/index.d.ts",
+                        "default": "./dist/cjs/index.js"
+                    },
+                    "default": "./dist/cjs/index.js"
+                },
+                "./package.json": "./package.json",
+                "./legacy": {
+                    "types": "./legacy/exports/index.d.ts",
+                    "import": {
+                        "types": "./legacy/exports/index.d.mts",
+                        "default": "./legacy/exports/index.mjs"
+                    },
+                    "require": {
+                        "types": "./legacy/exports/index.d.ts",
+                        "default": "./legacy/exports/index.js"
+                    }
+                }
+            },
+            "files": [
+                "legacy",
+                "package.json",
+                "dist",
+                "reference.md",
+                "README.md",
+                "LICENSE"
+            ],
+            "scripts": {
+                "format": "prettier . --write --ignore-unknown",
+                "format:check": "prettier . --check --ignore-unknown",
+                "lint": "eslint . --ext .js,.ts,.tsx",
+                "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
+                "check": "yarn format:check",
+                "check:fix": "yarn format",
+                "build": "yarn build:cjs && yarn build:esm",
+                "build:cjs": "tsc --project ./tsconfig.cjs.json",
+                "build:esm": "tsc --project ./tsconfig.esm.json && node scripts/rename-to-esm-files.js dist/esm",
+                "test": "jest --config jest.config.mjs",
+                "test:unit": "jest --selectProjects unit",
+                "test:wire": "jest --selectProjects wire",
+                "prepare": "husky",
+                "lint:check": "eslint . --ext .js,.ts,.tsx",
+                "lint:package": "publint --pack npm",
+                "test:coverage": "jest --config jest.config.mjs --coverage",
+                "test:coverage:unit": "jest --selectProjects unit --coverage",
+                "test:coverage:browser": "jest --selectProjects browser --coverage",
+                "test:coverage:wire": "jest --selectProjects wire --coverage",
+                "docs": "typedoc",
+                "docs:clean": "rm -rf docs",
+                "docs:build": "yarn docs:clean && yarn docs",
+                "precommit": "lint-staged",
+                "validate": "yarn lint:check && yarn format --check && yarn build && yarn test && yarn lint:package"
+            },
+            "dependencies": {
+                "uuid": "^11.1.1",
+                "jose": "^5.0.0",
+                "auth0-legacy": "npm:auth0@^4.37.1"
+            },
+            "devDependencies": {
+                "webpack": "^5.105.4",
+                "ts-loader": "^9.5.4",
+                "jest": "^29.7.0",
+                "@jest/globals": "^29.7.0",
+                "@types/jest": "^29.5.14",
+                "ts-jest": "^29.3.4",
+                "jest-environment-jsdom": "^29.7.0",
+                "msw": "2.11.2",
+                "@types/node": "^20.0.0",
+                "typescript": "~5.9.3",
+                "prettier": "3.8.1",
+                "typedoc": "^0.28.7",
+                "typedoc-plugin-missing-exports": "^4.0.0",
+                "nock": "^14.0.6",
+                "undici": "^7.12.0",
+                "@eslint/js": "^9.32.0",
+                "@typescript-eslint/eslint-plugin": "^8.38.0",
+                "@typescript-eslint/parser": "^8.38.0",
+                "eslint": "^9.32.0",
+                "eslint-config-prettier": "^10.1.8",
+                "eslint-plugin-prettier": "^5.5.3",
+                "husky": "^9.1.7",
+                "lint-staged": "^16.1.4",
+                "publint": "^0.3.12"
+            },
+            "browser": {
+                "fs": false,
+                "os": false,
+                "path": false,
+                "stream": false,
+                "crypto": false
+            },
+            "packageManager": "yarn@1.22.22",
+            "engines": {
+                "node": "^20.19.0 || ^22.12.0 || ^24.0.0 || ^26.0.0"
+            },
+            "sideEffects": false,
+            "bugs": {
+                "url": "https://github.com/auth0/node-auth0/issues"
+            },
+            "homepage": "https://github.com/auth0/node-auth0",
+            "keywords": [
+                "auth0",
+                "authentication",
+                "login",
+                "auth",
+                "jwt",
+                "management api",
+                "json web token"
+            ],
+            "description": "Auth0 Node.js SDK for the Management API v2.",
+            "lint-staged": {
+                "*.{js,ts,tsx}": [
+                    "eslint --fix",
+                    "prettier --write"
+                ],
+                "*.{json,md,yml,yaml}": [
+                    "prettier --write"
+                ]
+            }
+        }
+    status: unresolved

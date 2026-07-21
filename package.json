@@ -1,10 +1,10 @@
 {
-    "name": "auth0",
-    "version": "6.0.0",
+    "name": "",
+    "version": "0.0.75",
     "private": false,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/auth0/node-auth0.git"
+        "url": "git+https://github.com/fern-demo/internal-node-auth0.git"
     },
     "license": "MIT",
     "type": "commonjs",
@@ -72,7 +72,7 @@
     },
     "dependencies": {
         "uuid": "^11.1.1",
-        "jose": "^5.0.0",
+        "jose": "^4.13.2",
         "auth0-legacy": "npm:auth0@^4.37.1"
     },
     "devDependencies": {
@@ -110,13 +110,9 @@
     },
     "packageManager": "yarn@1.22.22",
     "engines": {
-        "node": "^20.19.0 || ^22.12.0 || ^24.0.0 || ^26.0.0"
+        "node": "^20.19.0 || ^22.12.0 || ^24.0.0"
     },
     "sideEffects": false,
-    "bugs": {
-        "url": "https://github.com/auth0/node-auth0/issues"
-    },
-    "homepage": "https://github.com/auth0/node-auth0",
     "keywords": [
         "auth0",
         "authentication",

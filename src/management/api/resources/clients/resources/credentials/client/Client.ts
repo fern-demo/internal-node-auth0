@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import * as core from "../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
@@ -25,7 +26,7 @@ export class CredentialsClient {
     /**
      * Get the details of a client credential.
      *
-     * **Important**: To enable credentials to be used for a client authentication method, set the `client_authentication_methods` property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the `signed_request_object` property on the client.
+     * <b>Important</b>: To enable credentials to be used for a client authentication method, set the <code>client_authentication_methods</code> property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the <code>signed_request_object</code> property on the client.
      *
      * @param {string} client_id - ID of the client.
      * @param {CredentialsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -34,6 +35,8 @@ export class CredentialsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.clients.credentials.list("client_id")
@@ -105,61 +108,37 @@ export class CredentialsClient {
     /**
      * Create a client credential associated to your application. Credentials can be used to configure Private Key JWT and mTLS authentication methods, as well as for JWT-secured Authorization requests.
      *
-     * **Public Key**
+     * <h5>Public Key</h5>Public Key credentials can be used to set up Private Key JWT client authentication and JWT-secured Authorization requests.
      *
-     * Public Key credentials can be used to set up Private Key JWT client authentication and JWT-secured Authorization requests.
-     *
-     * Sample:
-     *
-     * ```json
-     * {
+     * Sample: <pre><code>{
      *   "credential_type": "public_key",
      *   "name": "string",
      *   "pem": "string",
      *   "alg": "RS256",
      *   "parse_expiry_from_cert": false,
      *   "expires_at": "2022-12-31T23:59:59Z"
-     * }
-     * ```
+     * }</code></pre>
+     * <h5>Certificate (CA-signed & self-signed)</h5>Certificate credentials can be used to set up mTLS client authentication. CA-signed certificates can be configured either with a signed certificate or with just the certificate Subject DN.
      *
-     * **Certificate (CA-signed & self-signed)**
-     *
-     * Certificate credentials can be used to set up mTLS client authentication. CA-signed certificates can be configured either with a signed certificate or with just the certificate Subject DN.
-     *
-     * CA-signed Certificate Sample (pem):
-     *
-     * ```json
-     * {
+     * CA-signed Certificate Sample (pem): <pre><code>{
      *   "credential_type": "x509_cert",
      *   "name": "string",
      *   "pem": "string"
-     * }
-     * ```
-     *
-     * CA-signed Certificate Sample (subject_dn):
-     *
-     * ```json
-     * {
+     * }</code></pre>CA-signed Certificate Sample (subject_dn): <pre><code>{
      *   "credential_type": "cert_subject_dn",
      *   "name": "string",
      *   "subject_dn": "string"
-     * }
-     * ```
-     *
-     * Self-signed Certificate Sample:
-     *
-     * ```json
-     * {
+     * }</code></pre>Self-signed Certificate Sample: <pre><code>{
      *   "credential_type": "cert_subject_dn",
      *   "name": "string",
      *   "pem": "string"
-     * }
-     * ```
+     * }</code></pre>
      *
      * The credential will be created but not yet enabled for use until you set the corresponding properties in the client:
-     *
-     * - To enable the credential for Private Key JWT or mTLS authentication methods, set the `client_authentication_methods` property on the client. For more information, read [Configure Private Key JWT Authentication](https://auth0.com/docs/get-started/applications/configure-private-key-jwt) and [Configure mTLS Authentication](https://auth0.com/docs/get-started/applications/configure-mtls)
-     * - To enable the credential for JWT-secured Authorization requests, set the `signed_request_object`property on the client. For more information, read [Configure JWT-secured Authorization Requests (JAR)](https://auth0.com/docs/get-started/applications/configure-jar)
+     * <ul>
+     *   <li>To enable the credential for Private Key JWT or mTLS authentication methods, set the <code>client_authentication_methods</code> property on the client. For more information, read <a href="https://auth0.com/docs/get-started/applications/configure-private-key-jwt">Configure Private Key JWT Authentication</a> and <a href="https://auth0.com/docs/get-started/applications/configure-mtls">Configure mTLS Authentication</a></li>
+     *   <li>To enable the credential for JWT-secured Authorization requests, set the <code>signed_request_object</code>property on the client. For more information, read <a href="https://auth0.com/docs/get-started/applications/configure-jar">Configure JWT-secured Authorization Requests (JAR)</a></li>
+     * </ul>
      *
      * @param {string} client_id - ID of the client.
      * @param {Management.PostClientCredentialRequestContent} request
@@ -170,6 +149,8 @@ export class CredentialsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.clients.credentials.create("client_id", {
@@ -207,7 +188,7 @@ export class CredentialsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -253,7 +234,7 @@ export class CredentialsClient {
     /**
      * Get the details of a client credential.
      *
-     * **Important**: To enable credentials to be used for a client authentication method, set the `client_authentication_methods` property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the `signed_request_object` property on the client.
+     * <b>Important</b>: To enable credentials to be used for a client authentication method, set the <code>client_authentication_methods</code> property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the <code>signed_request_object</code> property on the client.
      *
      * @param {string} client_id - ID of the client.
      * @param {string} credential_id - ID of the credential.
@@ -263,6 +244,8 @@ export class CredentialsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.clients.credentials.get("client_id", "credential_id")
@@ -347,6 +330,8 @@ export class CredentialsClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.clients.credentials.delete("client_id", "credential_id")
@@ -430,6 +415,8 @@ export class CredentialsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.clients.credentials.update("client_id", "credential_id")
@@ -467,7 +454,7 @@ export class CredentialsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

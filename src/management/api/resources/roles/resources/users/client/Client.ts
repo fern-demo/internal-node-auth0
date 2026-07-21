@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import * as core from "../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
@@ -23,23 +24,25 @@ export class UsersClient {
     }
 
     /**
-     * Retrieve list of users associated with a specific role. For Dashboard instructions, review [View Users Assigned to Roles](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/roles/view-users-assigned-to-roles).
+     * Retrieve list of users associated with a specific role. For Dashboard instructions, review <a href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/roles/view-users-assigned-to-roles">View Users Assigned to Roles</a>.
      *
      * This endpoint supports two types of pagination:
-     *
-     * - Offset pagination
-     * - Checkpoint pagination
+     * <ul>
+     * <li>Offset pagination</li>
+     * <li>Checkpoint pagination</li>
+     * </ul>
      *
      * Checkpoint pagination must be used if you need to retrieve more than 1000 organization members.
      *
-     * **Checkpoint Pagination**
+     * <h2>Checkpoint Pagination</h2>
      *
      * To search by checkpoint, use the following parameters:
+     * <ul>
+     * <li><code>from</code>: Optional id from which to start selection.</li>
+     * <li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to 50.</li>
+     * </ul>
      *
-     * - `from`: Optional id from which to start selection.
-     * - `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
-     *
-     * **Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+     * <b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
      *
      * @param {string} id - ID of the role to retrieve a list of users associated with.
      * @param {Management.ListRoleUsersRequestParameters} request
@@ -50,6 +53,8 @@ export class UsersClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.roles.users.list("id", {
@@ -149,9 +154,9 @@ export class UsersClient {
     }
 
     /**
-     * Assign one or more users to an existing user role. To learn more, review [Role-Based Access Control](https://auth0.com/docs/manage-users/access-control/rbac).
+     * Assign one or more users to an existing user role. To learn more, review <a href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access Control</a>.
      *
-     * **Note**: New roles cannot be created through this action.
+     * <b>Note</b>: New roles cannot be created through this action.
      *
      * @param {string} id - ID of the role to assign users to.
      * @param {Management.AssignRoleUsersRequestContent} request
@@ -162,6 +167,8 @@ export class UsersClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.roles.users.assign("id", {
@@ -199,7 +206,7 @@ export class UsersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

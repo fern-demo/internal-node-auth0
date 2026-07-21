@@ -23,7 +23,7 @@ export class OrganizationsClient {
     }
 
     /**
-     * Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For more information, review [Auth0 Organizations](https://auth0.com/docs/manage-users/organizations).
+     * Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For more information, review <a href="https://auth0.com/docs/manage-users/organizations">Auth0 Organizations</a>.
      *
      * @param {string} id - ID of the user to retrieve the organizations for.
      * @param {Management.ListUserOrganizationsRequestParameters} request
@@ -31,8 +31,9 @@ export class OrganizationsClient {
      *
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
-     * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.users.organizations.list("id", {
@@ -97,8 +98,6 @@ export class OrganizationsClient {
                             );
                         case 403:
                             throw new Management.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Management.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                         case 429:
                             throw new Management.TooManyRequestsError(
                                 _response.error.body as unknown,

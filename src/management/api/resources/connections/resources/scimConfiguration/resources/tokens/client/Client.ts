@@ -7,6 +7,7 @@ import {
 } from "../../../../../../../../BaseClient.js";
 import * as core from "../../../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
@@ -26,13 +27,15 @@ export class TokensClient {
     }
 
     /**
-     * Retrieves all scim tokens by its connection `id`.
+     * Retrieves all scim tokens by its connection <code>id</code>.
      *
      * @param {string} id - The id of the connection to retrieve its SCIM configuration
      * @param {TokensClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.tokens.get("id")
@@ -110,6 +113,8 @@ export class TokensClient {
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.ConflictError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.tokens.create("id")
@@ -145,7 +150,7 @@ export class TokensClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -185,7 +190,7 @@ export class TokensClient {
     }
 
     /**
-     * Deletes a scim token by its connection `id` and `tokenId`.
+     * Deletes a scim token by its connection <code>id</code> and <code>tokenId</code>.
      *
      * @param {string} id - The connection id that owns the SCIM token to delete
      * @param {string} tokenId - The id of the scim token to delete
@@ -193,6 +198,8 @@ export class TokensClient {
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.tokens.delete("id", "tokenId")

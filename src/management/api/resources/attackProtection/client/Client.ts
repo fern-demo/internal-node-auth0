@@ -8,7 +8,6 @@ import { BotDetectionClient } from "../resources/botDetection/client/Client.js";
 import { BreachedPasswordDetectionClient } from "../resources/breachedPasswordDetection/client/Client.js";
 import { BruteForceProtectionClient } from "../resources/bruteForceProtection/client/Client.js";
 import { CaptchaClient } from "../resources/captcha/client/Client.js";
-import { PhoneProviderProtectionClient } from "../resources/phoneProviderProtection/client/Client.js";
 import { SuspiciousIpThrottlingClient } from "../resources/suspiciousIpThrottling/client/Client.js";
 
 export declare namespace AttackProtectionClient {
@@ -21,7 +20,6 @@ export class AttackProtectionClient {
     protected _breachedPasswordDetection: BreachedPasswordDetectionClient | undefined;
     protected _bruteForceProtection: BruteForceProtectionClient | undefined;
     protected _captcha: CaptchaClient | undefined;
-    protected _phoneProviderProtection: PhoneProviderProtectionClient | undefined;
     protected _suspiciousIpThrottling: SuspiciousIpThrottlingClient | undefined;
 
     constructor(options: AttackProtectionClient.Options) {
@@ -42,10 +40,6 @@ export class AttackProtectionClient {
 
     public get captcha(): CaptchaClient {
         return (this._captcha ??= new CaptchaClient(this._options));
-    }
-
-    public get phoneProviderProtection(): PhoneProviderProtectionClient {
-        return (this._phoneProviderProtection ??= new PhoneProviderProtectionClient(this._options));
     }
 
     public get suspiciousIpThrottling(): SuspiciousIpThrottlingClient {

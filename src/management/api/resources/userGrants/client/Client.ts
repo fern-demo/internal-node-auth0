@@ -23,7 +23,7 @@ export class UserGrantsClient {
     }
 
     /**
-     * Retrieve the [grants](https://auth0.com/docs/api-auth/which-oauth-flow-to-use) associated with your account.
+     * Retrieve the <a href="https://auth0.com/docs/api-auth/which-oauth-flow-to-use">grants</a> associated with your account.
      *
      * @param {Management.ListUserGrantsRequestParameters} request
      * @param {UserGrantsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -31,6 +31,8 @@ export class UserGrantsClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userGrants.list({
@@ -148,6 +150,8 @@ export class UserGrantsClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userGrants.deleteByUserId({
@@ -228,6 +232,8 @@ export class UserGrantsClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userGrants.delete("id")

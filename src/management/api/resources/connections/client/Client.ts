@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../BaseClie
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../BaseClient.js";
 import * as core from "../../../../core/index.js";
 import { mergeHeaders } from "../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../core/requestBody.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
@@ -53,23 +54,25 @@ export class ConnectionsClient {
     }
 
     /**
-     * Retrieves detailed list of all [connections](https://auth0.com/docs/authenticate/identity-providers) that match the specified strategy. If no strategy is provided, all connections within your tenant are retrieved. This action can accept a list of fields to include or exclude from the resulting list of connections.
+     * Retrieves detailed list of all <a href="https://auth0.com/docs/authenticate/identity-providers">connections</a> that match the specified strategy. If no strategy is provided, all connections within your tenant are retrieved. This action can accept a list of fields to include or exclude from the resulting list of connections.
      *
      * This endpoint supports two types of pagination:
-     *
-     * - Offset pagination
-     * - Checkpoint pagination
+     * <ul>
+     * <li>Offset pagination</li>
+     * <li>Checkpoint pagination</li>
+     * </ul>
      *
      * Checkpoint pagination must be used if you need to retrieve more than 1000 connections.
      *
-     * **Checkpoint Pagination**
+     * <h2>Checkpoint Pagination</h2>
      *
      * To search by checkpoint, use the following parameters:
+     * <ul>
+     * <li><code>from</code>: Optional id from which to start selection.</li>
+     * <li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to 50.</li>
+     * </ul>
      *
-     * - `from`: Optional id from which to start selection.
-     * - `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
-     *
-     * **Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+     * <b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
      *
      * @param {Management.ListConnectionsQueryParameters} request
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -78,6 +81,9 @@ export class ConnectionsClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link Management.InternalServerError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.list({
@@ -92,12 +98,21 @@ export class ConnectionsClient {
     public async list(
         request: Management.ListConnectionsQueryParameters = {},
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): Promise<core.Page<Management.ConnectionForList, Management.ListConnectionsCheckpointPaginatedResponseContent>> {
+    ): Promise<
+        core.Page<Management.ConnectionResponseContent, Management.ListConnectionsCheckpointPaginatedResponseContent>
+    > {
         const list = core.HttpResponsePromise.interceptFunction(
             async (
                 request: Management.ListConnectionsQueryParameters,
             ): Promise<core.WithRawResponse<Management.ListConnectionsCheckpointPaginatedResponseContent>> => {
-                const { from: from_, take = 50, strategy, name, fields, include_fields: includeFields } = request;
+                const {
+                    from: from_,
+                    take = 50,
+                    strategy,
+                    name,
+                    fields,
+                    include_fields: includeFields = true,
+                } = request;
                 const _queryParams: Record<string, unknown> = {
                     from: from_,
                     take,
@@ -161,6 +176,11 @@ export class ConnectionsClient {
                                 _response.error.body as unknown,
                                 _response.rawResponse,
                             );
+                        case 500:
+                            throw new Management.InternalServerError(
+                                _response.error.body as unknown,
+                                _response.rawResponse,
+                            );
                         default:
                             throw new errors.ManagementError({
                                 statusCode: _response.error.statusCode,
@@ -174,7 +194,7 @@ export class ConnectionsClient {
         );
         const dataWithRawResponse = await list(request).withRawResponse();
         return new core.Page<
-            Management.ConnectionForList,
+            Management.ConnectionResponseContent,
             Management.ListConnectionsCheckpointPaginatedResponseContent
         >({
             response: dataWithRawResponse.data,
@@ -189,9 +209,7 @@ export class ConnectionsClient {
     }
 
     /**
-     * Creates a new connection according to the JSON object received in `body`.
-     *
-     * **Note:** If a connection with the same name was recently deleted and had a large number of associated users, the deletion may still be processing. Creating a new connection with that name before the deletion completes may fail or produce unexpected results.
+     * Creates a new connection according to the JSON object received in <code>body</code>.<br/>
      *
      * @param {Management.CreateConnectionRequestContent} request
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -201,24 +219,55 @@ export class ConnectionsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link Management.InternalServerError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.create({
-     *         name: "name",
-     *         strategy: "ad"
+     *         strategy: "ad",
+     *         display_name: "Corporate Active Directory",
+     *         enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+     *         is_domain_connection: true,
+     *         metadata: {
+     *             "environment": "production",
+     *             "managed_by": "identity-team"
+     *         },
+     *         name: "corp-active-directory",
+     *         name: "corp-active-directory",
+     *         display_name: "Corporate Active Directory",
+     *         is_domain_connection: true,
+     *         enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+     *         options: {
+     *             tenant_domain: "corp.example.com",
+     *             domain_aliases: ["example.com", "corp.example.com"],
+     *             agentIP: "10.0.0.42",
+     *             agentVersion: "4.3.0",
+     *             agentMode: false,
+     *             kerberos: true,
+     *             brute_force_protection: true,
+     *             disable_cache: false,
+     *             set_user_root_attributes: "on_each_login",
+     *             ips: ["10.0.0.0/24"],
+     *             non_persistent_attrs: ["ethnicity", "gender"]
+     *         },
+     *         metadata: {
+     *             "environment": "production",
+     *             "managed_by": "identity-team"
+     *         }
      *     })
      */
     public create(
         request: Management.CreateConnectionRequestContent,
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): core.HttpResponsePromise<Management.CreateConnectionResponseContent> {
+    ): core.HttpResponsePromise<Management.ConnectionResponseContent> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Management.CreateConnectionRequestContent,
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Management.CreateConnectionResponseContent>> {
+    ): Promise<core.WithRawResponse<Management.ConnectionResponseContent>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -237,7 +286,7 @@ export class ConnectionsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -245,10 +294,7 @@ export class ConnectionsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Management.CreateConnectionResponseContent,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Management.ConnectionResponseContent, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -263,6 +309,8 @@ export class ConnectionsClient {
                     throw new Management.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 case 429:
                     throw new Management.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                case 500:
+                    throw new Management.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.ManagementError({
                         statusCode: _response.error.statusCode,
@@ -276,9 +324,9 @@ export class ConnectionsClient {
     }
 
     /**
-     * Retrieve details for a specified [connection](https://auth0.com/docs/authenticate/identity-providers) along with options that can be used for identity provider configuration.
+     * Retrieve details for a specified <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> along with options that can be used for identity provider configuration.
      *
-     * @param {string} id - The id of the connection to retrieve
+     * @param {string} id - The id of the connection
      * @param {Management.GetConnectionRequestParameters} request
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -287,6 +335,9 @@ export class ConnectionsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link Management.InternalServerError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.get("id", {
@@ -298,7 +349,7 @@ export class ConnectionsClient {
         id: string,
         request: Management.GetConnectionRequestParameters = {},
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): core.HttpResponsePromise<Management.GetConnectionResponseContent> {
+    ): core.HttpResponsePromise<Management.ConnectionResponseContent> {
         return core.HttpResponsePromise.fromPromise(this.__get(id, request, requestOptions));
     }
 
@@ -306,8 +357,8 @@ export class ConnectionsClient {
         id: string,
         request: Management.GetConnectionRequestParameters = {},
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Management.GetConnectionResponseContent>> {
-        const { fields, include_fields: includeFields } = request;
+    ): Promise<core.WithRawResponse<Management.ConnectionResponseContent>> {
+        const { fields, include_fields: includeFields = true } = request;
         const _queryParams: Record<string, unknown> = {
             fields,
             include_fields: includeFields,
@@ -339,10 +390,7 @@ export class ConnectionsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Management.GetConnectionResponseContent,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Management.ConnectionResponseContent, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -357,6 +405,8 @@ export class ConnectionsClient {
                     throw new Management.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                 case 429:
                     throw new Management.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                case 500:
+                    throw new Management.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.ManagementError({
                         statusCode: _response.error.statusCode,
@@ -370,17 +420,18 @@ export class ConnectionsClient {
     }
 
     /**
-     * Removes a specific [connection](https://auth0.com/docs/authenticate/identity-providers) from your tenant. This action cannot be undone. Once removed, users can no longer use this connection to authenticate.
+     * Removes a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> from your tenant. This action cannot be undone. Once removed, users can no longer use this connection to authenticate.
      *
-     * **Note:** If your connection has a large amount of users associated with it, please be aware that this operation can be long running after the response is returned and may impact concurrent [create connection](https://auth0.com/docs/api/management/v2/connections/post-connections) requests, if they use an identical connection name.
-     *
-     * @param {string} id - The id of the connection to delete
+     * @param {string} id - The id of the connection
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link Management.InternalServerError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.delete("id")
@@ -429,6 +480,8 @@ export class ConnectionsClient {
                     throw new Management.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
                 case 429:
                     throw new Management.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                case 500:
+                    throw new Management.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.ManagementError({
                         statusCode: _response.error.statusCode,
@@ -442,11 +495,11 @@ export class ConnectionsClient {
     }
 
     /**
-     * Update details for a specific [connection](https://auth0.com/docs/authenticate/identity-providers), including option properties for identity provider configuration.
+     * Update details for a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a>, including option properties for identity provider configuration.
      *
-     * **Note**: If you use the `options` parameter, the entire `options` object is overridden. To avoid partial data or other issues, ensure all parameters are present when using this option.
+     * <b>Note</b>: If you use the <code>options</code> parameter, the entire <code>options</code> object is overriden. To avoid partial data or other issues, ensure all parameters are present when using this option.
      *
-     * @param {string} id - The id of the connection to update
+     * @param {string} id - The id of the connection
      * @param {Management.UpdateConnectionRequestContent} request
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -456,23 +509,26 @@ export class ConnectionsClient {
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link Management.InternalServerError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
-     *     await client.connections.update("id")
+     *     await client.connections.update("id", {})
      */
     public update(
         id: string,
-        request: Management.UpdateConnectionRequestContent = {},
+        request: Management.UpdateConnectionRequestContent,
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): core.HttpResponsePromise<Management.UpdateConnectionResponseContent> {
+    ): core.HttpResponsePromise<Management.ConnectionResponseContent> {
         return core.HttpResponsePromise.fromPromise(this.__update(id, request, requestOptions));
     }
 
     private async __update(
         id: string,
-        request: Management.UpdateConnectionRequestContent = {},
+        request: Management.UpdateConnectionRequestContent,
         requestOptions?: ConnectionsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Management.UpdateConnectionResponseContent>> {
+    ): Promise<core.WithRawResponse<Management.ConnectionResponseContent>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -491,7 +547,7 @@ export class ConnectionsClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -499,10 +555,7 @@ export class ConnectionsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Management.UpdateConnectionResponseContent,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Management.ConnectionResponseContent, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -519,6 +572,8 @@ export class ConnectionsClient {
                     throw new Management.ConflictError(_response.error.body as unknown, _response.rawResponse);
                 case 429:
                     throw new Management.TooManyRequestsError(_response.error.body as unknown, _response.rawResponse);
+                case 500:
+                    throw new Management.InternalServerError(_response.error.body as unknown, _response.rawResponse);
                 default:
                     throw new errors.ManagementError({
                         statusCode: _response.error.statusCode,
@@ -532,7 +587,7 @@ export class ConnectionsClient {
     }
 
     /**
-     * Retrieves the status of an ad/ldap connection referenced by its `ID`. `200 OK` http status code response is returned  when the connection is online, otherwise a `404` status code is returned along with an error message
+     * Retrieves the status of an ad/ldap connection referenced by its <code>ID</code>. <code>200 OK</code> http status code response is returned  when the connection is online, otherwise a <code>404</code> status code is returned along with an error message
      *
      * @param {string} id - ID of the connection to check
      * @param {ConnectionsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -542,6 +597,8 @@ export class ConnectionsClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.checkStatus("id")

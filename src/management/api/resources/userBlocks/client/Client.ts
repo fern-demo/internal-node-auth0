@@ -23,7 +23,7 @@ export class UserBlocksClient {
     }
 
     /**
-     * Retrieve details of all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for a user with the given identifier (username, phone number, or email).
+     * Retrieve details of all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for a user with the given identifier (username, phone number, or email).
      *
      * @param {Management.ListUserBlocksByIdentifierRequestParameters} request
      * @param {UserBlocksClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -32,6 +32,8 @@ export class UserBlocksClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userBlocks.listByIdentifier({
@@ -111,9 +113,9 @@ export class UserBlocksClient {
     }
 
     /**
-     * Remove all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given identifier (username, phone number, or email).
+     * Remove all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given identifier (username, phone number, or email).
      *
-     * Note: This endpoint does not unblock users that were [blocked by a tenant administrator](https://auth0.com/docs/user-profile#block-and-unblock-a-user).
+     * Note: This endpoint does not unblock users that were <a href="https://auth0.com/docs/user-profile#block-and-unblock-a-user">blocked by a tenant administrator</a>.
      *
      * @param {Management.DeleteUserBlocksByIdentifierRequestParameters} request
      * @param {UserBlocksClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -122,6 +124,8 @@ export class UserBlocksClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userBlocks.deleteByIdentifier({
@@ -196,7 +200,7 @@ export class UserBlocksClient {
     }
 
     /**
-     * Retrieve details of all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given ID.
+     * Retrieve details of all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given ID.
      *
      * @param {string} id - user_id of the user blocks to retrieve.
      * @param {Management.ListUserBlocksRequestParameters} request
@@ -207,6 +211,8 @@ export class UserBlocksClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userBlocks.list("id", {
@@ -288,9 +294,9 @@ export class UserBlocksClient {
     }
 
     /**
-     * Remove all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given ID.
+     * Remove all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given ID.
      *
-     * Note: This endpoint does not unblock users that were [blocked by a tenant administrator](https://auth0.com/docs/user-profile#block-and-unblock-a-user).
+     * Note: This endpoint does not unblock users that were <a href="https://auth0.com/docs/user-profile#block-and-unblock-a-user">blocked by a tenant administrator</a>.
      *
      * @param {string} id - The user_id of the user to update.
      * @param {UserBlocksClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -300,6 +306,8 @@ export class UserBlocksClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.userBlocks.delete("id")

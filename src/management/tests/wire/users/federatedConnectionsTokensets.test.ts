@@ -4,26 +4,35 @@ import * as Management from "../../../api/index";
 import { ManagementClient } from "../../../Client";
 import { mockServerPool } from "../../mock-server/MockServerPool";
 
-describe("PhoneProviderProtectionClient", () => {
-    test("get (1)", async () => {
+describe("FederatedConnectionsTokensetsClient", () => {
+    test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { type: "exponential" };
+        const rawResponseBody = [
+            {
+                id: "id",
+                connection: "connection",
+                scope: "scope",
+                expires_at: "2024-01-15T09:30:00Z",
+                issued_at: "2024-01-15T09:30:00Z",
+                last_used_at: "2024-01-15T09:30:00Z",
+            },
+        ];
 
         server
             .mockEndpoint()
-            .get("/attack-protection/phone-provider-protection")
+            .get("/users/id/federated-connections-tokensets")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.attackProtection.phoneProviderProtection.get();
+        const response = await client.users.federatedConnectionsTokensets.list("id");
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("get (2)", async () => {
+    test("list (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -31,18 +40,18 @@ describe("PhoneProviderProtectionClient", () => {
 
         server
             .mockEndpoint()
-            .get("/attack-protection/phone-provider-protection")
+            .get("/users/id/federated-connections-tokensets")
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.get();
+            return await client.users.federatedConnectionsTokensets.list("id");
         }).rejects.toThrow(Management.UnauthorizedError);
     });
 
-    test("get (3)", async () => {
+    test("list (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -50,18 +59,18 @@ describe("PhoneProviderProtectionClient", () => {
 
         server
             .mockEndpoint()
-            .get("/attack-protection/phone-provider-protection")
+            .get("/users/id/federated-connections-tokensets")
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.get();
+            return await client.users.federatedConnectionsTokensets.list("id");
         }).rejects.toThrow(Management.ForbiddenError);
     });
 
-    test("get (4)", async () => {
+    test("list (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -69,18 +78,18 @@ describe("PhoneProviderProtectionClient", () => {
 
         server
             .mockEndpoint()
-            .get("/attack-protection/phone-provider-protection")
+            .get("/users/id/federated-connections-tokensets")
             .respondWith()
             .statusCode(404)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.get();
+            return await client.users.federatedConnectionsTokensets.list("id");
         }).rejects.toThrow(Management.NotFoundError);
     });
 
-    test("get (5)", async () => {
+    test("list (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -88,101 +97,105 @@ describe("PhoneProviderProtectionClient", () => {
 
         server
             .mockEndpoint()
-            .get("/attack-protection/phone-provider-protection")
+            .get("/users/id/federated-connections-tokensets")
             .respondWith()
             .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.get();
+            return await client.users.federatedConnectionsTokensets.list("id");
         }).rejects.toThrow(Management.TooManyRequestsError);
     });
 
-    test("patch (1)", async () => {
+    test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "exponential" };
-        const rawResponseBody = { type: "exponential" };
 
         server
             .mockEndpoint()
-            .patch("/attack-protection/phone-provider-protection")
-            .jsonBody(rawRequestBody)
+            .delete("/users/id/federated-connections-tokensets/tokenset_id")
             .respondWith()
             .statusCode(200)
-            .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.attackProtection.phoneProviderProtection.patch({
-            type: "exponential",
-        });
-        expect(response).toEqual(rawResponseBody);
+        const response = await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
+        expect(response).toEqual(undefined);
     });
 
-    test("patch (2)", async () => {
+    test("delete (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "exponential" };
+
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/attack-protection/phone-provider-protection")
-            .jsonBody(rawRequestBody)
+            .delete("/users/id/federated-connections-tokensets/tokenset_id")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
+        }).rejects.toThrow(Management.BadRequestError);
+    });
+
+    test("delete (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .delete("/users/id/federated-connections-tokensets/tokenset_id")
             .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.patch({
-                type: "exponential",
-            });
+            return await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
         }).rejects.toThrow(Management.UnauthorizedError);
     });
 
-    test("patch (3)", async () => {
+    test("delete (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "exponential" };
+
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/attack-protection/phone-provider-protection")
-            .jsonBody(rawRequestBody)
+            .delete("/users/id/federated-connections-tokensets/tokenset_id")
             .respondWith()
             .statusCode(403)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.patch({
-                type: "exponential",
-            });
+            return await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
         }).rejects.toThrow(Management.ForbiddenError);
     });
 
-    test("patch (4)", async () => {
+    test("delete (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "exponential" };
+
         const rawResponseBody = { key: "value" };
 
         server
             .mockEndpoint()
-            .patch("/attack-protection/phone-provider-protection")
-            .jsonBody(rawRequestBody)
+            .delete("/users/id/federated-connections-tokensets/tokenset_id")
             .respondWith()
             .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
         await expect(async () => {
-            return await client.attackProtection.phoneProviderProtection.patch({
-                type: "exponential",
-            });
+            return await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
         }).rejects.toThrow(Management.TooManyRequestsError);
     });
 });

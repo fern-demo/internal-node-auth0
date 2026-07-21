@@ -12,13 +12,7 @@ describe("OrganizationsClient", () => {
         const rawResponseBody = {
             next: "next",
             organizations: [
-                {
-                    id: "id",
-                    name: "name",
-                    display_name: "display_name",
-                    token_quota: { client_credentials: {} },
-                    third_party_client_access: "block",
-                },
+                { id: "id", name: "name", display_name: "display_name", token_quota: { client_credentials: {} } },
             ],
         };
 
@@ -106,7 +100,6 @@ describe("OrganizationsClient", () => {
             branding: { logo_url: "logo_url", colors: { primary: "primary", page_background: "page_background" } },
             metadata: { key: "value" },
             token_quota: { client_credentials: { enforce: true, per_day: 1, per_hour: 1 } },
-            third_party_client_access: "block",
             enabled_connections: [
                 {
                     connection_id: "connection_id",
@@ -253,7 +246,6 @@ describe("OrganizationsClient", () => {
             branding: { logo_url: "logo_url", colors: { primary: "primary", page_background: "page_background" } },
             metadata: { key: "value" },
             token_quota: { client_credentials: { enforce: true, per_day: 1, per_hour: 1 } },
-            third_party_client_access: "block",
         };
 
         server
@@ -335,25 +327,6 @@ describe("OrganizationsClient", () => {
             .mockEndpoint()
             .get("/organizations/name/name")
             .respondWith()
-            .statusCode(404)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.organizations.getByName("name");
-        }).rejects.toThrow(Management.NotFoundError);
-    });
-
-    test("getByName (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .get("/organizations/name/name")
-            .respondWith()
             .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
@@ -374,7 +347,6 @@ describe("OrganizationsClient", () => {
             branding: { logo_url: "logo_url", colors: { primary: "primary", page_background: "page_background" } },
             metadata: { key: "value" },
             token_quota: { client_credentials: { enforce: true, per_day: 1, per_hour: 1 } },
-            third_party_client_access: "block",
         };
 
         server.mockEndpoint().get("/organizations/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -423,19 +395,6 @@ describe("OrganizationsClient", () => {
     });
 
     test("get (5)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
-        server.mockEndpoint().get("/organizations/id").respondWith().statusCode(404).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.organizations.get("id");
-        }).rejects.toThrow(Management.NotFoundError);
-    });
-
-    test("get (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
@@ -564,7 +523,6 @@ describe("OrganizationsClient", () => {
             branding: { logo_url: "logo_url", colors: { primary: "primary", page_background: "page_background" } },
             metadata: { key: "value" },
             token_quota: { client_credentials: { enforce: true, per_day: 1, per_hour: 1 } },
-            third_party_client_access: "block",
         };
 
         server

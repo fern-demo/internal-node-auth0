@@ -9,41 +9,46 @@ import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStat
 import * as errors from "../../../../../../errors/index.js";
 import * as Management from "../../../../../index.js";
 
-export declare namespace PhoneProviderProtectionClient {
+export declare namespace FederatedConnectionsTokensetsClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class PhoneProviderProtectionClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<PhoneProviderProtectionClient.Options>;
+export class FederatedConnectionsTokensetsClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<FederatedConnectionsTokensetsClient.Options>;
 
-    constructor(options: PhoneProviderProtectionClient.Options) {
+    constructor(options: FederatedConnectionsTokensetsClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
     /**
-     * Get the phone provider protection configuration for a tenant.
+     * List active federated connections tokensets for a provided user
      *
-     * @param {PhoneProviderProtectionClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {string} id - User identifier
+     * @param {FederatedConnectionsTokensetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
-     *     await client.attackProtection.phoneProviderProtection.get()
+     *     await client.users.federatedConnectionsTokensets.list("id")
      */
-    public get(
-        requestOptions?: PhoneProviderProtectionClient.RequestOptions,
-    ): core.HttpResponsePromise<Management.GetPhoneProviderProtectionResponseContent> {
-        return core.HttpResponsePromise.fromPromise(this.__get(requestOptions));
+    public list(
+        id: string,
+        requestOptions?: FederatedConnectionsTokensetsClient.RequestOptions,
+    ): core.HttpResponsePromise<Management.FederatedConnectionTokenSet[]> {
+        return core.HttpResponsePromise.fromPromise(this.__list(id, requestOptions));
     }
 
-    private async __get(
-        requestOptions?: PhoneProviderProtectionClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Management.GetPhoneProviderProtectionResponseContent>> {
+    private async __list(
+        id: string,
+        requestOptions?: FederatedConnectionsTokensetsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<Management.FederatedConnectionTokenSet[]>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -55,7 +60,7 @@ export class PhoneProviderProtectionClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                "attack-protection/phone-provider-protection",
+                `users/${core.url.encodePathParam(id)}/federated-connections-tokensets`,
             ),
             method: "GET",
             headers: _headers,
@@ -68,7 +73,7 @@ export class PhoneProviderProtectionClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as Management.GetPhoneProviderProtectionResponseContent,
+                data: _response.body as Management.FederatedConnectionTokenSet[],
                 rawResponse: _response.rawResponse,
             };
         }
@@ -96,36 +101,38 @@ export class PhoneProviderProtectionClient {
             _response.error,
             _response.rawResponse,
             "GET",
-            "/attack-protection/phone-provider-protection",
+            "/users/{id}/federated-connections-tokensets",
         );
     }
 
     /**
-     * Update the phone provider protection configuration for a tenant.
+     * @param {string} id - Id of the user that owns the tokenset
+     * @param {string} tokenset_id - The tokenset id
+     * @param {FederatedConnectionsTokensetsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @param {Management.PatchPhoneProviderProtectionRequestContent} request
-     * @param {PhoneProviderProtectionClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
+     * @throws {@link Management.BadRequestError}
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
-     *     await client.attackProtection.phoneProviderProtection.patch({
-     *         type: "exponential"
-     *     })
+     *     await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id")
      */
-    public patch(
-        request: Management.PatchPhoneProviderProtectionRequestContent,
-        requestOptions?: PhoneProviderProtectionClient.RequestOptions,
-    ): core.HttpResponsePromise<Management.PatchPhoneProviderProtectionResponseContent> {
-        return core.HttpResponsePromise.fromPromise(this.__patch(request, requestOptions));
+    public delete(
+        id: string,
+        tokenset_id: string,
+        requestOptions?: FederatedConnectionsTokensetsClient.RequestOptions,
+    ): core.HttpResponsePromise<void> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(id, tokenset_id, requestOptions));
     }
 
-    private async __patch(
-        request: Management.PatchPhoneProviderProtectionRequestContent,
-        requestOptions?: PhoneProviderProtectionClient.RequestOptions,
-    ): Promise<core.WithRawResponse<Management.PatchPhoneProviderProtectionResponseContent>> {
+    private async __delete(
+        id: string,
+        tokenset_id: string,
+        requestOptions?: FederatedConnectionsTokensetsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<void>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -137,14 +144,11 @@ export class PhoneProviderProtectionClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                "attack-protection/phone-provider-protection",
+                `users/${core.url.encodePathParam(id)}/federated-connections-tokensets/${core.url.encodePathParam(tokenset_id)}`,
             ),
-            method: "PATCH",
+            method: "DELETE",
             headers: _headers,
-            contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -152,14 +156,13 @@ export class PhoneProviderProtectionClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Management.PatchPhoneProviderProtectionResponseContent,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
+                case 400:
+                    throw new Management.BadRequestError(_response.error.body as unknown, _response.rawResponse);
                 case 401:
                     throw new Management.UnauthorizedError(_response.error.body as unknown, _response.rawResponse);
                 case 403:
@@ -178,8 +181,8 @@ export class PhoneProviderProtectionClient {
         return handleNonStatusCodeError(
             _response.error,
             _response.rawResponse,
-            "PATCH",
-            "/attack-protection/phone-provider-protection",
+            "DELETE",
+            "/users/{id}/federated-connections-tokensets/{tokenset_id}",
         );
     }
 }

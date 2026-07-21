@@ -4,11 +4,11 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import * as core from "../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
 import * as Management from "../../../../../index.js";
-import { EffectiveRolesClient } from "../resources/effectiveRoles/client/Client.js";
 import { RolesClient } from "../resources/roles/client/Client.js";
 
 export declare namespace MembersClient {
@@ -19,15 +19,10 @@ export declare namespace MembersClient {
 
 export class MembersClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<MembersClient.Options>;
-    protected _effectiveRoles: EffectiveRolesClient | undefined;
     protected _roles: RolesClient | undefined;
 
     constructor(options: MembersClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
-    }
-
-    public get effectiveRoles(): EffectiveRolesClient {
-        return (this._effectiveRoles ??= new EffectiveRolesClient(this._options));
     }
 
     public get roles(): RolesClient {
@@ -38,8 +33,14 @@ export class MembersClient {
      * List organization members.
      * This endpoint is subject to eventual consistency. New users may not be immediately included in the response and deleted users may not be immediately removed from it.
      *
-     * - Use the `fields` parameter to optionally define the specific member details retrieved. If `fields` is left blank, all fields (except roles) are returned.
-     * - Member roles are not sent by default. Use `fields=roles` to retrieve the roles assigned to each listed member. To use this parameter, you must include the `read:organization_member_roles` scope in the token.
+     * <ul>
+     *   <li>
+     *     Use the <code>fields</code> parameter to optionally define the specific member details retrieved. If <code>fields</code> is left blank, all fields (except roles) are returned.
+     *   </li>
+     *   <li>
+     *     Member roles are not sent by default. Use <code>fields=roles</code> to retrieve the roles assigned to each listed member. To use this parameter, you must include the <code>read:organization_member_roles</code> scope in the token.
+     *   </li>
+     * </ul>
      *
      * This endpoint supports two types of pagination:
      *
@@ -48,9 +49,9 @@ export class MembersClient {
      *
      * Checkpoint pagination must be used if you need to retrieve more than 1000 organization members.
      *
-     * **Checkpoint Pagination**
+     * <h2>Checkpoint Pagination</h2>
      *
-     * To search by checkpoint, use the following parameters: - from: Optional id from which to start selection. - take: The total amount of entries to retrieve when using the from parameter. Defaults to 50. Note: The first time you call this endpoint using Checkpoint Pagination, you should omit the `from` parameter. If there are more results, a `next` value will be included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, this indicates there are no more pages remaining.
+     * To search by checkpoint, use the following parameters: - from: Optional id from which to start selection. - take: The total amount of entries to retrieve when using the from parameter. Defaults to 50. Note: The first time you call this endpoint using Checkpoint Pagination, you should omit the <code>from</code> parameter. If there are more results, a <code>next</code> value will be included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, this indicates there are no more pages remaining.
      *
      * @param {string} id - Organization identifier.
      * @param {Management.ListOrganizationMembersRequestParameters} request
@@ -59,8 +60,9 @@ export class MembersClient {
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
-     * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.organizations.members.list("id", {
@@ -132,8 +134,6 @@ export class MembersClient {
                             );
                         case 403:
                             throw new Management.ForbiddenError(_response.error.body as unknown, _response.rawResponse);
-                        case 404:
-                            throw new Management.NotFoundError(_response.error.body as unknown, _response.rawResponse);
                         case 429:
                             throw new Management.TooManyRequestsError(
                                 _response.error.body as unknown,
@@ -171,9 +171,9 @@ export class MembersClient {
     }
 
     /**
-     * Set one or more existing users as members of a specific [Organization](https://auth0.com/docs/manage-users/organizations).
+     * Set one or more existing users as members of a specific <a href="https://auth0.com/docs/manage-users/organizations">Organization</a>.
      *
-     * To add a user to an Organization through this action, the user must already exist in your tenant. If a user does not yet exist, you can [invite them to create an account](https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members), manually create them through the Auth0 Dashboard, or use the Management API.
+     * To add a user to an Organization through this action, the user must already exist in your tenant. If a user does not yet exist, you can <a href="https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members">invite them to create an account</a>, manually create them through the Auth0 Dashboard, or use the Management API.
      *
      * @param {string} id - Organization identifier.
      * @param {Management.CreateOrganizationMemberRequestContent} request
@@ -183,6 +183,8 @@ export class MembersClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.organizations.members.create("id", {
@@ -220,7 +222,7 @@ export class MembersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -262,6 +264,8 @@ export class MembersClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.organizations.members.delete("id", {
@@ -299,7 +303,7 @@ export class MembersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
