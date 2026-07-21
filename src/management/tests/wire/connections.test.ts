@@ -13,17 +13,16 @@ describe("ConnectionsClient", () => {
             next: "next",
             connections: [
                 {
-                    name: "name",
-                    display_name: "display_name",
-                    options: { key: "value" },
-                    id: "id",
-                    strategy: "strategy",
-                    realms: ["realms"],
-                    is_domain_connection: true,
-                    show_as_button: true,
+                    strategy: "ad",
                     authentication: { active: true },
+                    id: "connections",
+                    realms: ["connections"],
+                    display_name: "connections",
+                    enabled_clients: ["connections"],
+                    is_domain_connection: true,
+                    name: "connections",
                     connected_accounts: { active: true },
-                    cross_app_access_requesting_app: { active: true },
+                    provisioning_ticket_url: "provisioning_ticket_url",
                 },
             ],
         };
@@ -104,24 +103,59 @@ describe("ConnectionsClient", () => {
         }).rejects.toThrow(Management.TooManyRequestsError);
     });
 
+    test("list (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/connections").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.connections.list();
+        }).rejects.toThrow(Management.InternalServerError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
-        const rawResponseBody = {
-            name: "name",
-            display_name: "display_name",
-            options: { key: "value" },
-            id: "id",
-            strategy: "strategy",
-            realms: ["realms"],
-            enabled_clients: ["enabled_clients"],
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: "Corporate Active Directory",
+            enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
             is_domain_connection: true,
-            show_as_button: true,
-            metadata: { key: "value" },
-            authentication: { active: true },
-            connected_accounts: { active: true, cross_app_access: true },
-            cross_app_access_requesting_app: { active: true },
+            metadata: { environment: "production", managed_by: "identity-team" },
+            name: "corp-active-directory",
+            options: {
+                tenant_domain: "corp.example.com",
+                domain_aliases: ["example.com", "corp.example.com"],
+                agentIP: "10.0.0.42",
+                agentVersion: "4.3.0",
+                agentMode: false,
+                kerberos: true,
+                brute_force_protection: true,
+                disable_cache: false,
+                set_user_root_attributes: "on_each_login",
+                ips: ["10.0.0.0/24"],
+                non_persistent_attrs: ["ethnicity", "gender"],
+            },
+        };
+        const rawResponseBody = {
+            strategy: "ad",
+            id: "con_a1B2c3D4e5F6g7H8",
+            realms: ["corp-active-directory"],
+            display_name: "Corporate Active Directory",
+            enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+            is_domain_connection: true,
+            metadata: { environment: "production", managed_by: "identity-team" },
+            name: "corp-active-directory",
+            options: {
+                tenant_domain: "corp.example.com",
+                domain_aliases: ["example.com", "corp.example.com"],
+                kerberos: true,
+                brute_force_protection: true,
+                set_user_root_attributes: "on_each_login",
+            },
         };
 
         server
@@ -134,8 +168,36 @@ describe("ConnectionsClient", () => {
             .build();
 
         const response = await client.connections.create({
-            name: "name",
             strategy: "ad",
+            display_name: "Corporate Active Directory",
+            enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+            is_domain_connection: true,
+            metadata: {
+                environment: "production",
+                managed_by: "identity-team",
+            },
+            name: "corp-active-directory",
+            name: "corp-active-directory",
+            display_name: "Corporate Active Directory",
+            is_domain_connection: true,
+            enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+            options: {
+                tenant_domain: "corp.example.com",
+                domain_aliases: ["example.com", "corp.example.com"],
+                agentIP: "10.0.0.42",
+                agentVersion: "4.3.0",
+                agentMode: false,
+                kerberos: true,
+                brute_force_protection: true,
+                disable_cache: false,
+                set_user_root_attributes: "on_each_login",
+                ips: ["10.0.0.0/24"],
+                non_persistent_attrs: ["ethnicity", "gender"],
+            },
+            metadata: {
+                environment: "production",
+                managed_by: "identity-team",
+            },
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -143,7 +205,14 @@ describe("ConnectionsClient", () => {
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -157,8 +226,13 @@ describe("ConnectionsClient", () => {
 
         await expect(async () => {
             return await client.connections.create({
-                name: "name",
                 strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
             });
         }).rejects.toThrow(Management.BadRequestError);
     });
@@ -166,7 +240,14 @@ describe("ConnectionsClient", () => {
     test("create (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -180,8 +261,13 @@ describe("ConnectionsClient", () => {
 
         await expect(async () => {
             return await client.connections.create({
-                name: "name",
                 strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
             });
         }).rejects.toThrow(Management.UnauthorizedError);
     });
@@ -189,7 +275,14 @@ describe("ConnectionsClient", () => {
     test("create (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -203,8 +296,13 @@ describe("ConnectionsClient", () => {
 
         await expect(async () => {
             return await client.connections.create({
-                name: "name",
                 strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
             });
         }).rejects.toThrow(Management.ForbiddenError);
     });
@@ -212,7 +310,14 @@ describe("ConnectionsClient", () => {
     test("create (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -226,8 +331,13 @@ describe("ConnectionsClient", () => {
 
         await expect(async () => {
             return await client.connections.create({
-                name: "name",
                 strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
             });
         }).rejects.toThrow(Management.ConflictError);
     });
@@ -235,7 +345,14 @@ describe("ConnectionsClient", () => {
     test("create (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { name: "name", strategy: "ad" };
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
         const rawResponseBody = { key: "value" };
 
         server
@@ -249,10 +366,50 @@ describe("ConnectionsClient", () => {
 
         await expect(async () => {
             return await client.connections.create({
-                name: "name",
                 strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
             });
         }).rejects.toThrow(Management.TooManyRequestsError);
+    });
+
+    test("create (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            strategy: "ad",
+            display_name: undefined,
+            enabled_clients: undefined,
+            is_domain_connection: undefined,
+            metadata: undefined,
+            name: "x",
+        };
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .post("/connections")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(500)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.connections.create({
+                strategy: "ad",
+                display_name: undefined,
+                enabled_clients: undefined,
+                is_domain_connection: undefined,
+                metadata: undefined,
+                name: "x",
+                name: "x",
+            });
+        }).rejects.toThrow(Management.InternalServerError);
     });
 
     test("get (1)", async () => {
@@ -260,19 +417,37 @@ describe("ConnectionsClient", () => {
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            name: "name",
-            display_name: "display_name",
-            options: { key: "value" },
-            id: "id",
-            strategy: "strategy",
-            realms: ["realms"],
-            enabled_clients: ["enabled_clients"],
-            is_domain_connection: true,
-            show_as_button: true,
-            metadata: { key: "value" },
+            strategy: "ad",
             authentication: { active: true },
+            id: "string",
+            realms: ["string"],
+            display_name: "string",
+            enabled_clients: ["string"],
+            is_domain_connection: true,
+            metadata: { key: "value" },
+            name: "string",
             connected_accounts: { active: true, cross_app_access: true },
-            cross_app_access_requesting_app: { active: true },
+            options: {
+                non_persistent_attrs: ["non_persistent_attrs"],
+                agentIP: "agentIP",
+                agentMode: true,
+                agentVersion: "agentVersion",
+                brute_force_protection: true,
+                certAuth: true,
+                certs: ["certs"],
+                disable_cache: true,
+                disable_self_service_change_password: true,
+                domain_aliases: ["domain_aliases"],
+                icon_url: "icon_url",
+                ips: ["ips"],
+                kerberos: true,
+                set_user_root_attributes: "on_each_login",
+                signInEndpoint: "signInEndpoint",
+                tenant_domain: "tenant_domain",
+                thumbprints: ["thumbprints"],
+                upstream_params: { key: {} },
+            },
+            provisioning_ticket_url: "provisioning_ticket_url",
         };
 
         server.mockEndpoint().get("/connections/id").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -349,6 +524,19 @@ describe("ConnectionsClient", () => {
         }).rejects.toThrow(Management.TooManyRequestsError);
     });
 
+    test("get (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().get("/connections/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.connections.get("id");
+        }).rejects.toThrow(Management.InternalServerError);
+    });
+
     test("delete (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -411,24 +599,55 @@ describe("ConnectionsClient", () => {
         }).rejects.toThrow(Management.TooManyRequestsError);
     });
 
+    test("delete (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server.mockEndpoint().delete("/connections/id").respondWith().statusCode(500).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.connections.delete("id");
+        }).rejects.toThrow(Management.InternalServerError);
+    });
+
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
         const rawResponseBody = {
-            name: "name",
-            display_name: "display_name",
-            options: { key: "value" },
-            id: "id",
-            strategy: "strategy",
-            realms: ["realms"],
-            enabled_clients: ["enabled_clients"],
-            is_domain_connection: true,
-            show_as_button: true,
-            metadata: { key: "value" },
+            strategy: "ad",
             authentication: { active: true },
+            id: "string",
+            realms: ["string"],
+            display_name: "string",
+            enabled_clients: ["string"],
+            is_domain_connection: true,
+            metadata: { key: "value" },
+            name: "string",
             connected_accounts: { active: true, cross_app_access: true },
-            cross_app_access_requesting_app: { active: true },
+            options: {
+                non_persistent_attrs: ["non_persistent_attrs"],
+                agentIP: "agentIP",
+                agentMode: true,
+                agentVersion: "agentVersion",
+                brute_force_protection: true,
+                certAuth: true,
+                certs: ["certs"],
+                disable_cache: true,
+                disable_self_service_change_password: true,
+                domain_aliases: ["domain_aliases"],
+                icon_url: "icon_url",
+                ips: ["ips"],
+                kerberos: true,
+                set_user_root_attributes: "on_each_login",
+                signInEndpoint: "signInEndpoint",
+                tenant_domain: "tenant_domain",
+                thumbprints: ["thumbprints"],
+                upstream_params: { key: {} },
+            },
+            provisioning_ticket_url: "provisioning_ticket_url",
         };
 
         server
@@ -440,7 +659,7 @@ describe("ConnectionsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.connections.update("id");
+        const response = await client.connections.update("id", {});
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -460,7 +679,7 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.BadRequestError);
     });
 
@@ -480,7 +699,7 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.UnauthorizedError);
     });
 
@@ -500,7 +719,7 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.ForbiddenError);
     });
 
@@ -520,7 +739,7 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.NotFoundError);
     });
 
@@ -540,7 +759,7 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.ConflictError);
     });
 
@@ -560,8 +779,28 @@ describe("ConnectionsClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.connections.update("id");
+            return await client.connections.update("id", {});
         }).rejects.toThrow(Management.TooManyRequestsError);
+    });
+
+    test("update (8)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {};
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .patch("/connections/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(500)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.connections.update("id", {});
+        }).rejects.toThrow(Management.InternalServerError);
     });
 
     test("checkStatus (1)", async () => {

@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import * as core from "../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
@@ -38,6 +39,8 @@ export class ScimConfigurationClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.list({
@@ -139,13 +142,15 @@ export class ScimConfigurationClient {
     }
 
     /**
-     * Retrieves a scim configuration by its `connectionId`.
+     * Retrieves a scim configuration by its <code>connectionId</code>.
      *
      * @param {string} id - The id of the connection to retrieve its SCIM configuration
      * @param {ScimConfigurationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.get("id")
@@ -222,6 +227,8 @@ export class ScimConfigurationClient {
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.create("id")
@@ -257,7 +264,7 @@ export class ScimConfigurationClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -295,13 +302,15 @@ export class ScimConfigurationClient {
     }
 
     /**
-     * Deletes a scim configuration by its `connectionId`.
+     * Deletes a scim configuration by its <code>connectionId</code>.
      *
      * @param {string} id - The id of the connection to delete its SCIM configuration
      * @param {ScimConfigurationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.delete("id")
@@ -364,7 +373,7 @@ export class ScimConfigurationClient {
     }
 
     /**
-     * Update a scim configuration by its `connectionId`.
+     * Update a scim configuration by its <code>connectionId</code>.
      *
      * @param {string} id - The id of the connection to update its SCIM configuration
      * @param {Management.UpdateScimConfigurationRequestContent} request
@@ -372,6 +381,8 @@ export class ScimConfigurationClient {
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.update("id", {
@@ -410,7 +421,7 @@ export class ScimConfigurationClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -448,13 +459,15 @@ export class ScimConfigurationClient {
     }
 
     /**
-     * Retrieves a scim configuration's default mapping by its `connectionId`.
+     * Retrieves a scim configuration's default mapping by its <code>connectionId</code>.
      *
      * @param {string} id - The id of the connection to retrieve its default SCIM mapping
      * @param {ScimConfigurationClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.NotFoundError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.connections.scimConfiguration.getDefaultMapping("id")

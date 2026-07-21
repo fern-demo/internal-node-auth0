@@ -7,6 +7,7 @@ import {
 } from "../../../../../../../../BaseClient.js";
 import * as core from "../../../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../../../errors/index.js";
@@ -26,7 +27,7 @@ export class ProvidersClient {
     }
 
     /**
-     * Retrieve a list of [phone providers](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details set for a Tenant. A list of fields to include or exclude may also be specified.
+     * Retrieve a list of <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone providers</a> details set for a Tenant. A list of fields to include or exclude may also be specified.
      *
      * @param {Management.ListBrandingPhoneProvidersRequestParameters} request
      * @param {ProvidersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -35,6 +36,8 @@ export class ProvidersClient {
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.list({
@@ -112,8 +115,8 @@ export class ProvidersClient {
     }
 
     /**
-     * Create a [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
-     * The `credentials` object requires different properties depending on the phone provider (which is specified using the `name` property).
+     * Create a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a>.
+     * The <code>credentials</code> object requires different properties depending on the phone provider (which is specified using the <code>name</code> property).
      *
      * @param {Management.CreateBrandingPhoneProviderRequestContent} request
      * @param {ProvidersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -123,6 +126,8 @@ export class ProvidersClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.create({
@@ -161,7 +166,7 @@ export class ProvidersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -200,7 +205,7 @@ export class ProvidersClient {
     }
 
     /**
-     * Retrieve [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details. A list of fields to include or exclude may also be specified.
+     * Retrieve <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a> details. A list of fields to include or exclude may also be specified.
      *
      * @param {string} id
      * @param {ProvidersClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -210,6 +215,8 @@ export class ProvidersClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.get("id")
@@ -293,6 +300,8 @@ export class ProvidersClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.delete("id")
@@ -359,8 +368,8 @@ export class ProvidersClient {
     }
 
     /**
-     * Update a [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
-     * The `credentials` object requires different properties depending on the phone provider (which is specified using the `name` property).
+     * Update a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a>.
+     * The <code>credentials</code> object requires different properties depending on the phone provider (which is specified using the <code>name</code> property).
      *
      * @param {string} id
      * @param {Management.UpdateBrandingPhoneProviderRequestContent} request
@@ -372,6 +381,8 @@ export class ProvidersClient {
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.update("id")
@@ -407,7 +418,7 @@ export class ProvidersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -463,6 +474,8 @@ export class ProvidersClient {
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.phone.providers.test("id", {
@@ -500,7 +513,7 @@ export class ProvidersClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

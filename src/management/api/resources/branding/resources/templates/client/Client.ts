@@ -4,6 +4,7 @@ import type { BaseClientOptions, BaseRequestOptions } from "../../../../../../Ba
 import { normalizeClientOptionsWithAuth, type NormalizedClientOptionsWithAuth } from "../../../../../../BaseClient.js";
 import * as core from "../../../../../../core/index.js";
 import { mergeHeaders } from "../../../../../../core/headers.js";
+import { mergeAdditionalBodyParameters } from "../../../../../../core/requestBody.js";
 import * as environments from "../../../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../../../errors/index.js";
@@ -30,6 +31,8 @@ export class TemplatesClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.templates.getUniversalLogin()
@@ -104,28 +107,28 @@ export class TemplatesClient {
     /**
      * Update the Universal Login branding template.
      *
-     * When `content-type` header is set to `application/json`:
-     *
-     * ```json
+     * <p>When <code>content-type</code> header is set to <code>application/json</code>:</p>
+     * <pre>
      * {
-     *   "template": "<!DOCTYPE html>{% assign resolved_dir = dir | default: \"auto\" %}<html lang=\"{{locale}}\" dir=\"{{resolved_dir}}\"><head>{%- auth0:head -%}</head><body class=\"_widget-auto-layout\">{%- auth0:widget -%}</body></html>"
+     *   "template": "&lt;!DOCTYPE html&gt;{% assign resolved_dir = dir | default: "auto" %}&lt;html lang="{{locale}}" dir="{{resolved_dir}}"&gt;&lt;head&gt;{%- auth0:head -%}&lt;/head&gt;&lt;body class="_widget-auto-layout"&gt;{%- auth0:widget -%}&lt;/body&gt;&lt;/html&gt;"
      * }
-     * ```
+     * </pre>
      *
-     * When `content-type` header is set to `text/html`:
-     *
-     * ```html
-     * <!DOCTYPE html>
+     * <p>
+     *   When <code>content-type</code> header is set to <code>text/html</code>:
+     * </p>
+     * <pre>
+     * &lt!DOCTYPE html&gt;
      * {% assign resolved_dir = dir | default: "auto" %}
-     * <html lang="{{locale}}" dir="{{resolved_dir}}">
-     *   <head>
+     * &lt;html lang="{{locale}}" dir="{{resolved_dir}}"&gt;
+     *   &lt;head&gt;
      *     {%- auth0:head -%}
-     *   </head>
-     *   <body class="_widget-auto-layout">
+     *   &lt;/head&gt;
+     *   &lt;body class="_widget-auto-layout"&gt;
      *     {%- auth0:widget -%}
-     *   </body>
-     * </html>
-     * ```
+     *   &lt;/body&gt;
+     * &lt;/html&gt;
+     * </pre>
      *
      * @param {Management.UpdateUniversalLoginTemplateRequestContent} request
      * @param {TemplatesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -136,6 +139,8 @@ export class TemplatesClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.ConflictError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.templates.updateUniversalLogin("string")
@@ -169,7 +174,7 @@ export class TemplatesClient {
             contentType: "application/json",
             queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
-            body: request,
+            body: mergeAdditionalBodyParameters(request, requestOptions?.additionalBodyParameters),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -218,6 +223,8 @@ export class TemplatesClient {
      * @throws {@link Management.PaymentRequiredError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.branding.templates.deleteUniversalLogin()

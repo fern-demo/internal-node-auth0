@@ -12,17 +12,16 @@ describe("ConnectionsClient", () => {
         const rawResponseBody = {
             connections: [
                 {
-                    name: "name",
-                    display_name: "display_name",
-                    options: { key: "value" },
-                    id: "id",
-                    strategy: "strategy",
-                    realms: ["realms"],
-                    is_domain_connection: true,
-                    show_as_button: true,
+                    strategy: "ad",
                     authentication: { active: true },
+                    id: "connections",
+                    realms: ["connections"],
+                    display_name: "connections",
+                    enabled_clients: ["connections"],
+                    is_domain_connection: true,
+                    name: "connections",
                     connected_accounts: { active: true },
-                    cross_app_access_requesting_app: { active: true },
+                    provisioning_ticket_url: "provisioning_ticket_url",
                 },
             ],
             next: "next",
@@ -144,5 +143,24 @@ describe("ConnectionsClient", () => {
         await expect(async () => {
             return await client.clients.connections.get("id");
         }).rejects.toThrow(Management.TooManyRequestsError);
+    });
+
+    test("get (7)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: "value" };
+
+        server
+            .mockEndpoint()
+            .get("/clients/id/connections")
+            .respondWith()
+            .statusCode(500)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.clients.connections.get("id");
+        }).rejects.toThrow(Management.InternalServerError);
     });
 });

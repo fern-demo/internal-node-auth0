@@ -23,7 +23,7 @@ export class MultifactorClient {
     }
 
     /**
-     * Invalidate all remembered browsers across all [authentication factors](https://auth0.com/docs/multifactor-authentication) for a user.
+     * Invalidate all remembered browsers across all <a href="https://auth0.com/docs/multifactor-authentication">authentication factors</a> for a user.
      *
      * @param {string} id - ID of the user to invalidate all remembered browsers and authentication factors for.
      * @param {MultifactorClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -31,6 +31,8 @@ export class MultifactorClient {
      * @throws {@link Management.BadRequestError}
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.users.multifactor.invalidateRememberBrowser("id")
@@ -98,7 +100,7 @@ export class MultifactorClient {
     }
 
     /**
-     * Remove a [multifactor](https://auth0.com/docs/multifactor-authentication) authentication configuration from a user's account. This forces the user to manually reconfigure the multi-factor provider.
+     * Remove a <a href="https://auth0.com/docs/multifactor-authentication">multifactor</a> authentication configuration from a user's account. This forces the user to manually reconfigure the multi-factor provider.
      *
      * @param {string} id - ID of the user to remove a multifactor configuration from.
      * @param {Management.UserMultifactorProviderEnum} provider - The multi-factor provider. Supported values 'duo' or 'google-authenticator'
@@ -109,6 +111,8 @@ export class MultifactorClient {
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.users.multifactor.deleteProvider("id", "duo")

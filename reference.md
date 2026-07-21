@@ -309,7 +309,7 @@ await client.actions.delete("id", {
 <dl>
 <dd>
 
-Update an existing action. If this action is currently bound to a trigger, updating it will **not** affect any user flows until the action is deployed.
+Update an existing action. If this action is currently bound to a trigger, updating it will <strong>not</strong> affect any user flows until the action is deployed.
 
 </dd>
 </dl>
@@ -640,7 +640,7 @@ await client.branding.update();
 <dl>
 <dd>
 
-Retrieve a list of [client grants](https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants), including the scopes associated with the application/API pair.
+Retrieve a list of <a href="https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants">client grants</a>, including the scopes associated with the application/API pair.
 
 </dd>
 </dl>
@@ -731,7 +731,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a client grant for a machine-to-machine login flow. To learn more, read [Client Credential Flow](https://www.auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow).
+Create a client grant for a machine-to-machine login flow. To learn more, read <a href="https://www.auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow">Client Credential Flow</a>.
 
 </dd>
 </dl>
@@ -796,7 +796,7 @@ await client.clientGrants.create({
 <dl>
 <dd>
 
-Retrieve a single [client grant](https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants), including the
+Retrieve a single <a href="https://auth0.com/docs/get-started/applications/application-access-to-apis-client-grants">client grant</a>, including the
 scopes associated with the application/API pair.
 
 </dd>
@@ -860,7 +860,7 @@ await client.clientGrants.get("id");
 <dl>
 <dd>
 
-Delete the [Client Credential Flow](https://www.auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow) from your machine-to-machine application.
+Delete the <a href="https://www.auth0.com/docs/get-started/authentication-and-authorization-flow/client-credentials-flow">Client Credential Flow</a> from your machine-to-machine application.
 
 </dd>
 </dl>
@@ -997,34 +997,42 @@ await client.clientGrants.update("id");
 <dd>
 
 Retrieve clients (applications and SSO integrations) matching provided filters. A list of fields to include or exclude may also be specified.
-For more information, read [Applications in Auth0](https://www.auth0.com/docs/get-started/applications) and [Single Sign-On](https://www.auth0.com/docs/authenticate/single-sign-on).
+For more information, read <a href="https://www.auth0.com/docs/get-started/applications"> Applications in Auth0</a> and <a href="https://www.auth0.com/docs/authenticate/single-sign-on"> Single Sign-On</a>.
 
-- The following can be retrieved with any scope:
-  `client_id`, `app_type`, `name`, and `description`.
-- The following properties can only be retrieved with the `read:clients` or
-  `read:client_keys` scope:
-  `callbacks`, `oidc_logout`, `allowed_origins`,
-  `web_origins`, `tenant`, `global`, `config_route`,
-  `callback_url_template`, `jwt_configuration`,
-  `jwt_configuration.lifetime_in_seconds`, `jwt_configuration.secret_encoded`,
-  `jwt_configuration.scopes`, `jwt_configuration.alg`, `api_type`,
-  `logo_uri`, `allowed_clients`, `owners`, `custom_login_page`,
-  `custom_login_page_off`, `sso`, `addons`, `form_template`,
-  `custom_login_page_codeview`, `resource_servers`, `client_metadata`,
-  `mobile`, `mobile.android`, `mobile.ios`, `allowed_logout_urls`,
-  `token_endpoint_auth_method`, `is_first_party`, `oidc_conformant`,
-  `is_token_endpoint_ip_header_trusted`, `initiate_login_uri`, `grant_types`,
-  `refresh_token`, `refresh_token.rotation_type`, `refresh_token.expiration_type`,
-  `refresh_token.leeway`, `refresh_token.token_lifetime`, `refresh_token.policies`, `organization_usage`,
-  `organization_require_behavior`.
-- The following properties can only be retrieved with the
-`read:client_keys` or `read:client_credentials` scope:
-`encryption_key`, `encryption_key.pub`, `encryption_key.cert`,
-`client_secret`, `client_authentication_methods` and `signing_key`.
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+<ul>
+  <li>
+    The following can be retrieved with any scope:
+    <code>client_id</code>, <code>app_type</code>, <code>name</code>, and <code>description</code>.
+  </li>
+  <li>
+    The following properties can only be retrieved with the <code>read:clients</code> or
+    <code>read:client_keys</code> scope:
+    <code>callbacks</code>, <code>oidc_logout</code>, <code>allowed_origins</code>,
+    <code>web_origins</code>, <code>tenant</code>, <code>global</code>, <code>config_route</code>,
+    <code>callback_url_template</code>, <code>jwt_configuration</code>,
+    <code>jwt_configuration.lifetime_in_seconds</code>, <code>jwt_configuration.secret_encoded</code>,
+    <code>jwt_configuration.scopes</code>, <code>jwt_configuration.alg</code>, <code>api_type</code>,
+    <code>logo_uri</code>, <code>allowed_clients</code>, <code>owners</code>, <code>custom_login_page</code>,
+    <code>custom_login_page_off</code>, <code>sso</code>, <code>addons</code>, <code>form_template</code>,
+    <code>custom_login_page_codeview</code>, <code>resource_servers</code>, <code>client_metadata</code>,
+    <code>mobile</code>, <code>mobile.android</code>, <code>mobile.ios</code>, <code>allowed_logout_urls</code>,
+    <code>token_endpoint_auth_method</code>, <code>is_first_party</code>, <code>oidc_conformant</code>,
+    <code>is_token_endpoint_ip_header_trusted</code>, <code>initiate_login_uri</code>, <code>grant_types</code>,
+    <code>refresh_token</code>, <code>refresh_token.rotation_type</code>, <code>refresh_token.expiration_type</code>,
+    <code>refresh_token.leeway</code>, <code>refresh_token.token_lifetime</code>, <code>refresh_token.policies</code>, <code>organization_usage</code>,
+    <code>organization_require_behavior</code>.
+  </li>
+  <li>
+    The following properties can only be retrieved with the
+    <code>read:client_keys</code> or <code>read:client_credentials</code> scope:
+    <code>encryption_key</code>, <code>encryption_key.pub</code>, <code>encryption_key.cert</code>,
+    <code>client_secret</code>, <code>client_authentication_methods</code> and <code>signing_key</code>.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1116,22 +1124,21 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new client (application or SSO integration). For more information, read [Create Applications](https://www.auth0.com/docs/get-started/auth0-overview/create-applications)
-[API Endpoints for Single Sign-On](https://www.auth0.com/docs/authenticate/single-sign-on/api-endpoints-for-single-sign-on).
+Create a new client (application or SSO integration). For more information, read <a href="https://www.auth0.com/docs/get-started/auth0-overview/create-applications">Create Applications</a>
+<a href="https://www.auth0.com/docs/authenticate/single-sign-on/api-endpoints-for-single-sign-on>">API Endpoints for Single Sign-On</a>.
 
 Notes:
 
 - We recommend leaving the `client_secret` parameter unspecified to allow the generation of a safe secret.
-- The `client_authentication_methods` and `token_endpoint_auth_method` properties are mutually exclusive. Use
-  `client_authentication_methods` to configure the client with Private Key JWT authentication method. Otherwise, use `token_endpoint_auth_method`
+- The <code>client_authentication_methods</code> and <code>token_endpoint_auth_method</code> properties are mutually exclusive. Use
+  <code>client_authentication_methods</code> to configure the client with Private Key JWT authentication method. Otherwise, use <code>token_endpoint_auth_method</code>
   to configure the client with client secret (basic or post) or with no authentication method (none).
-- When using `client_authentication_methods` to configure the client with Private Key JWT authentication method, specify fully defined credentials.
+- When using <code>client_authentication_methods</code> to configure the client with Private Key JWT authentication method, specify fully defined credentials.
   These credentials will be automatically enabled for Private Key JWT authentication on the client.
-- To configure `client_authentication_methods`, the `create:client_credentials` scope is required.
-- To configure `client_authentication_methods`, the property `jwt_configuration.alg` must be set to RS256.
+- To configure <code>client_authentication_methods</code>, the <code>create:client_credentials</code> scope is required.
+- To configure <code>client_authentication_methods</code>, the property <code>jwt_configuration.alg</code> must be set to RS256.
 
-SSO Integrations created via this endpoint will accept login requests and share user profile information.
-
+<div class="alert alert-warning">SSO Integrations created via this endpoint will accept login requests and share user profile information.</div>
 </dd>
 </dl>
 </dd>
@@ -1262,22 +1269,14 @@ await client.clients.previewCimdMetadata({
 <dl>
 <dd>
 
-Idempotent registration for Client ID Metadata Document (CIMD) clients.
-Uses external_client_id as the unique identifier for upsert operations.
+      Idempotent registration for Client ID Metadata Document (CIMD) clients.
+      Uses external_client_id as the unique identifier for upsert operations.
+      **Create:** Returns 201 when a new client is created (requires \
 
-**Create:** Returns 201 when a new client is created (requires `create:clients` scope).
-**Update:** Returns 200 when an existing client is updated (requires `update:clients` scope).
-
-This endpoint automatically:
-
-- Fetches and validates the metadata document
-- Maps CIMD fields to Auth0 client configuration
-- Creates/rotates credentials from the JWKS
-- Enforces CIMD security policies (HTTPS-only, no shared secrets)
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1338,33 +1337,41 @@ await client.clients.registerCimdClient({
 <dd>
 
 Retrieve client details by ID. Clients are SSO connections or Applications linked with your Auth0 tenant. A list of fields to include or exclude may also be specified.
-For more information, read [Applications in Auth0](https://www.auth0.com/docs/get-started/applications) and [Single Sign-On](https://www.auth0.com/docs/authenticate/single-sign-on).
+For more information, read <a href="https://www.auth0.com/docs/get-started/applications"> Applications in Auth0</a> and <a href="https://www.auth0.com/docs/authenticate/single-sign-on"> Single Sign-On</a>.
 
-- The following properties can be retrieved with any of the scopes:
-  `client_id`, `app_type`, `name`, and `description`.
-- The following properties can only be retrieved with the `read:clients` or
-  `read:client_keys` scopes:
-  `callbacks`, `oidc_logout`, `allowed_origins`,
-  `web_origins`, `tenant`, `global`, `config_route`,
-  `callback_url_template`, `jwt_configuration`,
-  `jwt_configuration.lifetime_in_seconds`, `jwt_configuration.secret_encoded`,
-  `jwt_configuration.scopes`, `jwt_configuration.alg`, `api_type`,
-  `logo_uri`, `allowed_clients`, `owners`, `custom_login_page`,
-  `custom_login_page_off`, `sso`, `addons`, `form_template`,
-  `custom_login_page_codeview`, `resource_servers`, `client_metadata`,
-  `mobile`, `mobile.android`, `mobile.ios`, `allowed_logout_urls`,
-  `token_endpoint_auth_method`, `is_first_party`, `oidc_conformant`,
-  `is_token_endpoint_ip_header_trusted`, `initiate_login_uri`, `grant_types`,
-  `refresh_token`, `refresh_token.rotation_type`, `refresh_token.expiration_type`,
-  `refresh_token.leeway`, `refresh_token.token_lifetime`, `refresh_token.policies`, `organization_usage`,
-  `organization_require_behavior`.
-- The following properties can only be retrieved with the `read:client_keys` or `read:client_credentials` scopes:
-`encryption_key`, `encryption_key.pub`, `encryption_key.cert`,
-`client_secret`, `client_authentication_methods` and `signing_key`.
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+<ul>
+  <li>
+    The following properties can be retrieved with any of the scopes:
+    <code>client_id</code>, <code>app_type</code>, <code>name</code>, and <code>description</code>.
+  </li>
+  <li>
+    The following properties can only be retrieved with the <code>read:clients</code> or
+    <code>read:client_keys</code> scopes:
+    <code>callbacks</code>, <code>oidc_logout</code>, <code>allowed_origins</code>,
+    <code>web_origins</code>, <code>tenant</code>, <code>global</code>, <code>config_route</code>,
+    <code>callback_url_template</code>, <code>jwt_configuration</code>,
+    <code>jwt_configuration.lifetime_in_seconds</code>, <code>jwt_configuration.secret_encoded</code>,
+    <code>jwt_configuration.scopes</code>, <code>jwt_configuration.alg</code>, <code>api_type</code>,
+    <code>logo_uri</code>, <code>allowed_clients</code>, <code>owners</code>, <code>custom_login_page</code>,
+    <code>custom_login_page_off</code>, <code>sso</code>, <code>addons</code>, <code>form_template</code>,
+    <code>custom_login_page_codeview</code>, <code>resource_servers</code>, <code>client_metadata</code>,
+    <code>mobile</code>, <code>mobile.android</code>, <code>mobile.ios</code>, <code>allowed_logout_urls</code>,
+    <code>token_endpoint_auth_method</code>, <code>is_first_party</code>, <code>oidc_conformant</code>,
+    <code>is_token_endpoint_ip_header_trusted</code>, <code>initiate_login_uri</code>, <code>grant_types</code>,
+    <code>refresh_token</code>, <code>refresh_token.rotation_type</code>, <code>refresh_token.expiration_type</code>,
+    <code>refresh_token.leeway</code>, <code>refresh_token.token_lifetime</code>, <code>refresh_token.policies</code>, <code>organization_usage</code>,
+    <code>organization_require_behavior</code>.
+  </li>
+  <li>
+    The following properties can only be retrieved with the <code>read:client_keys</code> or <code>read:client_credentials</code> scopes:
+    <code>encryption_key</code>, <code>encryption_key.pub</code>, <code>encryption_key.cert</code>,
+    <code>client_secret</code>, <code>client_authentication_methods</code> and <code>signing_key</code>.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1496,16 +1503,16 @@ await client.clients.delete("id");
 <dl>
 <dd>
 
-Updates a client's settings. For more information, read [Applications in Auth0](https://www.auth0.com/docs/get-started/applications) and [Single Sign-On](https://www.auth0.com/docs/authenticate/single-sign-on).
+Updates a client's settings. For more information, read <a href="https://www.auth0.com/docs/get-started/applications"> Applications in Auth0</a> and <a href="https://www.auth0.com/docs/authenticate/single-sign-on"> Single Sign-On</a>.
 
 Notes:
 
 - The `client_secret` and `signing_key` attributes can only be updated with the `update:client_keys` scope.
-- The `client_authentication_methods` and `token_endpoint_auth_method` properties are mutually exclusive. Use `client_authentication_methods` to configure the client with Private Key JWT authentication method. Otherwise, use `token_endpoint_auth_method` to configure the client with client secret (basic or post) or with no authentication method (none).
-- When using `client_authentication_methods` to configure the client with Private Key JWT authentication method, only specify the credential IDs that were generated when creating the credentials on the client.
-- To configure `client_authentication_methods`, the `update:client_credentials` scope is required.
-- To configure `client_authentication_methods`, the property `jwt_configuration.alg` must be set to RS256.
-- To change a client's `is_first_party` property to `false`, the `organization_usage` and `organization_require_behavior` properties must be unset.
+- The <code>client_authentication_methods</code> and <code>token_endpoint_auth_method</code> properties are mutually exclusive. Use <code>client_authentication_methods</code> to configure the client with Private Key JWT authentication method. Otherwise, use <code>token_endpoint_auth_method</code> to configure the client with client secret (basic or post) or with no authentication method (none).
+- When using <code>client_authentication_methods</code> to configure the client with Private Key JWT authentication method, only specify the credential IDs that were generated when creating the credentials on the client.
+- To configure <code>client_authentication_methods</code>, the <code>update:client_credentials</code> scope is required.
+- To configure <code>client_authentication_methods</code>, the property <code>jwt_configuration.alg</code> must be set to RS256.
+- To change a client's <code>is_first_party</code> property to <code>false</code>, the <code>organization_usage</code> and <code>organization_require_behavior</code> properties must be unset.
   </dd>
   </dl>
   </dd>
@@ -1579,7 +1586,7 @@ Rotate a client secret.
 
 This endpoint cannot be used with clients configured with Private Key JWT authentication method (client_authentication_methods configured with private_key_jwt). The generated secret is NOT base64 encoded.
 
-For more information, read [Rotate Client Secrets](https://www.auth0.com/docs/get-started/applications/rotate-client-secret).
+For more information, read <a href="https://www.auth0.com/docs/get-started/applications/rotate-client-secret">Rotate Client Secrets</a>.
 
 </dd>
 </dl>
@@ -2095,7 +2102,7 @@ await client.connectionProfiles.update("id");
 
 ## Connections
 
-<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Management.ConnectionForList, Management.ListConnectionsCheckpointPaginatedResponseContent&gt;</code></summary>
+<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Management.ConnectionResponseContent, Management.ListConnectionsCheckpointPaginatedResponseContent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2107,23 +2114,27 @@ await client.connectionProfiles.update("id");
 <dl>
 <dd>
 
-Retrieves detailed list of all [connections](https://auth0.com/docs/authenticate/identity-providers) that match the specified strategy. If no strategy is provided, all connections within your tenant are retrieved. This action can accept a list of fields to include or exclude from the resulting list of connections.
+Retrieves detailed list of all <a href="https://auth0.com/docs/authenticate/identity-providers">connections</a> that match the specified strategy. If no strategy is provided, all connections within your tenant are retrieved. This action can accept a list of fields to include or exclude from the resulting list of connections.
 
 This endpoint supports two types of pagination:
 
-- Offset pagination
-- Checkpoint pagination
+<ul>
+<li>Offset pagination</li>
+<li>Checkpoint pagination</li>
+</ul>
 
 Checkpoint pagination must be used if you need to retrieve more than 1000 connections.
 
-**Checkpoint Pagination**
+<h2>Checkpoint Pagination</h2>
 
 To search by checkpoint, use the following parameters:
 
-- `from`: Optional id from which to start selection.
-- `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
+<ul>
+<li><code>from</code>: Optional id from which to start selection.</li>
+<li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to 50.</li>
+</ul>
 
-**Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+<b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
 
 </dd>
 </dl>
@@ -2200,7 +2211,7 @@ const response = page.response;
 </dl>
 </details>
 
-<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">create</a>({ ...params }) -> Management.CreateConnectionResponseContent</code></summary>
+<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">create</a>({ ...params }) -> Management.ConnectionResponseContent</code></summary>
 <dl>
 <dd>
 
@@ -2212,9 +2223,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Creates a new connection according to the JSON object received in `body`.
-
-**Note:** If a connection with the same name was recently deleted and had a large number of associated users, the deletion may still be processing. Creating a new connection with that name before the deletion completes may fail or produce unexpected results.
+Creates a new connection according to the JSON object received in <code>body</code>.<br/>
 
 </dd>
 </dl>
@@ -2231,8 +2240,36 @@ Creates a new connection according to the JSON object received in `body`.
 
 ```typescript
 await client.connections.create({
-    name: "name",
     strategy: "ad",
+    display_name: "Corporate Active Directory",
+    enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+    is_domain_connection: true,
+    metadata: {
+        environment: "production",
+        managed_by: "identity-team",
+    },
+    name: "corp-active-directory",
+    name: "corp-active-directory",
+    display_name: "Corporate Active Directory",
+    is_domain_connection: true,
+    enabled_clients: ["AaiyAPdpYdesoKnqjj8HJqRn4T5titww"],
+    options: {
+        tenant_domain: "corp.example.com",
+        domain_aliases: ["example.com", "corp.example.com"],
+        agentIP: "10.0.0.42",
+        agentVersion: "4.3.0",
+        agentMode: false,
+        kerberos: true,
+        brute_force_protection: true,
+        disable_cache: false,
+        set_user_root_attributes: "on_each_login",
+        ips: ["10.0.0.0/24"],
+        non_persistent_attrs: ["ethnicity", "gender"],
+    },
+    metadata: {
+        environment: "production",
+        managed_by: "identity-team",
+    },
 });
 ```
 
@@ -2268,7 +2305,7 @@ await client.connections.create({
 </dl>
 </details>
 
-<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">get</a>(id, { ...params }) -> Management.GetConnectionResponseContent</code></summary>
+<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">get</a>(id, { ...params }) -> Management.ConnectionResponseContent</code></summary>
 <dl>
 <dd>
 
@@ -2280,7 +2317,7 @@ await client.connections.create({
 <dl>
 <dd>
 
-Retrieve details for a specified [connection](https://auth0.com/docs/authenticate/identity-providers) along with options that can be used for identity provider configuration.
+Retrieve details for a specified <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> along with options that can be used for identity provider configuration.
 
 </dd>
 </dl>
@@ -2315,7 +2352,7 @@ await client.connections.get("id", {
 <dl>
 <dd>
 
-**id:** `string` — The id of the connection to retrieve
+**id:** `string` — The id of the connection
 
 </dd>
 </dl>
@@ -2354,9 +2391,7 @@ await client.connections.get("id", {
 <dl>
 <dd>
 
-Removes a specific [connection](https://auth0.com/docs/authenticate/identity-providers) from your tenant. This action cannot be undone. Once removed, users can no longer use this connection to authenticate.
-
-**Note:** If your connection has a large amount of users associated with it, please be aware that this operation can be long running after the response is returned and may impact concurrent [create connection](https://auth0.com/docs/api/management/v2/connections/post-connections) requests, if they use an identical connection name.
+Removes a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> from your tenant. This action cannot be undone. Once removed, users can no longer use this connection to authenticate.
 
 </dd>
 </dl>
@@ -2388,7 +2423,7 @@ await client.connections.delete("id");
 <dl>
 <dd>
 
-**id:** `string` — The id of the connection to delete
+**id:** `string` — The id of the connection
 
 </dd>
 </dl>
@@ -2407,7 +2442,7 @@ await client.connections.delete("id");
 </dl>
 </details>
 
-<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">update</a>(id, { ...params }) -> Management.UpdateConnectionResponseContent</code></summary>
+<details><summary><code>client.connections.<a href="/src/management/api/resources/connections/client/Client.ts">update</a>(id, { ...params }) -> Management.ConnectionResponseContent</code></summary>
 <dl>
 <dd>
 
@@ -2419,9 +2454,9 @@ await client.connections.delete("id");
 <dl>
 <dd>
 
-Update details for a specific [connection](https://auth0.com/docs/authenticate/identity-providers), including option properties for identity provider configuration.
+Update details for a specific <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a>, including option properties for identity provider configuration.
 
-**Note**: If you use the `options` parameter, the entire `options` object is overridden. To avoid partial data or other issues, ensure all parameters are present when using this option.
+<b>Note</b>: If you use the <code>options</code> parameter, the entire <code>options</code> object is overriden. To avoid partial data or other issues, ensure all parameters are present when using this option.
 
 </dd>
 </dl>
@@ -2437,7 +2472,7 @@ Update details for a specific [connection](https://auth0.com/docs/authenticate/i
 <dd>
 
 ```typescript
-await client.connections.update("id");
+await client.connections.update("id", {});
 ```
 
 </dd>
@@ -2453,7 +2488,7 @@ await client.connections.update("id");
 <dl>
 <dd>
 
-**id:** `string` — The id of the connection to update
+**id:** `string` — The id of the connection
 
 </dd>
 </dl>
@@ -2492,7 +2527,7 @@ await client.connections.update("id");
 <dl>
 <dd>
 
-Retrieves the status of an ad/ldap connection referenced by its `ID`. `200 OK` http status code response is returned when the connection is online, otherwise a `404` status code is returned along with an error message
+Retrieves the status of an ad/ldap connection referenced by its <code>ID</code>. <code>200 OK</code> http status code response is returned when the connection is online, otherwise a <code>404</code> status code is returned along with an error message
 
 </dd>
 </dl>
@@ -2557,7 +2592,7 @@ await client.connections.checkStatus("id");
 <dl>
 <dd>
 
-Retrieve details on [custom domains](https://auth0.com/docs/custom-domains).
+Retrieve details on <a href="https://auth0.com/docs/custom-domains">custom domains</a>.
 
 </dd>
 </dl>
@@ -2955,22 +2990,12 @@ These are the attributes that can be updated:
 - custom_client_ip_header
 - tls_policy
 
-**Updating CUSTOM_CLIENT_IP_HEADER for a custom domain**
-
-To update the `custom_client_ip_header` for a domain, the body to
+<h5>Updating CUSTOM_CLIENT_IP_HEADER for a custom domain</h5>To update the <code>custom_client_ip_header</code> for a domain, the body to
 send should be:
+<pre><code>{ "custom_client_ip_header": "cf-connecting-ip" }</code></pre>
 
-```json
-{ "custom_client_ip_header": "cf-connecting-ip" }
-```
-
-**Updating TLS_POLICY for a custom domain**
-
-To update the `tls_policy` for a domain, the body to send should be:
-
-```json
-{ "tls_policy": "recommended" }
-```
+<h5>Updating TLS_POLICY for a custom domain</h5>To update the <code>tls_policy</code> for a domain, the body to send should be:
+<pre><code>{ "tls_policy": "recommended" }</code></pre>
 
 TLS Policies:
 
@@ -2979,7 +3004,7 @@ TLS Policies:
 Some considerations:
 
 - The TLS ciphers and protocols available in each TLS policy follow industry recommendations, and may be updated occasionally.
-- The `compatible` TLS policy is no longer supported.
+- The <code>compatible</code> TLS policy is no longer supported.
   </dd>
   </dl>
   </dd>
@@ -3114,12 +3139,12 @@ await client.customDomains.test("id");
 
 Run the verification process on a custom domain.
 
-Note: Check the `status` field to see its verification status. Once verification is complete, it may take up to 10 minutes before the custom domain can start accepting requests.
+Note: Check the <code>status</code> field to see its verification status. Once verification is complete, it may take up to 10 minutes before the custom domain can start accepting requests.
 
-For `self_managed_certs`, when the custom domain is verified for the first time, the response will also include the `cname_api_key` which you will need to configure your proxy. This key must be kept secret, and is used to validate the proxy requests.
+For <code>self_managed_certs</code>, when the custom domain is verified for the first time, the response will also include the <code>cname_api_key</code> which you will need to configure your proxy. This key must be kept secret, and is used to validate the proxy requests.
 
-[Learn more](https://auth0.com/docs/custom-domains#step-2-verify-ownership) about verifying custom domains that use Auth0 Managed certificates.
-[Learn more](https://auth0.com/docs/custom-domains/self-managed-certificates#step-2-verify-ownership) about verifying custom domains that use Self Managed certificates.
+<a href="https://auth0.com/docs/custom-domains#step-2-verify-ownership">Learn more</a> about verifying custom domains that use Auth0 Managed certificates.
+<a href="https://auth0.com/docs/custom-domains/self-managed-certificates#step-2-verify-ownership">Learn more</a> about verifying custom domains that use Self Managed certificates.
 
 </dd>
 </dl>
@@ -3184,7 +3209,7 @@ await client.customDomains.verify("id");
 <dl>
 <dd>
 
-Retrieve device credential information (`public_key`, `refresh_token`, or `rotating_refresh_token`) associated with a specific user.
+Retrieve device credential information (<code>public_key</code>, <code>refresh_token</code>, or <code>rotating_refresh_token</code>) associated with a specific user.
 
 </dd>
 </dl>
@@ -3277,9 +3302,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a device credential public key to manage refresh token rotation for a given `user_id`. Device Credentials APIs are designed for ad-hoc administrative use only and paging is by default enabled for GET requests.
+Create a device credential public key to manage refresh token rotation for a given <code>user_id</code>. Device Credentials APIs are designed for ad-hoc administrative use only and paging is by default enabled for GET requests.
 
-When refresh token rotation is enabled, the endpoint becomes consistent. For more information, read [Signing Keys](https://auth0.com/docs/get-started/tenant-settings/signing-keys).
+When refresh token rotation is enabled, the endpoint becomes consistent. For more information, read <a href="https://auth0.com/docs/get-started/tenant-settings/signing-keys"> Signing Keys</a>.
 
 </dd>
 </dl>
@@ -3477,7 +3502,7 @@ await client.emailTemplates.create({
 <dl>
 <dd>
 
-Retrieve an email template by pre-defined name. These names are `verify_email`, `verify_email_by_code`, `auth_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, and `async_approval`. The names `change_password`, and `password_reset` are also supported for legacy scenarios.
+Retrieve an email template by pre-defined name. These names are `verify_email`, `verify_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, and `async_approval`. The names `change_password`, and `password_reset` are also supported for legacy scenarios.
 
 </dd>
 </dl>
@@ -3509,7 +3534,7 @@ await client.emailTemplates.get("verify_email");
 <dl>
 <dd>
 
-**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `auth_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
+**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
 
 </dd>
 </dl>
@@ -3574,7 +3599,7 @@ await client.emailTemplates.set("verify_email", {
 <dl>
 <dd>
 
-**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `auth_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
+**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
 
 </dd>
 </dl>
@@ -3645,7 +3670,7 @@ await client.emailTemplates.update("verify_email");
 <dl>
 <dd>
 
-**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `auth_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
+**templateName:** `Management.EmailTemplateNameEnum` — Template name. Can be `verify_email`, `verify_email_by_code`, `reset_email`, `reset_email_by_code`, `welcome_email`, `blocked_account`, `stolen_credentials`, `enrollment_email`, `mfa_oob_code`, `user_invitation`, `async_approval`, `change_password` (legacy), or `password_reset` (legacy).
 
 </dd>
 </dl>
@@ -3965,7 +3990,7 @@ await client.eventStreams.update("id");
 
 ```typescript
 await client.eventStreams.test("id", {
-    event_type: "connection.created",
+    event_type: "group.created",
 });
 ```
 
@@ -4042,7 +4067,7 @@ Subscribe to events via Server-Sent Events (SSE)
 const response = await client.events.subscribe({
     from: "from",
     from_timestamp: "from_timestamp",
-    event_type: ["connection.created"],
+    event_type: ["group.created"],
 });
 for await (const item of response) {
     console.log(item);
@@ -4665,7 +4690,7 @@ await client.forms.update("id");
 <dl>
 <dd>
 
-Retrieve the [grants](https://auth0.com/docs/api-auth/which-oauth-flow-to-use) associated with your account.
+Retrieve the <a href="https://auth0.com/docs/api-auth/which-oauth-flow-to-use">grants</a> associated with your account.
 
 </dd>
 </dl>
@@ -5105,7 +5130,7 @@ await client.groups.delete("id");
 <dl>
 <dd>
 
-Retrieve all [hooks](https://auth0.com/docs/hooks). Accepts a list of fields to include or exclude in the result.
+Retrieve all <a href="https://auth0.com/docs/hooks">hooks</a>. Accepts a list of fields to include or exclude in the result.
 
 </dd>
 </dl>
@@ -5261,7 +5286,7 @@ await client.hooks.create({
 <dl>
 <dd>
 
-Retrieve [a hook](https://auth0.com/docs/hooks) by its ID. Accepts a list of fields to include in the result.
+Retrieve <a href="https://auth0.com/docs/hooks">a hook</a> by its ID. Accepts a list of fields to include in the result.
 
 </dd>
 </dl>
@@ -6363,30 +6388,33 @@ await client.logStreams.update("id");
 
 Retrieve log entries that match the specified search criteria (or all log entries if no criteria specified).
 
-Set custom search criteria using the `q` parameter, or search from a specific log ID (_"search from checkpoint"_).
+Set custom search criteria using the <code>q</code> parameter, or search from a specific log ID (<i>"search from checkpoint"</i>).
 
-For more information on all possible event types, their respective acronyms, and descriptions, see [Log Event Type Codes](https://auth0.com/docs/logs/log-event-type-codes).
+For more information on all possible event types, their respective acronyms, and descriptions, see <a href="https://auth0.com/docs/logs/log-event-type-codes">Log Event Type Codes</a>.
 
-**To set custom search criteria, use the following parameters:**
+<h5>To set custom search criteria, use the following parameters:</h5>
 
-- **q:** Search Criteria using [Query String Syntax](https://auth0.com/docs/logs/log-search-query-syntax)
-- **page:** Page index of the results to return. First page is 0.
-- **per_page:** Number of results per page.
-- **sort:** Field to use for sorting appended with `:1` for ascending and `:-1` for descending. e.g. `date:-1`
-- **fields:** Comma-separated list of fields to include or exclude (depending on include_fields) from the result, empty to retrieve all fields.
-- **include_fields:** Whether specified fields are to be included (true) or excluded (false).
-- **include_totals:** Return results inside an object that contains the total result count (true) or as a direct array of results (false, default). **Deprecated:** this field is deprecated and should be removed from use. See [Search Engine V3 Breaking Changes](https://auth0.com/docs/product-lifecycle/deprecations-and-migrations/migrate-to-tenant-log-search-v3#pagination)
+<ul>
+    <li><b>q:</b> Search Criteria using <a href="https://auth0.com/docs/logs/log-search-query-syntax">Query String Syntax</a></li>
+    <li><b>page:</b> Page index of the results to return. First page is 0.</li>
+    <li><b>per_page:</b> Number of results per page.</li>
+    <li><b>sort:</b> Field to use for sorting appended with `:1` for ascending and `:-1` for descending. e.g. `date:-1`</li>
+    <li><b>fields:</b> Comma-separated list of fields to include or exclude (depending on include_fields) from the result, empty to retrieve all fields.</li>
+    <li><b>include_fields:</b> Whether specified fields are to be included (true) or excluded (false).</li>
+    <li><b>include_totals:</b> Return results inside an object that contains the total result count (true) or as a direct array of results (false, default). <b>Deprecated:</b> this field is deprecated and should be removed from use. See <a href="https://auth0.com/docs/product-lifecycle/deprecations-and-migrations/migrate-to-tenant-log-search-v3#pagination">Search Engine V3 Breaking Changes</a></li>
+</ul>
 
-For more information on the list of fields that can be used in `fields` and `sort`, see [Searchable Fields](https://auth0.com/docs/logs/log-search-query-syntax#searchable-fields).
+For more information on the list of fields that can be used in <code>fields</code> and <code>sort</code>, see <a href="https://auth0.com/docs/logs/log-search-query-syntax#searchable-fields">Searchable Fields</a>.
 
-Auth0 [limits the number of logs](https://auth0.com/docs/logs/retrieve-log-events-using-mgmt-api#limitations) you can return by search criteria to 100 logs per request. Furthermore, you may paginate only through 1,000 search results. If you exceed this threshold, please redefine your search or use the [get logs by checkpoint method](https://auth0.com/docs/logs/retrieve-log-events-using-mgmt-api#retrieve-logs-by-checkpoint).
+Auth0 <a href="https://auth0.com/docs/logs/retrieve-log-events-using-mgmt-api#limitations">limits the number of logs</a> you can return by search criteria to 100 logs per request. Furthermore, you may paginate only through 1,000 search results. If you exceed this threshold, please redefine your search or use the <a href="https://auth0.com/docs/logs/retrieve-log-events-using-mgmt-api#retrieve-logs-by-checkpoint">get logs by checkpoint method</a>.
 
-**To search from a checkpoint log ID, use the following parameters:**
+<h5>To search from a checkpoint log ID, use the following parameters:</h5>
+<ul>
+    <li><b>from:</b> Log Event ID from which to start retrieving logs. You can limit the number of logs returned using the <code>take</code> parameter. If you use <code>from</code> at the same time as <code>q</code>, <code>from</code> takes precedence and <code>q</code> is ignored.</li>
+    <li><b>take:</b> Number of entries to retrieve when using the <code>from</code> parameter.</li>
+</ul>
 
-- **from:** Log Event ID from which to start retrieving logs. You can limit the number of logs returned using the `take` parameter. If you use `from` at the same time as `q`, `from` takes precedence and `q` is ignored.
-- **take:** Number of entries to retrieve when using the `from` parameter.
-
-**Important:** When fetching logs from a checkpoint log ID, any parameter other than `from` and `take` will be ignored, and date ordering is not guaranteed.
+<strong>Important:</strong> When fetching logs from a checkpoint log ID, any parameter other than <code>from</code> and <code>take</code> will be ignored, and date ordering is not guaranteed.
 
 </dd>
 </dl>
@@ -6976,19 +7004,23 @@ Retrieve detailed list of all Organizations available in your tenant. For more i
 
 This endpoint supports two types of pagination:
 
-- Offset pagination
-- Checkpoint pagination
+<ul>
+<li>Offset pagination</li>
+<li>Checkpoint pagination</li>
+</ul>
 
 Checkpoint pagination must be used if you need to retrieve more than 1000 organizations.
 
-**Checkpoint Pagination**
+<h2>Checkpoint Pagination</h2>
 
 To search by checkpoint, use the following parameters:
 
-- `from`: Optional id from which to start selection.
-- `take`: The total number of entries to retrieve when using the `from` parameter. Defaults to 50.
+<ul>
+<li><code>from</code>: Optional id from which to start selection.</li>
+<li><code>take</code>: The total number of entries to retrieve when using the <code>from</code> parameter. Defaults to 50.</li>
+</ul>
 
-**Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+<b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
 
 </dd>
 </dl>
@@ -7071,7 +7103,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new Organization within your tenant. To learn more about Organization settings, behavior, and configuration options, review [Create Your First Organization](https://auth0.com/docs/manage-users/organizations/create-first-organization).
+Create a new Organization within your tenant. To learn more about Organization settings, behavior, and configuration options, review <a href="https://auth0.com/docs/manage-users/organizations/create-first-organization">Create Your First Organization</a>.
 
 </dd>
 </dl>
@@ -7264,7 +7296,7 @@ await client.organizations.get("id");
 
 Remove an Organization from your tenant. This action cannot be undone.
 
-**Note**: Members are automatically disassociated from an Organization when it is deleted. However, this action does **not** delete these users from your tenant.
+<b>Note</b>: Members are automatically disassociated from an Organization when it is deleted. However, this action does <b>not</b> delete these users from your tenant.
 
 </dd>
 </dl>
@@ -7327,7 +7359,7 @@ await client.organizations.delete("id");
 <dl>
 <dd>
 
-Update the details of a specific [Organization](https://auth0.com/docs/manage-users/organizations/configure-organizations/create-organizations), such as name and display name, branding options, and metadata.
+Update the details of a specific <a href="https://auth0.com/docs/manage-users/organizations/configure-organizations/create-organizations">Organization</a>, such as name and display name, branding options, and metadata.
 
 </dd>
 </dl>
@@ -7506,291 +7538,6 @@ await client.prompts.updateSettings();
 </dl>
 </details>
 
-## RateLimitPolicies
-
-<details><summary><code>client.rateLimitPolicies.<a href="/src/management/api/resources/rateLimitPolicies/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Management.RateLimitPolicy, Management.ListRateLimitPoliciesPaginatedResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.rateLimitPolicies.list({
-    resource: "oauth_authentication_api",
-    consumer: "client",
-    consumer_selector: "consumer_selector",
-    take: 1,
-    from: "from",
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.rateLimitPolicies.list({
-    resource: "oauth_authentication_api",
-    consumer: "client",
-    consumer_selector: "consumer_selector",
-    take: 1,
-    from: "from",
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Management.ListRateLimitPoliciesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RateLimitPoliciesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.rateLimitPolicies.<a href="/src/management/api/resources/rateLimitPolicies/client/Client.ts">create</a>({ ...params }) -> Management.CreateRateLimitPolicyResponseContent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.rateLimitPolicies.create({
-    resource: "oauth_authentication_api",
-    consumer: "client",
-    consumer_selector: "consumer_selector",
-    configuration: {
-        action: "allow",
-    },
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Management.CreateRateLimitPolicyRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RateLimitPoliciesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.rateLimitPolicies.<a href="/src/management/api/resources/rateLimitPolicies/client/Client.ts">get</a>(id) -> Management.GetRateLimitPolicyResponseContent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.rateLimitPolicies.get("id");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the Rate Limit Policy.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RateLimitPoliciesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.rateLimitPolicies.<a href="/src/management/api/resources/rateLimitPolicies/client/Client.ts">delete</a>(id) -> void</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.rateLimitPolicies.delete("id");
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the Rate Limit Policy.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RateLimitPoliciesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.rateLimitPolicies.<a href="/src/management/api/resources/rateLimitPolicies/client/Client.ts">update</a>(id, { ...params }) -> Management.UpdateRateLimitPolicyResponseContent</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.rateLimitPolicies.update("id", {
-    configuration: {
-        action: "allow",
-    },
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the Rate Limit Policy.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.PatchRateLimitPolicyRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RateLimitPoliciesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## RefreshTokens
 
 <details><summary><code>client.refreshTokens.<a href="/src/management/api/resources/refreshTokens/client/Client.ts">list</a>({ ...params }) -> core.Page&lt;Management.RefreshTokenResponseContent, Management.GetRefreshTokensPaginatedResponseContent&gt;</code></summary>
@@ -7894,7 +7641,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Revoke refresh tokens in bulk by ID list, user, user+client, or user+client+audience.
+Revoke refresh tokens in bulk by ID list, user, user+client, or client.
 
 </dd>
 </dl>
@@ -8519,7 +8266,7 @@ await client.resourceServers.update("id");
 
 Retrieve detailed list of user roles created in your tenant.
 
-**Note**: The returned list does not include standard roles available for tenant members, such as Admin or Support Access.
+<b>Note</b>: The returned list does not include standard roles available for tenant members, such as Admin or Support Access.
 
 </dd>
 </dl>
@@ -8604,9 +8351,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a user role for [Role-Based Access Control](https://auth0.com/docs/manage-users/access-control/rbac).
+Create a user role for <a href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access Control</a>.
 
-**Note**: New roles are not associated with any permissions by default. To assign existing permissions to your role, review Associate Permissions with a Role. To create new permissions, review Add API Permissions.
+<b>Note</b>: New roles are not associated with any permissions by default. To assign existing permissions to your role, review Associate Permissions with a Role. To create new permissions, review Add API Permissions.
 
 </dd>
 </dl>
@@ -8671,7 +8418,7 @@ await client.roles.create({
 <dl>
 <dd>
 
-Retrieve details about a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) specified by ID.
+Retrieve details about a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user role</a> specified by ID.
 
 </dd>
 </dl>
@@ -8734,7 +8481,7 @@ await client.roles.get("id");
 <dl>
 <dd>
 
-Delete a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) from your tenant. Once deleted, it is removed from any user who was previously assigned that role. This action cannot be undone.
+Delete a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user role</a> from your tenant. Once deleted, it is removed from any user who was previously assigned that role. This action cannot be undone.
 
 </dd>
 </dl>
@@ -8797,7 +8544,7 @@ await client.roles.delete("id");
 <dl>
 <dd>
 
-Modify the details of a specific [user role](https://auth0.com/docs/manage-users/access-control/rbac) specified by ID.
+Modify the details of a specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">user role</a> specified by ID.
 
 </dd>
 </dl>
@@ -8870,7 +8617,7 @@ await client.roles.update("id");
 <dl>
 <dd>
 
-Retrieve a filtered list of [rules](https://auth0.com/docs/rules). Accepts a list of fields to include or exclude.
+Retrieve a filtered list of <a href="https://auth0.com/docs/rules">rules</a>. Accepts a list of fields to include or exclude.
 
 </dd>
 </dl>
@@ -8959,9 +8706,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a [new rule](https://auth0.com/docs/rules#create-a-new-rule-using-the-management-api).
+Create a <a href="https://auth0.com/docs/rules#create-a-new-rule-using-the-management-api">new rule</a>.
 
-Note: Changing a rule's stage of execution from the default `login_success` can change the rule's function signature to have user omitted.
+Note: Changing a rule's stage of execution from the default <code>login_success</code> can change the rule's function signature to have user omitted.
 
 </dd>
 </dl>
@@ -9027,7 +8774,7 @@ await client.rules.create({
 <dl>
 <dd>
 
-Retrieve [rule](https://auth0.com/docs/rules) details. Accepts a list of fields to include or exclude in the result.
+Retrieve <a href="https://auth0.com/docs/rules">rule</a> details. Accepts a list of fields to include or exclude in the result.
 
 </dd>
 </dl>
@@ -10420,14 +10167,16 @@ await client.tickets.changePassword();
 
 Retrieve a list of all Token Exchange Profiles available in your tenant.
 
-By using this feature, you agree to the applicable Free Trial terms in [Okta’s Master Subscription Agreement](https://www.okta.com/legal/). It is your responsibility to securely validate the user’s subject_token. See [User Guide](https://auth0.com/docs/authenticate/custom-token-exchange) for more details.
+By using this feature, you agree to the applicable Free Trial terms in <a href="https://www.okta.com/legal/">Okta’s Master Subscription Agreement</a>. It is your responsibility to securely validate the user’s subject_token. See <a href="https://auth0.com/docs/authenticate/custom-token-exchange">User Guide</a> for more details.
 
 This endpoint supports Checkpoint pagination. To search by checkpoint, use the following parameters:
 
-- `from`: Optional id from which to start selection.
-- `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
+<ul>
+<li><code>from</code>: Optional id from which to start selection.</li>
+<li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to 50.</li>
+</ul>
 
-**Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+<b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
 
 </dd>
 </dl>
@@ -10510,7 +10259,7 @@ const response = page.response;
 
 Create a new Token Exchange Profile within your tenant.
 
-By using this feature, you agree to the applicable Free Trial terms in [Okta’s Master Subscription Agreement](https://www.okta.com/legal/). It is your responsibility to securely validate the user’s subject_token. See [User Guide](https://auth0.com/docs/authenticate/custom-token-exchange) for more details.
+By using this feature, you agree to the applicable Free Trial terms in <a href="https://www.okta.com/legal/">Okta’s Master Subscription Agreement</a>. It is your responsibility to securely validate the user’s subject_token. See <a href="https://auth0.com/docs/authenticate/custom-token-exchange">User Guide</a> for more details.
 
 </dd>
 </dl>
@@ -10580,7 +10329,7 @@ await client.tokenExchangeProfiles.create({
 
 Retrieve details about a single Token Exchange Profile specified by ID.
 
-By using this feature, you agree to the applicable Free Trial terms in [Okta’s Master Subscription Agreement](https://www.okta.com/legal/). It is your responsibility to securely validate the user’s subject_token. See [User Guide](https://auth0.com/docs/authenticate/custom-token-exchange) for more details.
+By using this feature, you agree to the applicable Free Trial terms in <a href="https://www.okta.com/legal/">Okta’s Master Subscription Agreement</a>. It is your responsibility to securely validate the user’s subject_token. See <a href="https://auth0.com/docs/authenticate/custom-token-exchange">User Guide</a> for more details.
 
 </dd>
 </dl>
@@ -10645,7 +10394,7 @@ await client.tokenExchangeProfiles.get("id");
 
 Delete a Token Exchange Profile within your tenant.
 
-By using this feature, you agree to the applicable Free Trial terms in [Okta's Master Subscription Agreement](https://www.okta.com/legal/). It is your responsibility to securely validate the user's subject_token. See [User Guide](https://auth0.com/docs/authenticate/custom-token-exchange) for more details.
+By using this feature, you agree to the applicable Free Trial terms in <a href="https://www.okta.com/legal/">Okta's Master Subscription Agreement</a>. It is your responsibility to securely validate the user's subject_token. See <a href="https://auth0.com/docs/authenticate/custom-token-exchange">User Guide</a> for more details.
 
 </dd>
 </dl>
@@ -10710,7 +10459,7 @@ await client.tokenExchangeProfiles.delete("id");
 
 Update a Token Exchange Profile within your tenant.
 
-By using this feature, you agree to the applicable Free Trial terms in [Okta's Master Subscription Agreement](https://www.okta.com/legal/). It is your responsibility to securely validate the user's subject_token. See [User Guide](https://auth0.com/docs/authenticate/custom-token-exchange) for more details.
+By using this feature, you agree to the applicable Free Trial terms in <a href="https://www.okta.com/legal/">Okta's Master Subscription Agreement</a>. It is your responsibility to securely validate the user's subject_token. See <a href="https://auth0.com/docs/authenticate/custom-token-exchange">User Guide</a> for more details.
 
 </dd>
 </dl>
@@ -10864,7 +10613,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a User Attribute Profile.
+Create a User Attribute Profile
 
 </dd>
 </dl>
@@ -11254,7 +11003,7 @@ await client.userAttributeProfiles.update("id");
 <dl>
 <dd>
 
-Retrieve details of all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for a user with the given identifier (username, phone number, or email).
+Retrieve details of all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for a user with the given identifier (username, phone number, or email).
 
 </dd>
 </dl>
@@ -11320,9 +11069,9 @@ await client.userBlocks.listByIdentifier({
 <dl>
 <dd>
 
-Remove all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given identifier (username, phone number, or email).
+Remove all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given identifier (username, phone number, or email).
 
-Note: This endpoint does not unblock users that were [blocked by a tenant administrator](https://auth0.com/docs/user-profile#block-and-unblock-a-user).
+Note: This endpoint does not unblock users that were <a href="https://auth0.com/docs/user-profile#block-and-unblock-a-user">blocked by a tenant administrator</a>.
 
 </dd>
 </dl>
@@ -11387,7 +11136,7 @@ await client.userBlocks.deleteByIdentifier({
 <dl>
 <dd>
 
-Retrieve details of all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given ID.
+Retrieve details of all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given ID.
 
 </dd>
 </dl>
@@ -11460,9 +11209,9 @@ await client.userBlocks.list("id", {
 <dl>
 <dd>
 
-Remove all [Brute-force Protection](https://auth0.com/docs/secure/attack-protection/brute-force-protection) blocks for the user with the given ID.
+Remove all <a href="https://auth0.com/docs/secure/attack-protection/brute-force-protection">Brute-force Protection</a> blocks for the user with the given ID.
 
-Note: This endpoint does not unblock users that were [blocked by a tenant administrator](https://auth0.com/docs/user-profile#block-and-unblock-a-user).
+Note: This endpoint does not unblock users that were <a href="https://auth0.com/docs/user-profile#block-and-unblock-a-user">blocked by a tenant administrator</a>.
 
 </dd>
 </dl>
@@ -11533,14 +11282,14 @@ Retrieve details of users. It is possible to:
 - Sort the users to be returned
 - Select the fields to be returned
 - Specify the number of users to retrieve per page and the page index
+     <!-- only v3 is available -->
+    The <code>q</code> query parameter can be used to get users that match the specified criteria <a href="https://auth0.com/docs/users/search/v3/query-syntax">using query string syntax.</a>
 
-The `q` query parameter can be used to get users that match the specified criteria [using query string syntax.](https://auth0.com/docs/users/search/v3/query-syntax)
+<a href="https://auth0.com/docs/users/search/v3">Learn more about searching for users.</a>
 
-[Learn more about searching for users.](https://auth0.com/docs/users/search/v3)
+Read about <a href="https://auth0.com/docs/users/search/best-practices">best practices</a> when working with the API endpoints for retrieving users.
 
-Read about [best practices](https://auth0.com/docs/users/search/best-practices) when working with the API endpoints for retrieving users.
-
-Auth0 limits the number of users you can return. If you exceed this threshold, please redefine your search, use the [export job](https://auth0.com/docs/api/management/v2#!/Jobs/post_users_exports), or the [User Import / Export](https://auth0.com/docs/extensions/user-import-export) extension.
+Auth0 limits the number of users you can return. If you exceed this threshold, please redefine your search, use the <a href="https://auth0.com/docs/api/management/v2#!/Jobs/post_users_exports">export job</a>, or the <a href="https://auth0.com/docs/extensions/user-import-export">User Import / Export</a> extension.
 
 </dd>
 </dl>
@@ -11637,9 +11386,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a new user for a given [database](https://auth0.com/docs/connections/database) or [passwordless](https://auth0.com/docs/connections/passwordless) connection.
+Create a new user for a given <a href="https://auth0.com/docs/connections/database">database</a> or <a href="https://auth0.com/docs/connections/passwordless">passwordless</a> connection.
 
-Note: `connection` is required but other parameters such as `email` and `password` are dependent upon the type of connection.
+Note: <code>connection</code> is required but other parameters such as <code>email</code> and <code>password</code> are dependent upon the type of connection.
 
 </dd>
 </dl>
@@ -11775,7 +11524,7 @@ await client.users.listUsersByEmail({
 <dl>
 <dd>
 
-Retrieve user details. A list of fields to include or exclude may also be specified. For more information, see [Retrieve Users with the Get Users Endpoint](https://auth0.com/docs/manage-users/user-search/retrieve-users-with-get-users-endpoint).
+Retrieve user details. A list of fields to include or exclude may also be specified. For more information, see <a href="https://auth0.com/docs/manage-users/user-search/retrieve-users-with-get-users-endpoint">Retrieve Users with the Get Users Endpoint</a>.
 
 </dd>
 </dl>
@@ -11849,7 +11598,7 @@ await client.users.get("id", {
 <dl>
 <dd>
 
-Delete a user by user ID. This action cannot be undone. For Auth0 Dashboard instructions, see [Delete Users](https://auth0.com/docs/manage-users/user-accounts/delete-users).
+Delete a user by user ID. This action cannot be undone. For Auth0 Dashboard instructions, see <a href="https://auth0.com/docs/manage-users/user-accounts/delete-users">Delete Users</a>.
 
 </dd>
 </dl>
@@ -11916,94 +11665,75 @@ Update a user.
 
 These are the attributes that can be updated at the root level:
 
-- app_metadata
-- blocked
-- email
-- email_verified
-- family_name
-- given_name
-- name
-- nickname
-- password
-- phone_number
-- phone_verified
-- picture
-- username
-- user_metadata
-- verify_email
+<ul>
+    <li>app_metadata</li>
+    <li>blocked</li>
+    <li>email</li>
+    <li>email_verified</li>
+    <li>family_name</li>
+    <li>given_name</li>
+    <li>name</li>
+    <li>nickname</li>
+    <li>password</li>
+    <li>phone_number</li>
+    <li>phone_verified</li>
+    <li>picture</li>
+    <li>username</li>
+    <li>user_metadata</li>
+    <li>verify_email</li>
+</ul>
 
 Some considerations:
 
-- The properties of the new object will replace the old ones.
-- The metadata fields are an exception to this rule (`user_metadata` and `app_metadata`). These properties are merged instead of being replaced but be careful, the merge only occurs on the first level.
-- If you are updating `email`, `email_verified`, `phone_number`, `phone_verified`, `username` or `password` of a secondary identity, you need to specify the `connection` property too.
-- If you are updating `email` or `phone_number` you can specify, optionally, the `client_id` property.
-- Updating `email_verified` is not supported for enterprise and passwordless sms connections.
-- Updating the `blocked` to `false` does not affect the user's blocked state from an excessive amount of incorrectly provided credentials. Use the "Unblock a user" endpoint from the "User Blocks" API to change the user's state.
-- Supported attributes can be unset by supplying `null` as the value.
+<ul>
+    <li>The properties of the new object will replace the old ones.</li>
+    <li>The metadata fields are an exception to this rule (<code>user_metadata</code> and <code>app_metadata</code>). These properties are merged instead of being replaced but be careful, the merge only occurs on the first level.</li>
+    <li>If you are updating <code>email</code>, <code>email_verified</code>, <code>phone_number</code>, <code>phone_verified</code>, <code>username</code> or <code>password</code> of a secondary identity, you need to specify the <code>connection</code> property too.</li>
+    <li>If you are updating <code>email</code> or <code>phone_number</code> you can specify, optionally, the <code>client_id</code> property.</li>
+    <li>Updating <code>email_verified</code> is not supported for enterprise and passwordless sms connections.</li>
+    <li>Updating the <code>blocked</code> to <code>false</code> does not affect the user's blocked state from an excessive amount of incorrectly provided credentials. Use the "Unblock a user" endpoint from the "User Blocks" API to change the user's state.</li>
+    <li>Supported attributes can be unset by supplying <code>null</code> as the value.</li>
+</ul>
 
-**Updating a field (non-metadata property)**
-
+<h5>Updating a field (non-metadata property)</h5>
 To mark the email address of a user as verified, the body to send should be:
+<pre><code>{ "email_verified": true }</code></pre>
 
-```json
-{ "email_verified": true }
-```
+<h5>Updating a user metadata root property</h5>Let's assume that our test user has the following <code>user_metadata</code>:
+<pre><code>{ "user_metadata" : { "profileCode": 1479 } }</code></pre>
 
-**Updating a user metadata root property**
+To add the field <code>addresses</code> the body to send should be:
 
-Let's assume that our test user has the following `user_metadata`:
+<pre><code>{ "user_metadata" : { "addresses": {"work_address": "100 Industrial Way"} }}</code></pre>
 
-```json
-{ "user_metadata": { "profileCode": 1479 } }
-```
-
-To add the field `addresses` the body to send should be:
-
-```json
-{ "user_metadata": { "addresses": { "work_address": "100 Industrial Way" } } }
-```
-
-The modified object ends up with the following `user_metadata` property:
-
-```json
-{
-    "user_metadata": {
-        "profileCode": 1479,
-        "addresses": { "work_address": "100 Industrial Way" }
-    }
+The modified object ends up with the following <code>user_metadata</code> property:<pre><code>{
+"user_metadata": {
+"profileCode": 1479,
+"addresses": { "work_address": "100 Industrial Way" }
 }
-```
+}</code></pre>
 
-**Updating an inner user metadata property**
-
-If there's existing user metadata to which we want to add `"home_address": "742 Evergreen Terrace"` (using the `addresses` property) we should send the whole `addresses` object. Since this is a first-level object, the object will be merged in, but its own properties will not be. The body to send should be:
-
-```json
-{
-    "user_metadata": {
-        "addresses": {
-            "work_address": "100 Industrial Way",
-            "home_address": "742 Evergreen Terrace"
-        }
+<h5>Updating an inner user metadata property</h5>If there's existing user metadata to which we want to add  <code>"home_address": "742 Evergreen Terrace"</code> (using the <code>addresses</code> property) we should send the whole <code>addresses</code> object. Since this is a first-level object, the object will be merged in, but its own properties will not be. The body to send should be:
+<pre><code>{
+  "user_metadata": {
+    "addresses": {
+      "work_address": "100 Industrial Way",
+      "home_address": "742 Evergreen Terrace"
     }
-}
-```
+  }
+}</code></pre>
 
-The modified object ends up with the following `user_metadata` property:
+The modified object ends up with the following <code>user_metadata</code> property:
 
-```json
-{
-    "user_metadata": {
-        "profileCode": 1479,
-        "addresses": {
-            "work_address": "100 Industrial Way",
-            "home_address": "742 Evergreen Terrace"
-        }
+<pre><code>{
+  "user_metadata": {
+    "profileCode": 1479,
+    "addresses": {
+      "work_address": "100 Industrial Way",
+      "home_address": "742 Evergreen Terrace"
     }
-}
-```
-
+  }
+}</code></pre>
 </dd>
 </dl>
 </dd>
@@ -12073,7 +11803,7 @@ await client.users.update("id");
 <dl>
 <dd>
 
-Remove an existing multi-factor authentication (MFA) [recovery code](https://auth0.com/docs/secure/multi-factor-authentication/reset-user-mfa) and generate a new one. If a user cannot access the original device or account used for MFA enrollment, they can use a recovery code to authenticate.
+Remove an existing multi-factor authentication (MFA) <a href="https://auth0.com/docs/secure/multi-factor-authentication/reset-user-mfa">recovery code</a> and generate a new one. If a user cannot access the original device or account used for MFA enrollment, they can use a recovery code to authenticate.
 
 </dd>
 </dl>
@@ -14061,128 +13791,6 @@ await client.attackProtection.captcha.update();
 </dl>
 </details>
 
-## AttackProtection PhoneProviderProtection
-
-<details><summary><code>client.attackProtection.phoneProviderProtection.<a href="/src/management/api/resources/attackProtection/resources/phoneProviderProtection/client/Client.ts">get</a>() -> Management.GetPhoneProviderProtectionResponseContent</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Get the phone provider protection configuration for a tenant.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.attackProtection.phoneProviderProtection.get();
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneProviderProtectionClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.attackProtection.phoneProviderProtection.<a href="/src/management/api/resources/attackProtection/resources/phoneProviderProtection/client/Client.ts">patch</a>({ ...params }) -> Management.PatchPhoneProviderProtectionResponseContent</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Update the phone provider protection configuration for a tenant.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.attackProtection.phoneProviderProtection.patch({
-    type: "exponential",
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Management.PatchPhoneProviderProtectionRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `PhoneProviderProtectionClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## AttackProtection SuspiciousIpThrottling
 
 <details><summary><code>client.attackProtection.suspiciousIpThrottling.<a href="/src/management/api/resources/attackProtection/resources/suspiciousIpThrottling/client/Client.ts">get</a>() -> Management.GetSuspiciousIpThrottlingSettingsResponseContent</code></summary>
@@ -14359,29 +13967,28 @@ await client.branding.templates.getUniversalLogin();
 
 Update the Universal Login branding template.
 
-When `content-type` header is set to `application/json`:
-
-```json
+<p>When <code>content-type</code> header is set to <code>application/json</code>:</p>
+<pre>
 {
-    "template": "<!DOCTYPE html>{% assign resolved_dir = dir | default: \"auto\" %}<html lang=\"{{locale}}\" dir=\"{{resolved_dir}}\"><head>{%- auth0:head -%}</head><body class=\"_widget-auto-layout\">{%- auth0:widget -%}</body></html>"
+  "template": "&lt;!DOCTYPE html&gt;{% assign resolved_dir = dir | default: "auto" %}&lt;html lang="{{locale}}" dir="{{resolved_dir}}"&gt;&lt;head&gt;{%- auth0:head -%}&lt;/head&gt;&lt;body class="_widget-auto-layout"&gt;{%- auth0:widget -%}&lt;/body&gt;&lt;/html&gt;"
 }
-```
+</pre>
 
-When `content-type` header is set to `text/html`:
-
-```html
-<!DOCTYPE html>
+<p>
+  When <code>content-type</code> header is set to <code>text/html</code>:
+</p>
+<pre>
+&lt!DOCTYPE html&gt;
 {% assign resolved_dir = dir | default: "auto" %}
-<html lang="{{locale}}" dir="{{resolved_dir}}">
-    <head>
-        {%- auth0:head -%}
-    </head>
-    <body class="_widget-auto-layout">
-        {%- auth0:widget -%}
-    </body>
-</html>
-```
-
+&lt;html lang="{{locale}}" dir="{{resolved_dir}}"&gt;
+  &lt;head&gt;
+    {%- auth0:head -%}
+  &lt;/head&gt;
+  &lt;body class="_widget-auto-layout"&gt;
+    {%- auth0:widget -%}
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
 </dd>
 </dl>
 </dd>
@@ -14944,7 +14551,7 @@ await client.branding.themes.update("themeId", {
 <dl>
 <dd>
 
-Retrieve a list of [phone providers](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details set for a Tenant. A list of fields to include or exclude may also be specified.
+Retrieve a list of <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone providers</a> details set for a Tenant. A list of fields to include or exclude may also be specified.
 
 </dd>
 </dl>
@@ -15009,8 +14616,8 @@ await client.branding.phone.providers.list({
 <dl>
 <dd>
 
-Create a [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
-The `credentials` object requires different properties depending on the phone provider (which is specified using the `name` property).
+Create a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a>.
+The <code>credentials</code> object requires different properties depending on the phone provider (which is specified using the <code>name</code> property).
 
 </dd>
 </dl>
@@ -15078,7 +14685,7 @@ await client.branding.phone.providers.create({
 <dl>
 <dd>
 
-Retrieve [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers) details. A list of fields to include or exclude may also be specified.
+Retrieve <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a> details. A list of fields to include or exclude may also be specified.
 
 </dd>
 </dl>
@@ -15204,8 +14811,8 @@ await client.branding.phone.providers.delete("id");
 <dl>
 <dd>
 
-Update a [phone provider](https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers).
-The `credentials` object requires different properties depending on the phone provider (which is specified using the `name` property).
+Update a <a href="https://auth0.com/docs/customize/phone-messages/configure-phone-messaging-providers">phone provider</a>.
+The <code>credentials</code> object requires different properties depending on the phone provider (which is specified using the <code>name</code> property).
 
 </dd>
 </dl>
@@ -15782,7 +15389,7 @@ const response = page.response;
 
 Get the details of a client credential.
 
-**Important**: To enable credentials to be used for a client authentication method, set the `client_authentication_methods` property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the `signed_request_object` property on the client.
+<b>Important</b>: To enable credentials to be used for a client authentication method, set the <code>client_authentication_methods</code> property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the <code>signed_request_object</code> property on the client.
 
 </dd>
 </dl>
@@ -15847,65 +15454,43 @@ await client.clients.credentials.list("client_id");
 
 Create a client credential associated to your application. Credentials can be used to configure Private Key JWT and mTLS authentication methods, as well as for JWT-secured Authorization requests.
 
-**Public Key**
+<h5>Public Key</h5>Public Key credentials can be used to set up Private Key JWT client authentication and JWT-secured Authorization requests.
 
-Public Key credentials can be used to set up Private Key JWT client authentication and JWT-secured Authorization requests.
+Sample: <pre><code>{
+"credential_type": "public_key",
+"name": "string",
+"pem": "string",
+"alg": "RS256",
+"parse_expiry_from_cert": false,
+"expires_at": "2022-12-31T23:59:59Z"
+}</code></pre>
 
-Sample:
+<h5>Certificate (CA-signed & self-signed)</h5>Certificate credentials can be used to set up mTLS client authentication. CA-signed certificates can be configured either with a signed certificate or with just the certificate Subject DN.
 
-```json
-{
-    "credential_type": "public_key",
-    "name": "string",
-    "pem": "string",
-    "alg": "RS256",
-    "parse_expiry_from_cert": false,
-    "expires_at": "2022-12-31T23:59:59Z"
-}
-```
-
-**Certificate (CA-signed & self-signed)**
-
-Certificate credentials can be used to set up mTLS client authentication. CA-signed certificates can be configured either with a signed certificate or with just the certificate Subject DN.
-
-CA-signed Certificate Sample (pem):
-
-```json
-{
-    "credential_type": "x509_cert",
-    "name": "string",
-    "pem": "string"
-}
-```
-
-CA-signed Certificate Sample (subject_dn):
-
-```json
-{
-    "credential_type": "cert_subject_dn",
-    "name": "string",
-    "subject_dn": "string"
-}
-```
-
-Self-signed Certificate Sample:
-
-```json
-{
-    "credential_type": "cert_subject_dn",
-    "name": "string",
-    "pem": "string"
-}
-```
+CA-signed Certificate Sample (pem): <pre><code>{
+"credential_type": "x509_cert",
+"name": "string",
+"pem": "string"
+}</code></pre>CA-signed Certificate Sample (subject_dn): <pre><code>{
+"credential_type": "cert_subject_dn",
+"name": "string",
+"subject_dn": "string"
+}</code></pre>Self-signed Certificate Sample: <pre><code>{
+"credential_type": "cert_subject_dn",
+"name": "string",
+"pem": "string"
+}</code></pre>
 
 The credential will be created but not yet enabled for use until you set the corresponding properties in the client:
 
-- To enable the credential for Private Key JWT or mTLS authentication methods, set the `client_authentication_methods` property on the client. For more information, read [Configure Private Key JWT Authentication](https://auth0.com/docs/get-started/applications/configure-private-key-jwt) and [Configure mTLS Authentication](https://auth0.com/docs/get-started/applications/configure-mtls)
-- To enable the credential for JWT-secured Authorization requests, set the `signed_request_object`property on the client. For more information, read [Configure JWT-secured Authorization Requests (JAR)](https://auth0.com/docs/get-started/applications/configure-jar)
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+<ul>
+  <li>To enable the credential for Private Key JWT or mTLS authentication methods, set the <code>client_authentication_methods</code> property on the client. For more information, read <a href="https://auth0.com/docs/get-started/applications/configure-private-key-jwt">Configure Private Key JWT Authentication</a> and <a href="https://auth0.com/docs/get-started/applications/configure-mtls">Configure mTLS Authentication</a></li>
+  <li>To enable the credential for JWT-secured Authorization requests, set the <code>signed_request_object</code>property on the client. For more information, read <a href="https://auth0.com/docs/get-started/applications/configure-jar">Configure JWT-secured Authorization Requests (JAR)</a></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -15975,7 +15560,7 @@ await client.clients.credentials.create("client_id", {
 
 Get the details of a client credential.
 
-**Important**: To enable credentials to be used for a client authentication method, set the `client_authentication_methods` property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the `signed_request_object` property on the client.
+<b>Important</b>: To enable credentials to be used for a client authentication method, set the <code>client_authentication_methods</code> property on the client. To enable credentials to be used for JWT-Secured Authorization requests set the <code>signed_request_object</code> property on the client.
 
 </dd>
 </dl>
@@ -16186,7 +15771,7 @@ await client.clients.credentials.update("client_id", "credential_id");
 
 ## Clients Connections
 
-<details><summary><code>client.clients.connections.<a href="/src/management/api/resources/clients/resources/connections/client/Client.ts">get</a>(id, { ...params }) -> core.Page&lt;Management.ConnectionForList, Management.ListClientConnectionsResponseContent&gt;</code></summary>
+<details><summary><code>client.clients.connections.<a href="/src/management/api/resources/clients/resources/connections/client/Client.ts">get</a>(id, { ...params }) -> core.Page&lt;Management.ConnectionResponseContent, Management.ListClientConnectionsResponseContent&gt;</code></summary>
 <dl>
 <dd>
 
@@ -16198,14 +15783,20 @@ await client.clients.credentials.update("client_id", "credential_id");
 <dl>
 <dd>
 
-Retrieve all connections that are enabled for the specified [Application](https://www.auth0.com/docs/get-started/applications), using checkpoint pagination. A list of fields to include or exclude for each connection may also be specified.
+Retrieve all connections that are enabled for the specified <a href="https://www.auth0.com/docs/get-started/applications"> Application</a>, using checkpoint pagination. A list of fields to include or exclude for each connection may also be specified.
 
-- This endpoint requires the `read:connections` scope and any one of `read:clients` or `read:client_summary`.
-- **Note**: The first time you call this endpoint, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no further results are remaining.
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+<ul>
+  <li>
+    This endpoint requires the <code>read:connections</code> scope and any one of <code>read:clients</code> or <code>read:client_summary</code>.
+  </li>
+  <li>
+    <b>Note</b>: The first time you call this endpoint, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no further results are remaining.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -16958,7 +16549,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieves a scim configuration by its `connectionId`.
+Retrieves a scim configuration by its <code>connectionId</code>.
 
 </dd>
 </dl>
@@ -17092,7 +16683,7 @@ await client.connections.scimConfiguration.create("id");
 <dl>
 <dd>
 
-Deletes a scim configuration by its `connectionId`.
+Deletes a scim configuration by its <code>connectionId</code>.
 
 </dd>
 </dl>
@@ -17155,7 +16746,7 @@ await client.connections.scimConfiguration.delete("id");
 <dl>
 <dd>
 
-Update a scim configuration by its `connectionId`.
+Update a scim configuration by its <code>connectionId</code>.
 
 </dd>
 </dl>
@@ -17229,7 +16820,7 @@ await client.connections.scimConfiguration.update("id", {
 <dl>
 <dd>
 
-Retrieves a scim configuration's default mapping by its `connectionId`.
+Retrieves a scim configuration's default mapping by its <code>connectionId</code>.
 
 </dd>
 </dl>
@@ -17294,9 +16885,9 @@ await client.connections.scimConfiguration.getDefaultMapping("id");
 <dl>
 <dd>
 
-Retrieve all clients that have the specified [connection](https://auth0.com/docs/authenticate/identity-providers) enabled.
+Retrieve all clients that have the specified <a href="https://auth0.com/docs/authenticate/identity-providers">connection</a> enabled.
 
-**Note**: The first time you call this endpoint, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no further results are remaining.
+<b>Note</b>: The first time you call this endpoint, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no further results are remaining.
 
 </dd>
 </dl>
@@ -17795,7 +17386,7 @@ await client.connections.directoryProvisioning.synchronizations.create("id");
 <dl>
 <dd>
 
-Retrieves all scim tokens by its connection `id`.
+Retrieves all scim tokens by its connection <code>id</code>.
 
 </dd>
 </dl>
@@ -17929,7 +17520,7 @@ await client.connections.scimConfiguration.tokens.create("id");
 <dl>
 <dd>
 
-Deletes a scim token by its connection `id` and `tokenId`.
+Deletes a scim token by its connection <code>id</code> and <code>tokenId</code>.
 
 </dd>
 </dl>
@@ -18002,7 +17593,7 @@ await client.connections.scimConfiguration.tokens.delete("id", "tokenId");
 <dl>
 <dd>
 
-Retrieve details of the [email provider configuration](https://auth0.com/docs/customize/email/smtp-email-providers) in your tenant. A list of fields to include or exclude may also be specified.
+Retrieve details of the <a href="https://auth0.com/docs/customize/email/smtp-email-providers">email provider configuration</a> in your tenant. A list of fields to include or exclude may also be specified.
 
 </dd>
 </dl>
@@ -18068,35 +17659,53 @@ await client.emails.provider.get({
 <dl>
 <dd>
 
-Create an [email provider](https://auth0.com/docs/email/providers). The `credentials` object
-requires different properties depending on the email provider (which is specified using the `name` property):
+Create an <a href="https://auth0.com/docs/email/providers">email provider</a>. The <code>credentials</code> object
+requires different properties depending on the email provider (which is specified using the <code>name</code> property):
 
-- `mandrill` requires `api_key`
-- `sendgrid` requires `api_key`
-- `sparkpost` requires `api_key`. Optionally, set `region` to `eu` to use
-  the SparkPost service hosted in Western Europe; set to `null` to use the SparkPost service hosted in
-  North America. `eu` or `null` are the only valid values for `region`.
-- `mailgun` requires `api_key` and `domain`. Optionally, set `region` to
-  `eu` to use the Mailgun service hosted in Europe; set to `null` otherwise. `eu` or
-  `null` are the only valid values for `region`.
-- `ses` requires `accessKeyId`, `secretAccessKey`, and `region`
-- `smtp` requires `smtp_host`, `smtp_port`, `smtp_user`, and
-  `smtp_pass`
-
-Depending on the type of provider it is possible to specify `settings` object with different configuration
+<ul>
+  <li><code>mandrill</code> requires <code>api_key</code></li>
+  <li><code>sendgrid</code> requires <code>api_key</code></li>
+  <li>
+    <code>sparkpost</code> requires <code>api_key</code>. Optionally, set <code>region</code> to <code>eu</code> to use
+    the SparkPost service hosted in Western Europe; set to <code>null</code> to use the SparkPost service hosted in
+    North America. <code>eu</code> or <code>null</code> are the only valid values for <code>region</code>.
+  </li>
+  <li>
+    <code>mailgun</code> requires <code>api_key</code> and <code>domain</code>. Optionally, set <code>region</code> to
+    <code>eu</code> to use the Mailgun service hosted in Europe; set to <code>null</code> otherwise. <code>eu</code> or
+    <code>null</code> are the only valid values for <code>region</code>.
+  </li>
+  <li><code>ses</code> requires <code>accessKeyId</code>, <code>secretAccessKey</code>, and <code>region</code></li>
+  <li>
+    <code>smtp</code> requires <code>smtp_host</code>, <code>smtp_port</code>, <code>smtp_user</code>, and
+    <code>smtp_pass</code>
+  </li>
+</ul>
+Depending on the type of provider it is possible to specify <code>settings</code> object with different configuration
 options, which will be used when sending an email:
-
-- `smtp` provider, `settings` may contain `headers` object.
-    - When using AWS SES SMTP host, you may provide a name of configuration set in
-      `X-SES-Configuration-Set` header. Value must be a string.
-    - When using Sparkpost host, you may provide value for
-      `X-MSYS_API` header. Value must be an object.
-- For `ses` provider, `settings` may contain `message` object, where you can provide
-a name of configuration set in `configuration_set_name` property. Value must be a string.
-  </dd>
-  </dl>
-  </dd>
-  </dl>
+<ul>
+  <li>
+    <code>smtp</code> provider, <code>settings</code> may contain <code>headers</code> object.
+    <ul>
+      <li>
+        When using AWS SES SMTP host, you may provide a name of configuration set in
+        <code>X-SES-Configuration-Set</code> header. Value must be a string.
+      </li>
+      <li>
+        When using Sparkpost host, you may provide value for
+        <code>X-MSYS_API</code> header. Value must be an object.
+      </li>
+    </ul>
+  </li>
+  <li>
+    for <code>ses</code> provider, <code>settings</code> may contain <code>message</code> object, where you can provide
+    a name of configuration set in <code>configuration_set_name</code> property. Value must be a string.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -18214,34 +17823,51 @@ await client.emails.provider.delete();
 <dl>
 <dd>
 
-Update an [email provider](https://auth0.com/docs/email/providers). The `credentials` object
-requires different properties depending on the email provider (which is specified using the `name` property):
+Update an <a href="https://auth0.com/docs/email/providers">email provider</a>. The <code>credentials</code> object
+requires different properties depending on the email provider (which is specified using the <code>name</code> property):
 
-- `mandrill` requires `api_key`
-- `sendgrid` requires `api_key`
-- `sparkpost` requires `api_key`. Optionally, set `region` to `eu` to use
-  the SparkPost service hosted in Western Europe; set to `null` to use the SparkPost service hosted in
-  North America. `eu` or `null` are the only valid values for `region`.
-- `mailgun` requires `api_key` and `domain`. Optionally, set `region` to
-  `eu` to use the Mailgun service hosted in Europe; set to `null` otherwise. `eu` or
-  `null` are the only valid values for `region`.
-- `ses` requires `accessKeyId`, `secretAccessKey`, and `region`
-- `smtp` requires `smtp_host`, `smtp_port`, `smtp_user`, and
-  `smtp_pass`
-
-Depending on the type of provider it is possible to specify `settings` object with different configuration
+<ul>
+  <li><code>mandrill</code> requires <code>api_key</code></li>
+  <li><code>sendgrid</code> requires <code>api_key</code></li>
+  <li>
+    <code>sparkpost</code> requires <code>api_key</code>. Optionally, set <code>region</code> to <code>eu</code> to use
+    the SparkPost service hosted in Western Europe; set to <code>null</code> to use the SparkPost service hosted in
+    North America. <code>eu</code> or <code>null</code> are the only valid values for <code>region</code>.
+  </li>
+  <li>
+    <code>mailgun</code> requires <code>api_key</code> and <code>domain</code>. Optionally, set <code>region</code> to
+    <code>eu</code> to use the Mailgun service hosted in Europe; set to <code>null</code> otherwise. <code>eu</code> or
+    <code>null</code> are the only valid values for <code>region</code>.
+  </li>
+  <li><code>ses</code> requires <code>accessKeyId</code>, <code>secretAccessKey</code>, and <code>region</code></li>
+  <li>
+    <code>smtp</code> requires <code>smtp_host</code>, <code>smtp_port</code>, <code>smtp_user</code>, and
+    <code>smtp_pass</code>
+  </li>
+</ul>
+Depending on the type of provider it is possible to specify <code>settings</code> object with different configuration
 options, which will be used when sending an email:
-
-- `smtp` provider, `settings` may contain `headers` object. - When using AWS SES SMTP host, you may provide a name of configuration set in
-  `X-SES-Configuration-Set` header. Value must be a string. - When using Sparkpost host, you may provide value for
-  `X-MSYS_API` header. Value must be an object.
-
-    For `ses` provider, `settings` may contain `message` object, where you can provide
-    a name of configuration set in `configuration_set_name` property. Value must be a string.
-    </dd>
-    </dl>
-    </dd>
-    </dl>
+<ul>
+  <li>
+    <code>smtp</code> provider, <code>settings</code> may contain <code>headers</code> object.
+    <ul>
+      <li>
+        When using AWS SES SMTP host, you may provide a name of configuration set in
+        <code>X-SES-Configuration-Set</code> header. Value must be a string.
+      </li>
+      <li>
+        When using Sparkpost host, you may provide value for
+        <code>X-MSYS_API</code> header. Value must be an object.
+      </li>
+    </ul>
+    for <code>ses</code> provider, <code>settings</code> may contain <code>message</code> object, where you can provide
+    a name of configuration set in <code>configuration_set_name</code> property. Value must be a string.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -19093,243 +18719,6 @@ const response = page.response;
 </dl>
 </details>
 
-## Groups Roles
-
-<details><summary><code>client.groups.roles.<a href="/src/management/api/resources/groups/resources/roles/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.Role, Management.ListGroupRolesResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the [roles](https://auth0.com/docs/manage-users/access-control/rbac) assigned to a group.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.groups.roles.list("id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.groups.roles.list("id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the group (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListGroupRolesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.groups.roles.<a href="/src/management/api/resources/groups/resources/roles/client/Client.ts">create</a>(id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Assign one or more [roles](https://auth0.com/docs/manage-users/access-control/rbac) to a specified group.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.groups.roles.create("id", {
-    roles: ["roles"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the group (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.CreateGroupRolesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.groups.roles.<a href="/src/management/api/resources/groups/resources/roles/client/Client.ts">delete</a>(id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Unassign one or more [roles](https://auth0.com/docs/manage-users/access-control/rbac) from a specified group.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.groups.roles.delete("id", {
-    roles: ["roles"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the group (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.DeleteGroupRolesRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## Guardian Enrollments
 
 <details><summary><code>client.guardian.enrollments.<a href="/src/management/api/resources/guardian/resources/enrollments/client/Client.ts">createTicket</a>({ ...params }) -> Management.CreateGuardianEnrollmentTicketResponseContent</code></summary>
@@ -19344,7 +18733,10 @@ await client.groups.roles.delete("id", {
 <dl>
 <dd>
 
-Create a [multi-factor authentication (MFA) enrollment ticket](https://auth0.com/docs/secure/multi-factor-authentication/auth0-guardian/create-custom-enrollment-tickets), and optionally send an email with the created ticket to a given user. Enrollment tickets can specify which factor users must enroll with or allow existing MFA users to enroll in additional factors.
+Create a <a href="https://auth0.com/docs/secure/multi-factor-authentication/auth0-guardian/create-custom-enrollment-tickets">multi-factor authentication (MFA) enrollment ticket</a>, and optionally send an email with the created ticket, to a given user.
+Create a <a href="https://auth0.com/docs/secure/multi-factor-authentication/auth0-guardian/create-custom-enrollment-tickets">multi-factor authentication (MFA) enrollment ticket</a>, and optionally send an email with the created ticket to a given user. Enrollment tickets can specify which factor users must enroll with or allow existing MFA users to enroll in additional factors.<br/>
+
+Note: Users cannot enroll in Email as a factor through custom enrollment tickets.
 
 </dd>
 </dl>
@@ -19472,7 +18864,7 @@ await client.guardian.enrollments.get("id");
 <dl>
 <dd>
 
-Remove a specific multi-factor authentication (MFA) enrollment from a user's account. This allows the user to re-enroll with MFA. For more information, review [Reset User Multi-Factor Authentication and Recovery Codes](https://auth0.com/docs/secure/multi-factor-authentication/reset-user-mfa).
+Remove a specific multi-factor authentication (MFA) enrollment from a user's account. This allows the user to re-enroll with MFA. For more information, review <a href="https://auth0.com/docs/secure/multi-factor-authentication/reset-user-mfa">Reset User Multi-Factor Authentication and Recovery Codes</a>.
 
 </dd>
 </dl>
@@ -19667,14 +19059,16 @@ await client.guardian.factors.set("push-notification", {
 <dl>
 <dd>
 
-Retrieve the [multi-factor authentication (MFA) policies](https://auth0.com/docs/secure/multi-factor-authentication/enable-mfa) configured for your tenant.
+Retrieve the <a href="https://auth0.com/docs/secure/multi-factor-authentication/enable-mfa">multi-factor authentication (MFA) policies</a> configured for your tenant.
 
 The following policies are supported:
 
-- `all-applications` policy prompts with MFA for all logins.
-- `confidence-score` policy prompts with MFA only for low confidence logins.
+<ul>
+<li><code>all-applications</code> policy prompts with MFA for all logins.</li>
+<li><code>confidence-score</code> policy prompts with MFA only for low confidence logins.</li>
+</ul>
 
-**Note**: The `confidence-score` policy is part of the [Adaptive MFA feature](https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa). Adaptive MFA requires an add-on for the Enterprise plan; review [Auth0 Pricing](https://auth0.com/pricing) for more details.
+<b>Note</b>: The <code>confidence-score</code> policy is part of the <a href="https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa">Adaptive MFA feature</a>. Adaptive MFA requires an add-on for the Enterprise plan; review <a href="https://auth0.com/pricing">Auth0 Pricing</a> for more details.
 
 </dd>
 </dl>
@@ -19729,14 +19123,16 @@ await client.guardian.policies.list();
 <dl>
 <dd>
 
-Set [multi-factor authentication (MFA) policies](https://auth0.com/docs/secure/multi-factor-authentication/enable-mfa) for your tenant.
+Set <a href="https://auth0.com/docs/secure/multi-factor-authentication/enable-mfa">multi-factor authentication (MFA) policies</a> for your tenant.
 
 The following policies are supported:
 
-- `all-applications` policy prompts with MFA for all logins.
-- `confidence-score` policy prompts with MFA only for low confidence logins.
+<ul>
+<li><code>all-applications</code> policy prompts with MFA for all logins.</li>
+<li><code>confidence-score</code> policy prompts with MFA only for low confidence logins.</li>
+</ul>
 
-**Note**: The `confidence-score` policy is part of the [Adaptive MFA feature](https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa). Adaptive MFA requires an add-on for the Enterprise plan; review [Auth0 Pricing](https://auth0.com/pricing) for more details.
+<b>Note</b>: The <code>confidence-score</code> policy is part of the <a href="https://auth0.com/docs/secure/multi-factor-authentication/adaptive-mfa">Adaptive MFA feature</a>. Adaptive MFA requires an add-on for the Enterprise plan; review <a href="https://auth0.com/pricing">Auth0 Pricing</a> for more details.
 
 </dd>
 </dl>
@@ -20700,7 +20096,7 @@ await client.guardian.factors.pushNotification.updateFcmv1Provider();
 <dl>
 <dd>
 
-Retrieve configuration details for an AWS SNS push notification provider that has been enabled for MFA. To learn more, review [Configure Push Notifications for MFA](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa).
+Retrieve configuration details for an AWS SNS push notification provider that has been enabled for MFA. To learn more, review <a href="https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors/configure-push-notifications-for-mfa">Configure Push Notifications for MFA</a>.
 
 </dd>
 </dl>
@@ -20755,7 +20151,7 @@ await client.guardian.factors.pushNotification.getSnsProvider();
 <dl>
 <dd>
 
-Configure the [AWS SNS push notification provider configuration](https://auth0.com/docs/multifactor-authentication/developer/sns-configuration) (subscription required).
+Configure the <a href="https://auth0.com/docs/multifactor-authentication/developer/sns-configuration">AWS SNS push notification provider configuration</a> (subscription required).
 
 </dd>
 </dl>
@@ -20818,7 +20214,7 @@ await client.guardian.factors.pushNotification.setSnsProvider();
 <dl>
 <dd>
 
-Configure the [AWS SNS push notification provider configuration](https://auth0.com/docs/multifactor-authentication/developer/sns-configuration) (subscription required).
+Configure the <a href="https://auth0.com/docs/multifactor-authentication/developer/sns-configuration">AWS SNS push notification provider configuration</a> (subscription required).
 
 </dd>
 </dl>
@@ -21959,7 +21355,7 @@ await client.jobs.usersImports.create({
 <dl>
 <dd>
 
-Send an email to the specified user that asks them to click a link to [verify their email address](https://auth0.com/docs/email/custom#verification-email).
+Send an email to the specified user that asks them to click a link to <a href="https://auth0.com/docs/email/custom#verification-email">verify their email address</a>.
 
 Note: You must have the `Status` toggle enabled for the verification email template for the email to be sent.
 
@@ -23869,7 +23265,7 @@ await client.organizations.discoveryDomains.delete("id", "discovery_domain_id");
 <dl>
 <dd>
 
-Update the verification status and/or use_for_organization_discovery for an organization discovery domain. The `status` field must be either `pending` or `verified`. The `use_for_organization_discovery` field can be `true` or `false` (default: `true`).
+Update the verification status and/or use_for_organization_discovery for an organization discovery domain. The <code>status</code> field must be either <code>pending</code> or <code>verified</code>. The <code>use_for_organization_discovery</code> field can be <code>true</code> or <code>false</code> (default: <code>true</code>).
 
 </dd>
 </dl>
@@ -24043,7 +23439,7 @@ const response = page.response;
 
 Enable a specific connection for a given Organization. To enable a connection, it must already exist within your tenant; connections cannot be created through this action.
 
-[Connections](https://auth0.com/docs/authenticate/identity-providers) represent the relationship between Auth0 and a source of users. Available types of connections include database, enterprise, and social.
+<a href="https://auth0.com/docs/authenticate/identity-providers">Connections</a> represent the relationship between Auth0 and a source of users. Available types of connections include database, enterprise, and social.
 
 </dd>
 </dl>
@@ -24189,7 +23585,7 @@ await client.organizations.enabledConnections.get("id", "connectionId");
 
 Disable a specific connection for an Organization. Once disabled, Organization members can no longer use that connection to authenticate.
 
-**Note**: This action does not remove the connection from your tenant.
+<b>Note</b>: This action does not remove the connection from your tenant.
 
 </dd>
 </dl>
@@ -24341,7 +23737,7 @@ await client.organizations.enabledConnections.update("id", "connectionId");
 <dl>
 <dd>
 
-Retrieve a detailed list of invitations sent to users for a specific Organization. The list includes details such as inviter and invitee information, invitation URLs, and dates of creation and expiration. To learn more about Organization invitations, review [Invite Organization Members](https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members).
+Retrieve a detailed list of invitations sent to users for a specific Organization. The list includes details such as inviter and invitee information, invitation URLs, and dates of creation and expiration. To learn more about Organization invitations, review <a href="https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members">Invite Organization Members</a>.
 
 </dd>
 </dl>
@@ -24438,7 +23834,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Create a user invitation for a specific Organization. Upon creation, the listed user receives an email inviting them to join the Organization. To learn more about Organization invitations, review [Invite Organization Members](https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members).
+Create a user invitation for a specific Organization. Upon creation, the listed user receives an email inviting them to join the Organization. To learn more about Organization invitations, review <a href="https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members">Invite Organization Members</a>.
 
 </dd>
 </dl>
@@ -24645,8 +24041,14 @@ await client.organizations.invitations.delete("id", "invitation_id");
 List organization members.
 This endpoint is subject to eventual consistency. New users may not be immediately included in the response and deleted users may not be immediately removed from it.
 
-- Use the `fields` parameter to optionally define the specific member details retrieved. If `fields` is left blank, all fields (except roles) are returned.
-- Member roles are not sent by default. Use `fields=roles` to retrieve the roles assigned to each listed member. To use this parameter, you must include the `read:organization_member_roles` scope in the token.
+<ul>
+  <li>
+    Use the <code>fields</code> parameter to optionally define the specific member details retrieved. If <code>fields</code> is left blank, all fields (except roles) are returned.
+  </li>
+  <li>
+    Member roles are not sent by default. Use <code>fields=roles</code> to retrieve the roles assigned to each listed member. To use this parameter, you must include the <code>read:organization_member_roles</code> scope in the token.
+  </li>
+</ul>
 
 This endpoint supports two types of pagination:
 
@@ -24655,9 +24057,9 @@ This endpoint supports two types of pagination:
 
 Checkpoint pagination must be used if you need to retrieve more than 1000 organization members.
 
-**Checkpoint Pagination**
+<h2>Checkpoint Pagination</h2>
 
-To search by checkpoint, use the following parameters: - from: Optional id from which to start selection. - take: The total amount of entries to retrieve when using the from parameter. Defaults to 50. Note: The first time you call this endpoint using Checkpoint Pagination, you should omit the `from` parameter. If there are more results, a `next` value will be included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, this indicates there are no more pages remaining.
+To search by checkpoint, use the following parameters: - from: Optional id from which to start selection. - take: The total amount of entries to retrieve when using the from parameter. Defaults to 50. Note: The first time you call this endpoint using Checkpoint Pagination, you should omit the <code>from</code> parameter. If there are more results, a <code>next</code> value will be included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, this indicates there are no more pages remaining.
 
 </dd>
 </dl>
@@ -24750,9 +24152,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Set one or more existing users as members of a specific [Organization](https://auth0.com/docs/manage-users/organizations).
+Set one or more existing users as members of a specific <a href="https://auth0.com/docs/manage-users/organizations">Organization</a>.
 
-To add a user to an Organization through this action, the user must already exist in your tenant. If a user does not yet exist, you can [invite them to create an account](https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members), manually create them through the Auth0 Dashboard, or use the Management API.
+To add a user to an Organization through this action, the user must already exist in your tenant. If a user does not yet exist, you can <a href="https://auth0.com/docs/manage-users/organizations/configure-organizations/invite-members">invite them to create an account</a>, manually create them through the Auth0 Dashboard, or use the Management API.
 
 </dd>
 </dl>
@@ -24861,457 +24263,6 @@ await client.organizations.members.delete("id", {
 <dd>
 
 **requestOptions:** `MembersClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Organizations Groups
-
-<details><summary><code>client.organizations.groups.<a href="/src/management/api/resources/organizations/resources/groups/client/Client.ts">list</a>(organization_id, { ...params }) -> core.Page&lt;Management.Group, Management.ListOrganizationGroupsResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the groups that are assigned to the specified organization.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.organizations.groups.list("organization_id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.organizations.groups.list("organization_id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**organization_id:** `string` — ID of the organization
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListOrganizationGroupsRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Organizations Groups Roles
-
-<details><summary><code>client.organizations.groups.roles.<a href="/src/management/api/resources/organizations/resources/groups/resources/roles/client/Client.ts">list</a>(organization_id, group_id, { ...params }) -> core.Page&lt;Management.Role, Management.ListOrganizationGroupRolesResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the roles assigned to the specified group in the context of an organization.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.organizations.groups.roles.list("organization_id", "group_id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.organizations.groups.roles.list("organization_id", "group_id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**organization_id:** `string` — ID of the organization
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**group_id:** `string` — ID of the group
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListOrganizationGroupRolesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.organizations.groups.roles.<a href="/src/management/api/resources/organizations/resources/groups/resources/roles/client/Client.ts">create</a>(organization_id, group_id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Assign one or more roles to a specified group in the context of an organization.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.organizations.groups.roles.create("organization_id", "group_id", {
-    roles: ["roles"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**organization_id:** `string` — ID of the organization
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**group_id:** `string` — ID of the group
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.CreateOrganizationGroupRolesRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.organizations.groups.roles.<a href="/src/management/api/resources/organizations/resources/groups/resources/roles/client/Client.ts">delete</a>(organization_id, group_id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Unassign one or more roles from a specified group in the context of an organization.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.organizations.groups.roles.delete("organization_id", "group_id", {
-    roles: ["roles"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**organization_id:** `string` — ID of the organization
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**group_id:** `string` — ID of the group
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.DeleteOrganizationGroupRolesRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Organizations Members EffectiveRoles
-
-<details><summary><code>client.organizations.members.effectiveRoles.<a href="/src/management/api/resources/organizations/resources/members/resources/effectiveRoles/client/Client.ts">list</a>(id, user_id, { ...params }) -> core.Page&lt;Management.OrganizationMemberEffectiveRole, Management.ListOrganizationMemberEffectiveRolesResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the roles assigned to an organization member directly or through group membership.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.organizations.members.effectiveRoles.list("id", "user_id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.organizations.members.effectiveRoles.list("id", "user_id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Organization identifier.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**user_id:** `string` — ID of the user to list effective roles for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListOrganizationMemberEffectiveRolesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EffectiveRolesClient.RequestOptions`
 
 </dd>
 </dl>
@@ -25437,7 +24388,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Assign one or more [roles](https://auth0.com/docs/manage-users/access-control/rbac) to a user to determine their access for a specific Organization.
+Assign one or more <a href="https://auth0.com/docs/manage-users/access-control/rbac">roles</a> to a user to determine their access for a specific Organization.
 
 Users can be members of multiple Organizations with unique roles assigned for each membership. This action assigns roles to a user only for the specified Organization. Roles cannot be assigned to a user across multiple Organizations in the same call.
 
@@ -25520,7 +24471,7 @@ await client.organizations.members.roles.assign("id", "user_id", {
 <dl>
 <dd>
 
-Remove one or more Organization-specific [roles](https://auth0.com/docs/manage-users/access-control/rbac) from a given user.
+Remove one or more Organization-specific <a href="https://auth0.com/docs/manage-users/access-control/rbac">roles</a> from a given user.
 
 Users can be members of multiple Organizations with unique roles assigned for each membership. This action removes roles from a user in relation to the specified Organization. Roles assigned to the user within a different Organization cannot be managed in the same call.
 
@@ -25581,210 +24532,6 @@ await client.organizations.members.roles.delete("id", "user_id", {
 <dd>
 
 **requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Organizations Members EffectiveRoles Sources Groups
-
-<details><summary><code>client.organizations.members.effectiveRoles.sources.groups.<a href="/src/management/api/resources/organizations/resources/members/resources/effectiveRoles/resources/sources/resources/groups/client/Client.ts">list</a>(id, user_id, { ...params }) -> core.Page&lt;Management.Group, Management.ListOrganizationMemberRoleSourceGroupsResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the groups which grant the org member a given role.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.organizations.members.effectiveRoles.sources.groups.list("id", "user_id", {
-    from: "from",
-    take: 1,
-    role_id: "role_id",
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.organizations.members.effectiveRoles.sources.groups.list("id", "user_id", {
-    from: "from",
-    take: 1,
-    role_id: "role_id",
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Organization identifier.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**user_id:** `string` — ID of the user to list role source groups for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListOrganizationMemberRoleSourceGroupsRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Organizations Roles Members
-
-<details><summary><code>client.organizations.roles.members.<a href="/src/management/api/resources/organizations/resources/roles/resources/members/client/Client.ts">list</a>(id, role_id, { ...params }) -> core.Page&lt;Management.RoleMember, Management.ListOrganizationRoleMembersResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List the organization members assigned a specific role within the context of an organization.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.organizations.roles.members.list("id", "role_id", {
-    from: "from",
-    take: 1,
-    fields: "fields",
-    include_fields: true,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.organizations.roles.members.list("id", "role_id", {
-    from: "from",
-    take: 1,
-    fields: "fields",
-    include_fields: true,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — ID of the organization.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**role_id:** `string` — ID of the role to retrieve the assigned members for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListOrganizationRoleMembersRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `MembersClient.RequestOptions`
 
 </dd>
 </dl>
@@ -25902,7 +24649,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Learn more about [configuring render settings](https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens) for advanced customization.
+Learn more about <a href='https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens'>configuring render settings</a> for advanced customization.
 
 </dd>
 </dl>
@@ -26043,7 +24790,7 @@ await client.prompts.rendering.get("login", "login");
 <dl>
 <dd>
 
-Learn more about [configuring render settings](https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens) for advanced customization.
+Learn more about <a href='https://auth0.com/docs/customize/login-pages/advanced-customizations/getting-started/configure-acul-screens'>configuring render settings</a> for advanced customization.
 
 </dd>
 </dl>
@@ -26646,243 +25393,6 @@ await client.riskAssessments.settings.newDevice.update({
 </dl>
 </details>
 
-## Roles Groups
-
-<details><summary><code>client.roles.groups.<a href="/src/management/api/resources/roles/resources/groups/client/Client.ts">get</a>(id, { ...params }) -> core.Page&lt;Management.Group, Management.ListRoleGroupsResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the groups to which the specified role is assigned.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.roles.groups.get("id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.roles.groups.get("id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the role (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListRoleGroupsParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.roles.groups.<a href="/src/management/api/resources/roles/resources/groups/client/Client.ts">create</a>(id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Assign one or more groups to a specified role.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.roles.groups.create("id", {
-    groups: ["groups"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the role (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.AssignRoleGroupsRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.roles.groups.<a href="/src/management/api/resources/roles/resources/groups/client/Client.ts">delete</a>(id, { ...params }) -> void</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Unassign one or more groups from a specified role.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.roles.groups.delete("id", {
-    groups: ["groups"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — Unique identifier for the role (service-generated).
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.DeleteRoleGroupsRequestContent`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## Roles Permissions
 
 <details><summary><code>client.roles.permissions.<a href="/src/management/api/resources/roles/resources/permissions/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.PermissionsResponsePayload, Management.ListRolePermissionsOffsetPaginatedResponseContent&gt;</code></summary>
@@ -26988,7 +25498,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Add one or more [permissions](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions) to a specified user role.
+Add one or more <a href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions">permissions</a> to a specified user role.
 
 </dd>
 </dl>
@@ -27066,7 +25576,7 @@ await client.roles.permissions.add("id", {
 <dl>
 <dd>
 
-Remove one or more [permissions](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions) from a specified user role.
+Remove one or more <a href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/manage-permissions">permissions</a> from a specified user role.
 
 </dd>
 </dl>
@@ -27146,23 +25656,27 @@ await client.roles.permissions.delete("id", {
 <dl>
 <dd>
 
-Retrieve list of users associated with a specific role. For Dashboard instructions, review [View Users Assigned to Roles](https://auth0.com/docs/manage-users/access-control/configure-core-rbac/roles/view-users-assigned-to-roles).
+Retrieve list of users associated with a specific role. For Dashboard instructions, review <a href="https://auth0.com/docs/manage-users/access-control/configure-core-rbac/roles/view-users-assigned-to-roles">View Users Assigned to Roles</a>.
 
 This endpoint supports two types of pagination:
 
-- Offset pagination
-- Checkpoint pagination
+<ul>
+<li>Offset pagination</li>
+<li>Checkpoint pagination</li>
+</ul>
 
 Checkpoint pagination must be used if you need to retrieve more than 1000 organization members.
 
-**Checkpoint Pagination**
+<h2>Checkpoint Pagination</h2>
 
 To search by checkpoint, use the following parameters:
 
-- `from`: Optional id from which to start selection.
-- `take`: The total amount of entries to retrieve when using the from parameter. Defaults to 50.
+<ul>
+<li><code>from</code>: Optional id from which to start selection.</li>
+<li><code>take</code>: The total amount of entries to retrieve when using the from parameter. Defaults to 50.</li>
+</ul>
 
-**Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
+<b>Note</b>: The first time you call this endpoint using checkpoint pagination, omit the <code>from</code> parameter. If there are more results, a <code>next</code> value is included in the response. You can use this for subsequent API calls. When <code>next</code> is no longer included in the response, no pages are remaining.
 
 </dd>
 </dl>
@@ -27251,9 +25765,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Assign one or more users to an existing user role. To learn more, review [Role-Based Access Control](https://auth0.com/docs/manage-users/access-control/rbac).
+Assign one or more users to an existing user role. To learn more, review <a href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access Control</a>.
 
-**Note**: New roles cannot be created through this action.
+<b>Note</b>: New roles cannot be created through this action.
 
 </dd>
 </dl>
@@ -28286,7 +26800,7 @@ await client.users.authenticationMethods.update("id", "authentication_method_id"
 <dl>
 <dd>
 
-Remove all authenticators registered to a given user ID, such as OTP, email, phone, and push-notification. This action cannot be undone. For more information, review [Manage Authentication Methods with Management API](https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authentication-methods-with-management-api).
+Remove all authenticators registered to a given user ID, such as OTP, email, phone, and push-notification. This action cannot be undone. For more information, review <a href="https://auth0.com/docs/secure/multi-factor-authentication/manage-mfa-auth0-apis/manage-authentication-methods-with-management-api">Manage Authentication Methods with Management API</a>.
 
 </dd>
 </dl>
@@ -28428,190 +26942,6 @@ const response = page.response;
 </dl>
 </details>
 
-## Users EffectivePermissions
-
-<details><summary><code>client.users.effectivePermissions.<a href="/src/management/api/resources/users/resources/effectivePermissions/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.UserEffectivePermissionResponseContent, Management.ListUserEffectivePermissionsResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Returns the list of effective permissions for a user, taking into account permissions granted directly to the user, as well as those inherited through roles and group memberships.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.users.effectivePermissions.list("id", {
-    from: "from",
-    take: 1,
-    resource_server_identifier: "resource_server_identifier",
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.users.effectivePermissions.list("id", {
-    from: "from",
-    take: 1,
-    resource_server_identifier: "resource_server_identifier",
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — ID of the user to retrieve the permissions for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListUserEffectivePermissionsRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EffectivePermissionsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Users EffectiveRoles
-
-<details><summary><code>client.users.effectiveRoles.<a href="/src/management/api/resources/users/resources/effectiveRoles/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.UserEffectiveRole, Management.ListUserEffectiveRolesResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Retrieve detailed list of effective roles for a user, including roles assigned directly and through group memberships.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.users.effectiveRoles.list("id", {
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.users.effectiveRoles.list("id", {
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — ID of the user to list effective roles for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListUserEffectiveRolesRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `EffectiveRolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
 ## Users Enrollments
 
 <details><summary><code>client.users.enrollments.<a href="/src/management/api/resources/users/resources/enrollments/client/Client.ts">get</a>(id) -> Management.UsersEnrollment[]</code></summary>
@@ -28626,7 +26956,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Retrieve the first [multi-factor authentication](https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors) enrollment that a specific user has confirmed.
+Retrieve the first <a href="https://auth0.com/docs/secure/multi-factor-authentication/multi-factor-authentication-factors">multi-factor authentication</a> enrollment that a specific user has confirmed.
 
 </dd>
 </dl>
@@ -28667,6 +26997,127 @@ await client.users.enrollments.get("id");
 <dd>
 
 **requestOptions:** `EnrollmentsClient.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Users FederatedConnectionsTokensets
+
+<details><summary><code>client.users.federatedConnectionsTokensets.<a href="/src/management/api/resources/users/resources/federatedConnectionsTokensets/client/Client.ts">list</a>(id) -> Management.FederatedConnectionTokenSet[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List active federated connections tokensets for a provided user
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.users.federatedConnectionsTokensets.list("id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` — User identifier
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FederatedConnectionsTokensetsClient.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.users.federatedConnectionsTokensets.<a href="/src/management/api/resources/users/resources/federatedConnectionsTokensets/client/Client.ts">delete</a>(id, tokenset_id) -> void</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.users.federatedConnectionsTokensets.delete("id", "tokenset_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**id:** `string` — Id of the user that owns the tokenset
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**tokenset_id:** `string` — The tokenset id
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FederatedConnectionsTokensetsClient.RequestOptions`
 
 </dd>
 </dl>
@@ -28790,21 +27241,19 @@ Link two user accounts together forming a primary and secondary relationship. On
 
 Note: There are two ways of invoking the endpoint:
 
-- With the authenticated primary account's JWT in the Authorization header, which has the `update:current_user_identities` scope:
-
-    ```http
-    POST /api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities
-    Authorization: "Bearer PRIMARY_ACCOUNT_JWT"
-    {
-      "link_with": "SECONDARY_ACCOUNT_JWT"
-    }
-    ```
-
-    In this case, only the `link_with` param is required in the body, which also contains the JWT obtained upon the secondary account's authentication.
-
-- With a token generated by the API V2 containing the `update:users` scope:
-
-    ```http
+<ul>
+  <li>With the authenticated primary account's JWT in the Authorization header, which has the <code>update:current_user_identities</code> scope:
+    <pre>
+      POST /api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities
+      Authorization: "Bearer PRIMARY_ACCOUNT_JWT"
+      {
+        "link_with": "SECONDARY_ACCOUNT_JWT"
+      }
+    </pre>
+    In this case, only the <code>link_with</code> param is required in the body, which also contains the JWT obtained upon the secondary account's authentication.
+  </li>
+  <li>With a token generated by the API V2 containing the <code>update:users</code> scope:
+    <pre>
     POST /api/v2/users/PRIMARY_ACCOUNT_USER_ID/identities
     Authorization: "Bearer YOUR_API_V2_TOKEN"
     {
@@ -28812,13 +27261,14 @@ Note: There are two ways of invoking the endpoint:
       "connection_id": "SECONDARY_ACCOUNT_CONNECTION_ID(OPTIONAL)",
       "user_id": "SECONDARY_ACCOUNT_USER_ID"
     }
-    ```
-
-    In this case you need to send `provider` and `user_id` in the body. Optionally you can also send the `connection_id` param which is suitable for identifying a particular database connection for the 'auth0' provider.
-    </dd>
-    </dl>
-    </dd>
-    </dl>
+    </pre>
+    In this case you need to send <code>provider</code> and <code>user_id</code> in the body. Optionally you can also send the <code>connection_id</code> param which is suitable for identifying a particular database connection for the 'auth0' provider.
+  </li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -28886,7 +27336,7 @@ await client.users.identities.link("id");
 
 Unlink a specific secondary account from a target user. This action requires the ID of both the target user and the secondary account.
 
-Unlinking the secondary account removes it from the identities array of the target user and creates a new standalone profile for the secondary account. To learn more, review [Unlink User Accounts](https://auth0.com/docs/manage-users/user-accounts/user-account-linking/unlink-user-accounts).
+Unlinking the secondary account removes it from the identities array of the target user and creates a new standalone profile for the secondary account. To learn more, review <a href="https://auth0.com/docs/manage-users/user-accounts/user-account-linking/unlink-user-accounts">Unlink User Accounts</a>.
 
 </dd>
 </dl>
@@ -29068,7 +27518,7 @@ const response = page.response;
 <dl>
 <dd>
 
-Invalidate all remembered browsers across all [authentication factors](https://auth0.com/docs/multifactor-authentication) for a user.
+Invalidate all remembered browsers across all <a href="https://auth0.com/docs/multifactor-authentication">authentication factors</a> for a user.
 
 </dd>
 </dl>
@@ -29131,7 +27581,7 @@ await client.users.multifactor.invalidateRememberBrowser("id");
 <dl>
 <dd>
 
-Remove a [multifactor](https://auth0.com/docs/multifactor-authentication) authentication configuration from a user's account. This forces the user to manually reconfigure the multi-factor provider.
+Remove a <a href="https://auth0.com/docs/multifactor-authentication">multifactor</a> authentication configuration from a user's account. This forces the user to manually reconfigure the multi-factor provider.
 
 </dd>
 </dl>
@@ -29204,7 +27654,7 @@ await client.users.multifactor.deleteProvider("id", "duo");
 <dl>
 <dd>
 
-Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For more information, review [Auth0 Organizations](https://auth0.com/docs/manage-users/organizations).
+Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For more information, review <a href="https://auth0.com/docs/manage-users/organizations">Auth0 Organizations</a>.
 
 </dd>
 </dl>
@@ -29624,7 +28074,7 @@ await client.users.riskAssessments.clear("id", {
 
 Retrieve detailed list of all user roles currently assigned to a user.
 
-**Note**: This action retrieves all roles assigned to a user in the context of your whole tenant. To retrieve Organization-specific roles, use the following endpoint: [Get user roles assigned to an Organization member](https://auth0.com/docs/api/management/v2/organizations/get-organization-member-roles).
+<b>Note</b>: This action retrieves all roles assigned to a user in the context of your whole tenant. To retrieve Organization-specific roles, use the following endpoint: <a href="https://auth0.com/docs/api/management/v2/organizations/get-organization-member-roles">Get user roles assigned to an Organization member</a>.
 
 </dd>
 </dl>
@@ -29715,9 +28165,9 @@ const response = page.response;
 <dl>
 <dd>
 
-Assign one or more existing user roles to a user. For more information, review [Role-Based Access Control](https://auth0.com/docs/manage-users/access-control/rbac).
+Assign one or more existing user roles to a user. For more information, review <a href="https://auth0.com/docs/manage-users/access-control/rbac">Role-Based Access Control</a>.
 
-**Note**: New roles cannot be created through this action. Additionally, this action is used to assign roles to a user in the context of your whole tenant. To assign roles in the context of a specific Organization, use the following endpoint: [Assign user roles to an Organization member](https://auth0.com/docs/api/management/v2/organizations/post-organization-member-roles).
+<b>Note</b>: New roles cannot be created through this action. Additionally, this action is used to assign roles to a user in the context of your whole tenant. To assign roles in the context of a specific Organization, use the following endpoint: <a href="https://auth0.com/docs/api/management/v2/organizations/post-organization-member-roles">Assign user roles to an Organization member</a>.
 
 </dd>
 </dl>
@@ -29792,7 +28242,7 @@ await client.users.roles.assign("id", {
 
 Remove one or more specified user roles assigned to a user.
 
-**Note**: This action removes a role from a user in the context of your whole tenant. If you want to unassign a role from a user in the context of a specific Organization, use the following endpoint: [Delete user roles from an Organization member](https://auth0.com/docs/api/management/v2/organizations/delete-organization-member-roles).
+<b>Note</b>: This action removes a role from a user in the context of your whole tenant. If you want to unassign a role from a user in the context of a specific Organization, use the following endpoint: <a href="https://auth0.com/docs/api/management/v2/organizations/delete-organization-member-roles">Delete user roles from an Organization member</a>.
 
 </dd>
 </dl>
@@ -30151,194 +28601,6 @@ await client.users.sessions.delete("user_id");
 <dd>
 
 **requestOptions:** `SessionsClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Users EffectivePermissions Sources Roles
-
-<details><summary><code>client.users.effectivePermissions.sources.roles.<a href="/src/management/api/resources/users/resources/effectivePermissions/resources/sources/resources/roles/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.UserEffectivePermissionRoleSourceResponseContent, Management.ListUserEffectivePermissionRoleSourcesResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the roles which grant the user a given permission, including roles assigned directly to the user and those inherited through group memberships.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.users.effectivePermissions.sources.roles.list("id", {
-    from: "from",
-    take: 1,
-    resource_server_identifier: "resource_server_identifier",
-    permission_name: "permission_name",
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.users.effectivePermissions.sources.roles.list("id", {
-    from: "from",
-    take: 1,
-    resource_server_identifier: "resource_server_identifier",
-    permission_name: "permission_name",
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — ID of the user to retrieve the permissions for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListUserEffectivePermissionRoleSourceRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `RolesClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-## Users EffectiveRoles Sources Groups
-
-<details><summary><code>client.users.effectiveRoles.sources.groups.<a href="/src/management/api/resources/users/resources/effectiveRoles/resources/sources/resources/groups/client/Client.ts">list</a>(id, { ...params }) -> core.Page&lt;Management.Group, Management.ListUserRoleSourceGroupsResponseContent&gt;</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Lists the groups that grant a user a specific role.
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-const pageableResponse = await client.users.effectiveRoles.sources.groups.list("id", {
-    role_id: "role_id",
-    from: "from",
-    take: 1,
-});
-for await (const item of pageableResponse) {
-    console.log(item);
-}
-
-// Or you can manually iterate page-by-page
-let page = await client.users.effectiveRoles.sources.groups.list("id", {
-    role_id: "role_id",
-    from: "from",
-    take: 1,
-});
-while (page.hasNextPage()) {
-    page = page.getNextPage();
-}
-
-// You can also access the underlying response
-const response = page.response;
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**id:** `string` — ID of the user to list role source groups for.
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**request:** `Management.ListUserRoleSourceGroupsRequestParameters`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `GroupsClient.RequestOptions`
 
 </dd>
 </dl>
