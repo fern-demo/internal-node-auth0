@@ -18,14 +18,20 @@ generations:
     cli_version: unknown
     generator_versions:
       fernapi/fern-typescript-sdk: 3.82.2
-current_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
+  - commit_sha: a3a3f80a4ce4755a9d5e972dd93c70a8f139470a
+    tree_hash: a3c37f275286fb185f5e4992d7bee4a1334f08dc
+    timestamp: 2026-07-21T05:20:15.084Z
+    cli_version: unknown
+    generator_versions:
+      fernapi/fern-typescript-sdk: 3.82.2
+current_generation: a3a3f80a4ce4755a9d5e972dd93c70a8f139470a
 patches:
   - id: patch-066ff9e0
     content_hash: sha256:5b87ec9a63fc57aba4840d0d335d472c621e838fc1d61515b30660df39d0dbc2
     original_commit: 066ff9e02c45f4abf46791a3f070c762f7ecd924
     original_message: "docs: add v6 migration guide for breaking changes in v6.0.0 (#1368)"
     original_author: Ankita Tripathi <51994119+ankita10119@users.noreply.github.com>
-    base_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
+    base_generation: a3a3f80a4ce4755a9d5e972dd93c70a8f139470a
     files:
       - v6_MIGRATION_GUIDE.md
     patch_content: |
@@ -359,7 +365,7 @@ patches:
     original_commit: d8faf7a21efbed3bd75a0f36ff0d190bb9dd986b
     original_message: "docs: update v6 migration guide with federatedConnectionsTokensets and federated_connections_access_tokens breaking changes (#1370)"
     original_author: Ankita Tripathi <51994119+ankita10119@users.noreply.github.com>
-    base_generation: ff8b26ffa54a98cdcfb1b5ab17dea64234618d0c
+    base_generation: a3a3f80a4ce4755a9d5e972dd93c70a8f139470a
     files:
       - v6_MIGRATION_GUIDE.md
     patch_content: |
@@ -687,6 +693,7 @@ patches:
             },
         });
         ```
+    user_owned: true
   - id: patch-a823058b
     content_hash: sha256:99f6d783ff5b3315378610ff8a88aa7ef2f6d7802b2e39ee9c1adb299d093039
     original_commit: a823058bd14f6667877bffb625aaa2eadd9d1604
