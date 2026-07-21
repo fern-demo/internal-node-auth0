@@ -15,7 +15,6 @@ export type BaseClientOptions = {
     environment?: core.Supplier<environments.ManagementEnvironment | string>;
     /** Specify a custom URL to connect the client to. */
     baseUrl?: core.Supplier<string>;
-    /** Defaults to "{TENANT}.auth0.com". */
     tenantDomain?: string;
     /** Additional headers to include in requests. */
     headers?: Record<string, string | core.Supplier<string | null | undefined> | null | undefined>;
@@ -66,7 +65,7 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
 ): NormalizedClientOptions<T> {
     let baseUrl = options?.baseUrl;
     if (options?.tenantDomain != null) {
-        const _tenantDomain = options?.tenantDomain ?? "{TENANT}.auth0.com";
+        const _tenantDomain = options?.tenantDomain ?? "";
         baseUrl = `https://${_tenantDomain}/api/v2`;
     }
 
