@@ -336,7 +336,7 @@ export class OrganizationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/name/${core.url.encodePathParam(name)}`,
+                `organizations/name/${core.url.encodePathParam(name, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -415,7 +415,7 @@ export class OrganizationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -493,7 +493,7 @@ export class OrganizationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -571,7 +571,7 @@ export class OrganizationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "PATCH",
             headers: _headers,

@@ -72,7 +72,7 @@ export class PermissionsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `users/${core.url.encodePathParam(id)}/permissions`,
+                        `users/${core.url.encodePathParam(id, errors.ManagementError)}/permissions`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -194,7 +194,7 @@ export class PermissionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `users/${core.url.encodePathParam(id)}/permissions`,
+                `users/${core.url.encodePathParam(id, errors.ManagementError)}/permissions`,
             ),
             method: "POST",
             headers: _headers,
@@ -281,7 +281,7 @@ export class PermissionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `users/${core.url.encodePathParam(id)}/permissions`,
+                `users/${core.url.encodePathParam(id, errors.ManagementError)}/permissions`,
             ),
             method: "DELETE",
             headers: _headers,

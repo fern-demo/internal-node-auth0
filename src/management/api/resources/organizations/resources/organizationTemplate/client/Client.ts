@@ -58,7 +58,7 @@ export class OrganizationTemplateClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/organization-templates`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/organization-templates`,
             ),
             method: "GET",
             headers: _headers,
@@ -139,7 +139,7 @@ export class OrganizationTemplateClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/organization-templates/${core.url.encodePathParam(template_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/organization-templates/${core.url.encodePathParam(template_id, errors.ManagementError)}`,
             ),
             method: "PUT",
             headers: _headers,
@@ -222,7 +222,7 @@ export class OrganizationTemplateClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/organization-templates/${core.url.encodePathParam(template_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/organization-templates/${core.url.encodePathParam(template_id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,

@@ -67,7 +67,7 @@ export class SessionsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `users/${core.url.encodePathParam(user_id)}/sessions`,
+                        `users/${core.url.encodePathParam(user_id, errors.ManagementError)}/sessions`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -167,7 +167,7 @@ export class SessionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `users/${core.url.encodePathParam(user_id)}/sessions`,
+                `users/${core.url.encodePathParam(user_id, errors.ManagementError)}/sessions`,
             ),
             method: "DELETE",
             headers: _headers,

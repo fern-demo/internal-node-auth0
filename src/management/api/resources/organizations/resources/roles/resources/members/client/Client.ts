@@ -80,7 +80,7 @@ export class MembersClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/roles/${core.url.encodePathParam(role_id)}/members`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/roles/${core.url.encodePathParam(role_id, errors.ManagementError)}/members`,
                     ),
                     method: "GET",
                     headers: _headers,

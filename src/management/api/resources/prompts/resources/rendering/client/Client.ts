@@ -288,7 +288,7 @@ export class RenderingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `prompts/${core.url.encodePathParam(prompt)}/screen/${core.url.encodePathParam(screen)}/rendering`,
+                `prompts/${core.url.encodePathParam(prompt, errors.ManagementError)}/screen/${core.url.encodePathParam(screen, errors.ManagementError)}/rendering`,
             ),
             method: "GET",
             headers: _headers,
@@ -377,7 +377,7 @@ export class RenderingClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `prompts/${core.url.encodePathParam(prompt)}/screen/${core.url.encodePathParam(screen)}/rendering`,
+                `prompts/${core.url.encodePathParam(prompt, errors.ManagementError)}/screen/${core.url.encodePathParam(screen, errors.ManagementError)}/rendering`,
             ),
             method: "PATCH",
             headers: _headers,

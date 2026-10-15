@@ -71,7 +71,7 @@ export class ClientsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/clients`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/clients`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -188,7 +188,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/clients`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/clients`,
             ),
             method: "POST",
             headers: _headers,
@@ -277,7 +277,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/clients`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/clients`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -364,7 +364,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/clients/${core.url.encodePathParam(client_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/clients/${core.url.encodePathParam(client_id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -454,7 +454,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/clients/${core.url.encodePathParam(client_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/clients/${core.url.encodePathParam(client_id, errors.ManagementError)}`,
             ),
             method: "PATCH",
             headers: _headers,

@@ -83,7 +83,7 @@ export class ClientGrantsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/client-grants`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/client-grants`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -199,7 +199,7 @@ export class ClientGrantsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/client-grants`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/client-grants`,
             ),
             method: "POST",
             headers: _headers,
@@ -289,7 +289,7 @@ export class ClientGrantsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/client-grants/${core.url.encodePathParam(grant_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/client-grants/${core.url.encodePathParam(grant_id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,
