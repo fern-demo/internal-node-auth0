@@ -66,7 +66,7 @@ export class ExecutionsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `flows/${core.url.encodePathParam(flow_id)}/executions`,
+                        `flows/${core.url.encodePathParam(flow_id, errors.ManagementError)}/executions`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -184,7 +184,7 @@ export class ExecutionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `flows/${core.url.encodePathParam(flow_id)}/executions/${core.url.encodePathParam(execution_id)}`,
+                `flows/${core.url.encodePathParam(flow_id, errors.ManagementError)}/executions/${core.url.encodePathParam(execution_id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -272,7 +272,7 @@ export class ExecutionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `flows/${core.url.encodePathParam(flow_id)}/executions/${core.url.encodePathParam(execution_id)}`,
+                `flows/${core.url.encodePathParam(flow_id, errors.ManagementError)}/executions/${core.url.encodePathParam(execution_id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,

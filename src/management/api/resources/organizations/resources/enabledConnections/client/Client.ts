@@ -73,7 +73,7 @@ export class EnabledConnectionsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/enabled_connections`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/enabled_connections`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -195,7 +195,7 @@ export class EnabledConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/enabled_connections`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/enabled_connections`,
             ),
             method: "POST",
             headers: _headers,
@@ -286,7 +286,7 @@ export class EnabledConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/enabled_connections/${core.url.encodePathParam(connectionId)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/enabled_connections/${core.url.encodePathParam(connectionId, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -373,7 +373,7 @@ export class EnabledConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/enabled_connections/${core.url.encodePathParam(connectionId)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/enabled_connections/${core.url.encodePathParam(connectionId, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -460,7 +460,7 @@ export class EnabledConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/enabled_connections/${core.url.encodePathParam(connectionId)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/enabled_connections/${core.url.encodePathParam(connectionId, errors.ManagementError)}`,
             ),
             method: "PATCH",
             headers: _headers,

@@ -71,7 +71,7 @@ export class GroupsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(organization_id)}/roles/${core.url.encodePathParam(role_id)}/groups`,
+                        `organizations/${core.url.encodePathParam(organization_id, errors.ManagementError)}/roles/${core.url.encodePathParam(role_id, errors.ManagementError)}/groups`,
                     ),
                     method: "GET",
                     headers: _headers,

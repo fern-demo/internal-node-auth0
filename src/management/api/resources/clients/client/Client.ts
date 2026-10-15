@@ -546,7 +546,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `clients/${core.url.encodePathParam(id)}`,
+                `clients/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -622,7 +622,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `clients/${core.url.encodePathParam(id)}`,
+                `clients/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -707,7 +707,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `clients/${core.url.encodePathParam(id)}`,
+                `clients/${core.url.encodePathParam(id, errors.ManagementError)}`,
             ),
             method: "PATCH",
             headers: _headers,
@@ -793,7 +793,7 @@ export class ClientsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `clients/${core.url.encodePathParam(id)}/rotate-secret`,
+                `clients/${core.url.encodePathParam(id, errors.ManagementError)}/rotate-secret`,
             ),
             method: "POST",
             headers: _headers,

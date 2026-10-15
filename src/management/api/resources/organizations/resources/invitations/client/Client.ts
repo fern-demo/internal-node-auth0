@@ -86,7 +86,7 @@ export class InvitationsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/invitations`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/invitations`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -211,7 +211,7 @@ export class InvitationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/invitations`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/invitations`,
             ),
             method: "POST",
             headers: _headers,
@@ -310,7 +310,7 @@ export class InvitationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/invitations/${core.url.encodePathParam(invitation_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/invitations/${core.url.encodePathParam(invitation_id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -398,7 +398,7 @@ export class InvitationsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/invitations/${core.url.encodePathParam(invitation_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/invitations/${core.url.encodePathParam(invitation_id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,

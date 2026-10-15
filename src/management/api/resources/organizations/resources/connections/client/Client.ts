@@ -79,7 +79,7 @@ export class ConnectionsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `organizations/${core.url.encodePathParam(id)}/connections`,
+                        `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/connections`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -195,7 +195,7 @@ export class ConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/connections`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/connections`,
             ),
             method: "POST",
             headers: _headers,
@@ -284,7 +284,7 @@ export class ConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/connections/${core.url.encodePathParam(connection_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/connections/${core.url.encodePathParam(connection_id, errors.ManagementError)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -365,7 +365,7 @@ export class ConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/connections/${core.url.encodePathParam(connection_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/connections/${core.url.encodePathParam(connection_id, errors.ManagementError)}`,
             ),
             method: "DELETE",
             headers: _headers,
@@ -445,7 +445,7 @@ export class ConnectionsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.ManagementEnvironment.Default,
-                `organizations/${core.url.encodePathParam(id)}/connections/${core.url.encodePathParam(connection_id)}`,
+                `organizations/${core.url.encodePathParam(id, errors.ManagementError)}/connections/${core.url.encodePathParam(connection_id, errors.ManagementError)}`,
             ),
             method: "PATCH",
             headers: _headers,
