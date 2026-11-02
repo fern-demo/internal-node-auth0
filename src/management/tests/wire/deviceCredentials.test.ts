@@ -58,7 +58,7 @@ describe("DeviceCredentialsClient", () => {
         const rawResponseBody = { key: "value" };
 
         server
-            .mockEndpoint({ once: false })
+            .mockEndpoint()
             .get("/device-credentials")
             .respondWith()
             .statusCode(400)
@@ -77,7 +77,7 @@ describe("DeviceCredentialsClient", () => {
         const rawResponseBody = { key: "value" };
 
         server
-            .mockEndpoint({ once: false })
+            .mockEndpoint()
             .get("/device-credentials")
             .respondWith()
             .statusCode(401)
@@ -96,7 +96,7 @@ describe("DeviceCredentialsClient", () => {
         const rawResponseBody = { key: "value" };
 
         server
-            .mockEndpoint({ once: false })
+            .mockEndpoint()
             .get("/device-credentials")
             .respondWith()
             .statusCode(403)
@@ -115,7 +115,7 @@ describe("DeviceCredentialsClient", () => {
         const rawResponseBody = { key: "value" };
 
         server
-            .mockEndpoint({ once: false })
+            .mockEndpoint()
             .get("/device-credentials")
             .respondWith()
             .statusCode(429)
@@ -149,7 +149,6 @@ describe("DeviceCredentialsClient", () => {
 
         const response = await client.deviceCredentials.createPublicKey({
             device_name: "device_name",
-            type: "public_key",
             value: "value",
             device_id: "device_id",
         });
@@ -174,7 +173,6 @@ describe("DeviceCredentialsClient", () => {
         await expect(async () => {
             return await client.deviceCredentials.createPublicKey({
                 device_name: "x",
-                type: "public_key",
                 value: "x",
                 device_id: "device_id",
             });
@@ -199,7 +197,6 @@ describe("DeviceCredentialsClient", () => {
         await expect(async () => {
             return await client.deviceCredentials.createPublicKey({
                 device_name: "x",
-                type: "public_key",
                 value: "x",
                 device_id: "device_id",
             });
@@ -224,7 +221,6 @@ describe("DeviceCredentialsClient", () => {
         await expect(async () => {
             return await client.deviceCredentials.createPublicKey({
                 device_name: "x",
-                type: "public_key",
                 value: "x",
                 device_id: "device_id",
             });
@@ -249,7 +245,6 @@ describe("DeviceCredentialsClient", () => {
         await expect(async () => {
             return await client.deviceCredentials.createPublicKey({
                 device_name: "x",
-                type: "public_key",
                 value: "x",
                 device_id: "device_id",
             });
@@ -274,7 +269,6 @@ describe("DeviceCredentialsClient", () => {
         await expect(async () => {
             return await client.deviceCredentials.createPublicKey({
                 device_name: "x",
-                type: "public_key",
                 value: "x",
                 device_id: "device_id",
             });

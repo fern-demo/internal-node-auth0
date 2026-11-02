@@ -152,8 +152,6 @@ describe("RateLimitPoliciesClient", () => {
             .build();
 
         const response = await client.rateLimitPolicies.create({
-            resource: "oauth_authentication_api",
-            consumer: "client",
             consumer_selector: "consumer_selector",
             configuration: {
                 action: "allow",
@@ -184,8 +182,6 @@ describe("RateLimitPoliciesClient", () => {
 
         await expect(async () => {
             return await client.rateLimitPolicies.create({
-                resource: "oauth_authentication_api",
-                consumer: "client",
                 consumer_selector: "consumer_selector",
                 configuration: {
                     action: "allow",
@@ -216,8 +212,6 @@ describe("RateLimitPoliciesClient", () => {
 
         await expect(async () => {
             return await client.rateLimitPolicies.create({
-                resource: "oauth_authentication_api",
-                consumer: "client",
                 consumer_selector: "consumer_selector",
                 configuration: {
                     action: "allow",
@@ -248,8 +242,6 @@ describe("RateLimitPoliciesClient", () => {
 
         await expect(async () => {
             return await client.rateLimitPolicies.create({
-                resource: "oauth_authentication_api",
-                consumer: "client",
                 consumer_selector: "consumer_selector",
                 configuration: {
                     action: "allow",
@@ -280,8 +272,6 @@ describe("RateLimitPoliciesClient", () => {
 
         await expect(async () => {
             return await client.rateLimitPolicies.create({
-                resource: "oauth_authentication_api",
-                consumer: "client",
                 consumer_selector: "consumer_selector",
                 configuration: {
                     action: "allow",
@@ -312,8 +302,6 @@ describe("RateLimitPoliciesClient", () => {
 
         await expect(async () => {
             return await client.rateLimitPolicies.create({
-                resource: "oauth_authentication_api",
-                consumer: "client",
                 consumer_selector: "consumer_selector",
                 configuration: {
                     action: "allow",

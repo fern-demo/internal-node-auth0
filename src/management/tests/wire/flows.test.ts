@@ -53,13 +53,7 @@ describe("FlowsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/flows")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/flows").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.flows.list();
@@ -72,13 +66,7 @@ describe("FlowsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/flows")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/flows").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.flows.list();
@@ -91,13 +79,7 @@ describe("FlowsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/flows")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/flows").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.flows.list();
@@ -110,13 +92,7 @@ describe("FlowsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/flows")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/flows").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.flows.list();
@@ -413,19 +389,6 @@ describe("FlowsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server.mockEndpoint().delete("/flows/id").respondWith().statusCode(409).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.flows.delete("id");
-        }).rejects.toThrow(Management.ConflictError);
-    });
-
-    test("delete (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { key: "value" };
-
         server.mockEndpoint().delete("/flows/id").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -480,26 +443,6 @@ describe("FlowsClient", () => {
             .patch("/flows/id")
             .jsonBody(rawRequestBody)
             .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.flows.update("id");
-        }).rejects.toThrow(Management.BadRequestError);
-    });
-
-    test("update (3)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
-        const rawResponseBody = { key: "value" };
-
-        server
-            .mockEndpoint()
-            .patch("/flows/id")
-            .jsonBody(rawRequestBody)
-            .respondWith()
             .statusCode(401)
             .jsonBody(rawResponseBody)
             .build();
@@ -509,7 +452,7 @@ describe("FlowsClient", () => {
         }).rejects.toThrow(Management.UnauthorizedError);
     });
 
-    test("update (4)", async () => {
+    test("update (3)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -529,7 +472,7 @@ describe("FlowsClient", () => {
         }).rejects.toThrow(Management.ForbiddenError);
     });
 
-    test("update (5)", async () => {
+    test("update (4)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};
@@ -549,7 +492,7 @@ describe("FlowsClient", () => {
         }).rejects.toThrow(Management.NotFoundError);
     });
 
-    test("update (6)", async () => {
+    test("update (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new ManagementClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {};

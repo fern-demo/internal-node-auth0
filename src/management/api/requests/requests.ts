@@ -360,7 +360,6 @@ export interface CreateClientRequestContent {
     third_party_security_mode?: Management.ClientThirdPartySecurityModeEnum;
     redirection_policy?: Management.ClientRedirectionPolicyEnum;
     express_configuration?: Management.ExpressConfiguration;
-    b2b_integration_configuration?: Management.B2BIntegrationConfiguration;
     my_organization_configuration?: Management.ClientMyOrganizationPostConfiguration;
     async_approval_notification_channels?: Management.ClientAsyncApprovalNotificationsChannelsApiPostConfiguration;
 }
@@ -493,7 +492,6 @@ export interface UpdateClientRequestContent {
     /** Specifies how long, in seconds, a Pushed Authorization Request URI remains valid */
     par_request_expiry?: number | null;
     express_configuration?: Management.ExpressConfigurationOrNull | null;
-    b2b_integration_configuration?: Management.B2BIntegrationConfiguration;
     my_organization_configuration?: Management.ClientMyOrganizationPatchConfiguration | null;
     async_approval_notification_channels?:
         | (Management.ClientAsyncApprovalNotificationsChannelsApiPatchConfiguration | undefined)
@@ -529,8 +527,6 @@ export interface CreateConnectionProfileRequestContent {
     enabled_features?: Management.ConnectionProfileEnabledFeatures;
     connection_config?: Management.ConnectionProfileConfig;
     strategy_overrides?: Management.ConnectionProfileStrategyOverrides;
-    provisioning?: Management.ConnectionProfileProvisioning;
-    cross_app_access_resource_app?: Management.ConnectionProfileCrossAppAccessResourceApp;
 }
 
 /**
@@ -544,8 +540,6 @@ export interface UpdateConnectionProfileRequestContent {
     enabled_features?: Management.ConnectionProfileEnabledFeatures;
     connection_config?: Management.ConnectionProfileConfig;
     strategy_overrides?: Management.ConnectionProfileStrategyOverrides;
-    provisioning?: Management.ConnectionProfileProvisioning;
-    cross_app_access_resource_app?: Management.ConnectionProfileCrossAppAccessResourceApp;
 }
 
 /**
@@ -676,7 +670,7 @@ export interface CreateCustomDomainRequestContent {
     type: Management.CustomDomainProvisioningTypeEnum;
     verification_method?: Management.CustomDomainVerificationMethodEnum;
     tls_policy?: Management.CustomDomainTlsPolicyEnum;
-    custom_client_ip_header?: (Management.CustomDomainCustomClientIpHeader | undefined) | null;
+    custom_client_ip_header?: Management.CustomDomainCustomClientIpHeader | undefined;
     domain_metadata?: Management.DomainMetadata;
     /** Relying Party ID (rpId) to be used for Passkeys on this custom domain. If not provided, the full domain will be used. */
     relying_party_identifier?: string;
@@ -700,7 +694,7 @@ export interface SetDefaultCustomDomainRequestContent {
 export interface UpdateCustomDomainRequestContent {
     /** recommended includes TLS 1.2 */
     tls_policy?: Management.CustomDomainTlsPolicyEnum;
-    custom_client_ip_header?: (Management.CustomDomainCustomClientIpHeader | undefined) | null;
+    custom_client_ip_header?: Management.CustomDomainCustomClientIpHeader | undefined;
     domain_metadata?: Management.DomainMetadata;
     /** Relying Party ID (rpId) to be used for Passkeys on this custom domain. Set to null to remove the rpId and fall back to using the full domain. */
     relying_party_identifier?: string | null;
@@ -742,7 +736,6 @@ export interface ListDeviceCredentialsRequestParameters {
  * @example
  *     {
  *         device_name: "device_name",
- *         type: "public_key",
  *         value: "value",
  *         device_id: "device_id"
  *     }
@@ -750,7 +743,6 @@ export interface ListDeviceCredentialsRequestParameters {
 export interface CreatePublicKeyDeviceCredentialRequestContent {
     /** Name for this device easily recognized by owner. */
     device_name: string;
-    type: Management.DeviceCredentialPublicKeyTypeEnum;
     /** Base64 encoded string containing the credential. */
     value: string;
     /** Unique identifier for the device. Recommend using <a href="http://developer.android.com/reference/android/provider/Settings.Secure.html#ANDROID_ID">Android_ID</a> on Android and <a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIDevice_Class/index.html#//apple_ref/occ/instp/UIDevice/identifierForVendor">identifierForVendor</a>. */
@@ -1008,13 +1000,13 @@ export interface GetFormRequestParameters {
  */
 export interface UpdateFormRequestContent {
     name?: string;
-    messages?: (Management.FormMessagesNullable | undefined) | null;
-    languages?: (Management.FormLanguagesNullable | undefined) | null;
-    translations?: (Management.FormTranslationsNullable | undefined) | null;
-    nodes?: (Management.FormNodeListNullable | undefined) | null;
-    start?: (Management.FormStartNodeNullable | undefined) | null;
-    ending?: (Management.FormEndingNodeNullable | undefined) | null;
-    style?: (Management.FormStyleNullable | undefined) | null;
+    messages?: Management.FormMessagesNullable | undefined;
+    languages?: Management.FormLanguagesNullable | undefined;
+    translations?: Management.FormTranslationsNullable | undefined;
+    nodes?: Management.FormNodeListNullable | undefined;
+    start?: Management.FormStartNodeNullable | undefined;
+    ending?: Management.FormEndingNodeNullable | undefined;
+    style?: Management.FormStyleNullable | undefined;
 }
 
 /**
@@ -1282,97 +1274,6 @@ export interface UpdateNetworkAclRequestContent {
 /**
  * @example
  *     {
- *         from: "from",
- *         take: 1
- *     }
- */
-export interface ListOrganizationTemplatesRequestParameters {
-    /** Optional Id from which to start selection. */
-    from?: string | null;
-    /** Number of results per page. Defaults to 5. Values greater than 10 are capped at 10. */
-    take?: number | null;
-}
-
-/**
- * @example
- *     {
- *         name: "name",
- *         organization_deletion_behavior: "allow",
- *         enforce_permission_ceiling: true,
- *         enforce_self_assignment_restriction: true
- *     }
- */
-export interface CreateOrganizationTemplateRequestContent {
-    /** The name of the organization template. */
-    name: string;
-    /** Whether this is the default template applied to new organizations. */
-    is_default?: boolean;
-    organization_deletion_behavior: Management.OrganizationDeletionBehaviorEnum;
-    connection_deletion_behavior?: Management.ConnectionDeletionBehaviorEnum;
-    /** Whether to enforce permission ceiling for organizations using this template. */
-    enforce_permission_ceiling: boolean;
-    /** Whether to enforce self-assignment restrictions for organizations using this template. */
-    enforce_self_assignment_restriction: boolean;
-    /** The connection profile to apply to new connections. */
-    connection_profile_id?: string | null;
-    /** The user attribute profile to apply to organizations. */
-    user_attribute_profile_id?: string | null;
-    /** List of allowed connection strategies for this template. */
-    allowed_strategies?: Management.OrganizationTemplateAllowedStrategyEnum[] | null;
-    /** The client ID for the invitation landing page. */
-    invitation_landing_client_id?: string | null;
-    /** Default admin roles to assign to organization creators. */
-    admin_roles_assignment?: string[] | null;
-    use_for_organization_discovery?: Management.OrganizationTemplateUseForOrganizationDiscovery | null;
-    role_visibility_policy?: Management.OrganizationTemplateRoleVisibilityPolicy | null;
-}
-
-/**
- * @example
- *     {}
- */
-export interface UpdateOrganizationTemplateRequestContent {
-    /** The name of the organization template. */
-    name?: string;
-    /** Whether this is the default template applied to new organizations. */
-    is_default?: boolean;
-    organization_deletion_behavior?: Management.OrganizationDeletionBehaviorEnum;
-    connection_deletion_behavior?: Management.ConnectionDeletionBehaviorEnum;
-    /** Whether to enforce permission ceiling for organizations using this template. */
-    enforce_permission_ceiling?: boolean;
-    /** Whether to enforce self-assignment restrictions for organizations using this template. */
-    enforce_self_assignment_restriction?: boolean;
-    /** The connection profile to apply to new connections. */
-    connection_profile_id?: string | null;
-    /** The user attribute profile to apply to organizations. */
-    user_attribute_profile_id?: string | null;
-    /** List of allowed connection strategies for this template. */
-    allowed_strategies?: Management.OrganizationTemplateAllowedStrategyEnum[] | null;
-    /** The client ID for the invitation landing page. */
-    invitation_landing_client_id?: string | null;
-    /** Default admin roles to assign to organization creators. */
-    admin_roles_assignment?: string[] | null;
-    use_for_organization_discovery?: Management.OrganizationTemplateUseForOrganizationDiscovery | null;
-    role_visibility_policy?: Management.OrganizationTemplateRoleVisibilityPolicy | null;
-}
-
-/**
- * @example
- *     {
- *         from: "from",
- *         take: 1
- *     }
- */
-export interface ListTemplateOrganizationsRequestParameters {
-    /** Optional Id from which to start selection. */
-    from?: string | null;
-    /** Number of results per page. Defaults to 5. Values greater than 10 are capped at 10. */
-    take?: number | null;
-}
-
-/**
- * @example
- *     {
  *         include_totals: true,
  *         from: "from",
  *         take: 1,
@@ -1469,8 +1370,6 @@ export interface ListRateLimitPoliciesRequestParameters {
 /**
  * @example
  *     {
- *         resource: "oauth_authentication_api",
- *         consumer: "client",
  *         consumer_selector: "consumer_selector",
  *         configuration: {
  *             action: "allow"
@@ -1478,8 +1377,6 @@ export interface ListRateLimitPoliciesRequestParameters {
  *     }
  */
 export interface CreateRateLimitPolicyRequestContent {
-    resource: Management.RateLimitPolicyResourceEnum;
-    consumer: Management.RateLimitPolicyConsumerEnum;
     /** Identifier or category within the consumer to which the policy applies. Supported values: `client_id:<client_id>` to target a specific client by ID, `client_id:<cimd_uri>` to target a CIMD client by URI, `cimd_clients` to target all CIMD clients, `third_party_clients` to target all third-party clients, or `default` to apply the policy to any consumer identifier not otherwise explicitly targeted. */
     consumer_selector: string;
     configuration: Management.RateLimitPolicyConfiguration;
@@ -1600,7 +1497,7 @@ export interface CreateResourceServerRequestContent {
     /** Whether to enforce authorization policies (true) or to ignore them (false). */
     enforce_policies?: boolean;
     token_encryption?: Management.ResourceServerTokenEncryption | null;
-    consent_policy?: Management.ResourceServerConsentPolicyEnum | null;
+    consent_policy?: (Management.ResourceServerConsentPolicyEnum | undefined) | null;
     authorization_details?: unknown[] | null;
     proof_of_possession?: Management.ResourceServerProofOfPossession | null;
     subject_type_authorization?: Management.ResourceServerSubjectTypeAuthorization;
@@ -1644,7 +1541,7 @@ export interface UpdateResourceServerRequestContent {
     /** Whether authorization policies are enforced (true) or not enforced (false). */
     enforce_policies?: boolean;
     token_encryption?: Management.ResourceServerTokenEncryption | null;
-    consent_policy?: Management.ResourceServerConsentPolicyEnum | null;
+    consent_policy?: (Management.ResourceServerConsentPolicyEnum | undefined) | null;
     authorization_details?: unknown[] | null;
     proof_of_possession?: Management.ResourceServerProofOfPossession | null;
     subject_type_authorization?: Management.ResourceServerSubjectTypeAuthorization;
@@ -1834,7 +1731,7 @@ export interface UpdateSelfServiceProfileRequestContent {
     /** The name of the self-service Profile. */
     name?: string;
     description?: (Management.SelfServiceProfileDescription | undefined) | null;
-    branding?: (Management.SelfServiceProfileBranding | undefined) | null;
+    branding?: Management.SelfServiceProfileBranding | undefined;
     /** List of IdP strategies that will be shown to users during the Self-Service Enterprise Configuration flow. Possible values: [`oidc`, `samlp`, `waad`, `google-apps`, `adfs`, `okta`, `auth0-samlp`, `okta-samlp`, `keycloak-samlp`, `pingfederate`] */
     allowed_strategies?: Management.SelfServiceProfileAllowedStrategyEnum[];
     user_attributes?: (Management.SelfServiceProfileUserAttributes | undefined) | null;
@@ -1943,8 +1840,7 @@ export interface TokenExchangeProfilesListRequest {
  *     {
  *         name: "name",
  *         subject_token_type: "subject_token_type",
- *         action_id: "action_id",
- *         type: "custom_authentication"
+ *         action_id: "action_id"
  *     }
  */
 export interface CreateTokenExchangeProfileRequestContent {
@@ -1954,7 +1850,6 @@ export interface CreateTokenExchangeProfileRequestContent {
     subject_token_type: string;
     /** The ID of the Custom Token Exchange action to execute for this profile, in order to validate the subject_token. The action must use the custom-token-exchange trigger. */
     action_id: string;
-    type: Management.TokenExchangeProfileTypeEnum;
 }
 
 /**
@@ -2008,7 +1903,7 @@ export interface CreateUserAttributeProfileRequestContent {
  */
 export interface UpdateUserAttributeProfileRequestContent {
     name?: Management.UserAttributeProfileName;
-    user_id?: (Management.UserAttributeProfilePatchUserId | undefined) | null;
+    user_id?: Management.UserAttributeProfilePatchUserId | undefined;
     user_attributes?: Management.UserAttributeProfileUserAttributes;
 }
 
@@ -3439,22 +3334,6 @@ export interface CreateEncryptionKeyRequestContent {
 export interface ImportEncryptionKeyRequestContent {
     /** Base64 encoded ciphertext of key material wrapped by public wrapping key. */
     wrapped_key: string;
-}
-
-/**
- * @example
- *     {
- *         name: "name",
- *         alg: "hmac-sha256",
- *         value: "value"
- *     }
- */
-export interface CreateKeysNetworkAclsRequestContent {
-    /** Customer-supplied label with no cryptographic meaning. Must be unique across all Network ACL keys for the tenant. */
-    name: string;
-    alg: Management.NetworkAclKeyAlgorithmEnum;
-    /** Base64-encoded raw key material. Constraints on the decoded value depend on the algorithm specified. Currently only HMAC-SHA256 is supported. */
-    value: string;
 }
 
 /**

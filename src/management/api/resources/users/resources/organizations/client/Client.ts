@@ -25,31 +25,16 @@ export class OrganizationsClient {
     /**
      * Retrieve list of the specified user's current Organization memberships. User must be specified by user ID. For more information, review [Auth0 Organizations](https://auth0.com/docs/manage-users/organizations).
      *
-     * This endpoint supports two types of pagination:
-     *
-     * - Offset pagination
-     * - Checkpoint pagination
-     *
-     * Checkpoint pagination must be used if you need to retrieve more than 1000 organizations.
-     *
-     * **Checkpoint Pagination**
-     *
-     * To search by checkpoint, use the following parameters:
-     *
-     * - `from`: Optional id from which to start selection.
-     * - `take`: The total number of entries to retrieve when using the `from` parameter. Defaults to 50.
-     *
-     * **Note**: The first time you call this endpoint using checkpoint pagination, omit the `from` parameter. If there are more results, a `next` value is included in the response. You can use this for subsequent API calls. When `next` is no longer included in the response, no pages are remaining.
-     *
      * @param {string} id - ID of the user to retrieve the organizations for.
      * @param {Management.ListUserOrganizationsRequestParameters} request
      * @param {OrganizationsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Management.BadRequestError}
      * @throws {@link Management.UnauthorizedError}
      * @throws {@link Management.ForbiddenError}
      * @throws {@link Management.NotFoundError}
      * @throws {@link Management.TooManyRequestsError}
+     * @throws {@link errors.ManagementError}
+     * @throws {@link errors.ManagementTimeoutError}
      *
      * @example
      *     await client.users.organizations.list("id", {
@@ -84,7 +69,7 @@ export class OrganizationsClient {
                         (await core.Supplier.get(this._options.baseUrl)) ??
                             (await core.Supplier.get(this._options.environment)) ??
                             environments.ManagementEnvironment.Default,
-                        `users/${core.url.encodePathParam(id)}/organizations`,
+                        `users/${core.url.encodePathParam(id, errors.ManagementError)}/organizations`,
                     ),
                     method: "GET",
                     headers: _headers,
@@ -107,11 +92,6 @@ export class OrganizationsClient {
                 }
                 if (_response.error.reason === "status-code") {
                     switch (_response.error.statusCode) {
-                        case 400:
-                            throw new Management.BadRequestError(
-                                _response.error.body as unknown,
-                                _response.rawResponse,
-                            );
                         case 401:
                             throw new Management.UnauthorizedError(
                                 _response.error.body as unknown,
@@ -152,8 +132,15 @@ export class OrganizationsClient {
                 (request?.per_page == null || (response?.organizations ?? []).length >= request?.per_page),
             getItems: (response) => response?.organizations ?? [],
             loadPage: (_response) => {
-                _offset += 1;
-                return list(core.setObjectProperty(request, "page", _offset));
+                const _nextOffset = _offset + 1;
+                return core.HttpResponsePromise.fromPromise(
+                    list(core.setObjectProperty(request, "page", _nextOffset))
+                        .withRawResponse()
+                        .then((_pageResponse) => {
+                            _offset = _nextOffset;
+                            return _pageResponse;
+                        }),
+                );
             },
         });
     }

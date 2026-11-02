@@ -152,7 +152,6 @@ describe("TokenExchangeProfilesClient", () => {
             name: "name",
             subject_token_type: "subject_token_type",
             action_id: "action_id",
-            type: "custom_authentication",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -182,7 +181,6 @@ describe("TokenExchangeProfilesClient", () => {
                 name: "Token Exchange Profile 1",
                 subject_token_type: "mandarin",
                 action_id: "x",
-                type: "custom_authentication",
             });
         }).rejects.toThrow(Management.BadRequestError);
     });
@@ -212,7 +210,6 @@ describe("TokenExchangeProfilesClient", () => {
                 name: "Token Exchange Profile 1",
                 subject_token_type: "mandarin",
                 action_id: "x",
-                type: "custom_authentication",
             });
         }).rejects.toThrow(Management.UnauthorizedError);
     });
@@ -242,7 +239,6 @@ describe("TokenExchangeProfilesClient", () => {
                 name: "Token Exchange Profile 1",
                 subject_token_type: "mandarin",
                 action_id: "x",
-                type: "custom_authentication",
             });
         }).rejects.toThrow(Management.ForbiddenError);
     });
@@ -272,7 +268,6 @@ describe("TokenExchangeProfilesClient", () => {
                 name: "Token Exchange Profile 1",
                 subject_token_type: "mandarin",
                 action_id: "x",
-                type: "custom_authentication",
             });
         }).rejects.toThrow(Management.ConflictError);
     });
@@ -302,7 +297,6 @@ describe("TokenExchangeProfilesClient", () => {
                 name: "Token Exchange Profile 1",
                 subject_token_type: "mandarin",
                 action_id: "x",
-                type: "custom_authentication",
             });
         }).rejects.toThrow(Management.TooManyRequestsError);
     });

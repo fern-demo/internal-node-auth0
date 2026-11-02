@@ -117,13 +117,7 @@ describe("ClientsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/clients")
-            .respondWith()
-            .statusCode(400)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/clients").respondWith().statusCode(400).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.clients.list();
@@ -136,13 +130,7 @@ describe("ClientsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/clients")
-            .respondWith()
-            .statusCode(401)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/clients").respondWith().statusCode(401).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.clients.list();
@@ -155,13 +143,7 @@ describe("ClientsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/clients")
-            .respondWith()
-            .statusCode(403)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/clients").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.clients.list();
@@ -174,13 +156,7 @@ describe("ClientsClient", () => {
 
         const rawResponseBody = { key: "value" };
 
-        server
-            .mockEndpoint({ once: false })
-            .get("/clients")
-            .respondWith()
-            .statusCode(429)
-            .jsonBody(rawResponseBody)
-            .build();
+        server.mockEndpoint().get("/clients").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.clients.list();
@@ -387,12 +363,10 @@ describe("ClientsClient", () => {
                 admin_login_domain: "admin_login_domain",
                 oin_submission_id: "oin_submission_id",
             },
-            b2b_integration_configuration: { sso_profiles: ["sso_profiles"], integration_type: "custom_auth_server" },
             my_organization_configuration: {
                 connection_profile_id: "connection_profile_id",
                 user_attribute_profile_id: "user_attribute_profile_id",
                 allowed_strategies: ["pingfederate"],
-                third_party_client_access: { default_value: "block", allowed_values: ["allow"] },
                 connection_deletion_behavior: "allow",
                 invitation_landing_client_id: "invitation_landing_client_id",
             },
@@ -1051,12 +1025,10 @@ describe("ClientsClient", () => {
                 admin_login_domain: "admin_login_domain",
                 oin_submission_id: "oin_submission_id",
             },
-            b2b_integration_configuration: { sso_profiles: ["sso_profiles"], integration_type: "custom_auth_server" },
             my_organization_configuration: {
                 connection_profile_id: "connection_profile_id",
                 user_attribute_profile_id: "user_attribute_profile_id",
                 allowed_strategies: ["pingfederate"],
-                third_party_client_access: { default_value: "block", allowed_values: ["allow"] },
                 connection_deletion_behavior: "allow",
                 invitation_landing_client_id: "invitation_landing_client_id",
             },
@@ -1407,12 +1379,10 @@ describe("ClientsClient", () => {
                 admin_login_domain: "admin_login_domain",
                 oin_submission_id: "oin_submission_id",
             },
-            b2b_integration_configuration: { sso_profiles: ["sso_profiles"], integration_type: "custom_auth_server" },
             my_organization_configuration: {
                 connection_profile_id: "connection_profile_id",
                 user_attribute_profile_id: "user_attribute_profile_id",
                 allowed_strategies: ["pingfederate"],
-                third_party_client_access: { default_value: "block", allowed_values: ["allow"] },
                 connection_deletion_behavior: "allow",
                 invitation_landing_client_id: "invitation_landing_client_id",
             },
@@ -1740,12 +1710,10 @@ describe("ClientsClient", () => {
                 admin_login_domain: "admin_login_domain",
                 oin_submission_id: "oin_submission_id",
             },
-            b2b_integration_configuration: { sso_profiles: ["sso_profiles"], integration_type: "custom_auth_server" },
             my_organization_configuration: {
                 connection_profile_id: "connection_profile_id",
                 user_attribute_profile_id: "user_attribute_profile_id",
                 allowed_strategies: ["pingfederate"],
-                third_party_client_access: { default_value: "block", allowed_values: ["allow"] },
                 connection_deletion_behavior: "allow",
                 invitation_landing_client_id: "invitation_landing_client_id",
             },
